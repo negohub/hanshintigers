@@ -820,17 +820,52 @@ def fetch_players(teams: List[str]) -> Dict[str, Dict[str, List[Dict[str, Any]]]
 STARTER_URL = "https://npb.jp/announcement/starter/"
 
 
+# 旧字・異体字のゆれ（髙橋／高橋 など）。照合のときだけ寄せる
+KANJI_FOLD = str.maketrans({
+    "髙": "高", "﨑": "崎", "濵": "浜", "邊": "辺", "邉": "辺", "齋": "斎", "齊": "斎",
+    "德": "徳", "瀨": "瀬", "﨏": "沢", "澤": "沢", "栁": "柳", "曻": "昇", "祐": "祐",
+})
+
+
+def _name_variants(v: Any) -> List[str]:
+    """照合用の表記ゆれを作る。
+    「E.ルーカス」→「ルーカス」、「髙橋 奎二」→「髙橋奎二」など。
+    予告先発ページはイニシャル付き、個人成績は登録名だけ、という差があるため"""
+    key = norm_text(v)
+    if not key:
+        return []
+    key = key.translate(KANJI_FOLD)
+    out = [key]
+    # 先頭のイニシャル（E. / S. / A・ など）を落とす
+    stripped = re.sub(r"^[A-Za-zＡ-Ｚａ-ｚ]{1,3}[.\s・･]+", "", key)
+    if stripped and stripped != key:
+        out.append(stripped)
+    # 中黒や記号を取り払ったもの
+    plain = re.sub(r"[.\s・･･'’]", "", key)
+    if plain and plain not in out:
+        out.append(plain)
+    return [x for x in out if len(x) >= 2]
+
+
 def _resolve_pitcher(short: Optional[str], roster: List[Dict[str, Any]]) -> Optional[str]:
-    """「下村」→「下村 海翔」。同じ球団の登録投手から姓で引き当てる"""
+    """「下村」→「下村 海翔」、「E.ルーカス」→「ルーカス」。
+    同じ球団の登録投手から引き当てる"""
     if not short:
         return None
-    key = norm_text(short)
-    if not key:
+    keys = _name_variants(short)
+    if not keys:
         return None
-    for p in roster or []:
-        nm = norm_text(p.get("name"))
-        if nm == key or nm.startswith(key) or key.startswith(nm):
-            return p.get("name")
+    cand = [(p.get("name"), _name_variants(p.get("name"))) for p in (roster or [])]
+    # 完全一致 → 前方一致 → 後方一致 → 部分一致 の順に緩めていく
+    for test in (lambda a, b: a == b,
+                 lambda a, b: b.startswith(a) or a.startswith(b),
+                 lambda a, b: b.endswith(a) or a.endswith(b),
+                 lambda a, b: a in b or b in a):
+        for name, variants in cand:
+            for k in keys:
+                for v in variants:
+                    if test(k, v):
+                        return name
     return short
 
 
@@ -1123,6 +1158,8 @@ def build(target: date) -> Dict[str, Any]:
             if full:
                 g[f"{side}_pitcher"] = full
             g[f"{side}_fip"] = fip_index.get(full) if full else None
+            if full and g[f"{side}_fip"] is None:
+                log(f"  !! {full} のFIPが見つかりません（{team_key}の登録投手と名前が一致せず）")
         # 天気
         hour = int((g.get("start_time") or "18:00").split(":")[0])
         w = fetch_weather(g.get("venue"), target, hour)
