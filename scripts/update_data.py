@@ -834,14 +834,16 @@ def _resolve_pitcher(short: Optional[str], roster: List[Dict[str, Any]]) -> Opti
     return short
 
 
-def fetch_starter_page() -> Dict[str, Dict[str, Optional[str]]]:
-    """NPBの予告先発ページから「日付 → {球団: 投手}」を作る。
+def fetch_starter_page() -> Dict[str, List[Dict[str, Any]]]:
+    """NPBの予告先発ページを「日付 → 試合ブロックの並び」として読む。
 
-    ページの並びはこの形（球団はロゴ画像のalt、投手は選手ページへのリンク）。
-        6月21日の予告先発投手
-        [img alt=読売ジャイアンツ] [a 井上 温大]
-        [img alt=中日ドラゴンズ]   [a 柳 裕也]
-        （東京ドーム）14:00
+    ページはこの並びになっている（球場の行で1試合が区切られる）。
+        8月21日の予告先発投手
+        [ロゴ 読売ジャイアンツ] [投手 井上 温大]     ← 先に書かれている方がホーム
+        [ロゴ 広島東洋カープ]   [投手 森下 暢仁]
+        （東京ドーム）18:00
+    ロゴのaltが拾えない選手（外国人など）があるため、球団名に頼らず
+    「1試合＝投手2人、先がホーム」という並びで割り当てる。
     """
     if BeautifulSoup is None:
         log("予告先発ページ: BeautifulSoup が無いのでスキップ")
@@ -852,59 +854,58 @@ def fetch_starter_page() -> Dict[str, Dict[str, Optional[str]]]:
     if not html:
         return {}
     soup = BeautifulSoup(html, "html.parser")
-    out: Dict[str, Dict[str, Optional[str]]] = {}
-    cur_date, pending_team = None, None
-    for el in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "img", "a"]):
+
+    out: Dict[str, List[Dict[str, Any]]] = {}
+    cur_date = None
+    names: List[str] = []
+    teams: List[Optional[str]] = []
+
+    def flush(venue_text: str):
+        """球場の行が来たら、そこまでに集めた投手2人で1試合ぶんを確定する"""
+        nonlocal names, teams
+        if cur_date and names:
+            out.setdefault(cur_date, []).append({
+                "venue": clean_venue(venue_text),
+                "names": names[:],
+                "teams": teams[:],
+            })
+        names, teams = [], []
+
+    for el in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "img", "a", "p", "div", "td"]):
+        txt = norm_text(el.get_text()) if el.name not in ("img",) else ""
+
         if el.name in ("h1", "h2", "h3", "h4", "h5", "h6"):
-            m = re.search(r"(\d{1,2})月(\d{1,2})日", norm_text(el.get_text()))
-            if m and "予告先発" in norm_text(el.get_text()):
+            m = re.search(r"(\d{1,2})月(\d{1,2})日", txt)
+            if m and "予告先発" in txt:
+                names, teams = [], []
                 cur_date = f"{int(m.group(1))}/{int(m.group(2))}"
-                pending_team = None
             continue
         if not cur_date:
             continue
+
         if el.name == "img":
-            team = norm_team(el.get("alt") or el.get("title"))
-            if team:
-                pending_team = team
+            t = norm_team(el.get("alt") or el.get("title"))
+            if t:
+                teams.append(t)
             continue
-        # <a> のうち、選手ページへのリンクだけを投手名とみなす
-        href = el.get("href") or ""
-        if "/bis/players/" not in href:
+
+        if el.name == "a":
+            if "/bis/players/" not in (el.get("href") or ""):
+                continue
+            nm = norm_text(el.get_text())
+            if nm and len(nm) <= 12 and not re.search(r"[0-9]", nm):
+                if nm not in names:
+                    names.append(nm)
             continue
-        name = norm_text(el.get_text())
-        if pending_team and name and not norm_team(name):
-            out.setdefault(cur_date, {}).setdefault(pending_team, name)
-        pending_team = None
-    # ロゴ画像で拾えなかった場合の保険：本文テキストから「球団名 → 直後の人名」を拾う
-    try:
-        text = soup.get_text("\n")
-        cur = None
-        pending = None
-        for raw in text.split("\n"):
-            t = norm_text(raw)
-            if not t:
-                continue
-            m = re.search(r"(\d{1,2})月(\d{1,2})日", t)
-            if m and "予告先発" in t:
-                cur = f"{int(m.group(1))}/{int(m.group(2))}"
-                pending = None
-                continue
-            if not cur:
-                continue
-            team = norm_team(t)
-            if team and len(t) <= 14:
-                pending = team
-                continue
-            if pending and 1 < len(t) <= 12 and not re.search(r"[0-9:：（）()]", t):
-                out.setdefault(cur, {}).setdefault(pending, t)
-                pending = None
-    except Exception as e:  # noqa: BLE001
-        log(f"  テキスト解析でも失敗: {e}")
+
+        # 「（横 浜）18:00」の行で1試合の区切り
+        if re.match(r"^[（(].{1,14}[）)]\d{1,2}:\d{2}$", txt) and len(txt) <= 24:
+            flush(re.sub(r"[（(）)]", "", re.sub(r"\d{1,2}:\d{2}$", "", txt)))
 
     if out:
         for d in sorted(out):
-            log(f"  {d}: " + " / ".join(f"{k} {v}" for k, v in out[d].items()))
+            log(f"  {d}: " + " / ".join(
+                f"{b['venue'] or '?'}[{'・'.join(b['names'])}]" for b in out[d]))
     else:
         log("  → 予告先発は見つからず")
     return out
@@ -930,7 +931,7 @@ def fetch_probables(target: date, days: int = 2) -> List[Dict[str, Any]]:
 
 
 def _probable_for(target: date,
-                  starters: Optional[Dict[str, Dict[str, Optional[str]]]] = None
+                  starters: Optional[Dict[str, List[Dict[str, Any]]]] = None
                   ) -> Optional[Dict[str, Any]]:
     key = f"{target.month}/{target.day}"
     games = load_season_games() or fetch_month_games(target.month)
@@ -948,12 +949,30 @@ def _probable_for(target: date,
     day = (starters or {}).get(key, {})
     src_h = "日程" if han_sp else ""
     src_o = "日程" if opp_sp else ""
-    if not han_sp and day.get(HOME_TEAM):
-        han_sp, src_h = day[HOME_TEAM], "予告先発ページ"
-    if not opp_sp and day.get(opp):
-        opp_sp, src_o = day[opp], "予告先発ページ"
+
+    # 予告先発ページから、球場が一致する試合ブロックを探して割り当てる
+    blocks = (starters or {}).get(key) or []
+    blk = next((b for b in blocks if b.get("venue") and b["venue"] == g.get("venue")), None)
+    if blk is None and len(blocks) == 1:
+        blk = blocks[0]
+    if blk:
+        nm = blk.get("names") or []
+        tm = blk.get("teams") or []
+        pick_h = pick_o = None
+        if HOME_TEAM in tm and tm.index(HOME_TEAM) < len(nm):
+            pick_h = nm[tm.index(HOME_TEAM)]
+        if opp in tm and tm.index(opp) < len(nm):
+            pick_o = nm[tm.index(opp)]
+        if len(nm) == 2:
+            # ロゴで引けなかったぶんは「先に書かれている方がホーム」で埋める
+            pick_h = pick_h or (nm[0] if is_home else nm[1])
+            pick_o = pick_o or (nm[1] if is_home else nm[0])
+        if not han_sp and pick_h:
+            han_sp, src_h = pick_h, "予告先発ページ"
+        if not opp_sp and pick_o:
+            opp_sp, src_o = pick_o, "予告先発ページ"
     if not han_sp:
-        log(f"  !! {key} の{HOME_TEAM}の先発が取れていません（この日の予告先発ページの中身: {day}）")
+        log(f"  !! {key} の{HOME_TEAM}の先発が取れていません（この日のブロック: {blocks}）")
 
     item = {
         "date": target.isoformat(),
