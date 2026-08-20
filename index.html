@@ -1347,6 +1347,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 /* ホーム画面から起動したときのノッチ／ホームバー対策 */
 body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 .wrap{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+.hh .lgtag{font-style:normal;font-family:var(--sys);font-size:12.5px;color:var(--ink-dim);margin-left:9px}
+.hh .lgtag.inter{color:var(--gold);background:rgba(255,209,0,.12);padding:2px 8px;border-radius:20px;font-size:11.5px}
+.hh tr.h2hsep td{padding:14px 6px 8px;font-size:12.5px;letter-spacing:.14em;color:var(--gold);
+  font-weight:700;border-bottom:1px solid var(--line);text-align:left}
 </style>
 </head>
 <body>
@@ -1485,7 +1489,7 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
   </section>
   <section class="reveal" id="nav-h2h">
     <div class="head"><h2>対戦成績</h2><em>Head to Head</em></div>
-    <p class="hint">予告先発のFIP比較と、阪神の今季の対戦球団別成績。</p>
+    <p class="hint"><span class="sn">予告先発のFIP比較と、阪神の今季の対戦球団別成績。</span><span class="sn">交流戦も含みます。</span></p>
     <div id="matchup"></div>
     <div id="h2h"></div>
   </section>
@@ -1522,7 +1526,7 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
         <p class="fine" style="margin:0 0 7px">calculateOdds() で試合ごとに自動算出</p>
         <ul>
           <li>両チームの<b>シーズン勝率</b>と<b>直近10試合の勝率</b></li>
-          <li>両先発投手の<b>FIP</b></li>
+          <li>両先発投手の<b>FIP</b>（いちばん大きく効く。エースの日と苦しい日でオッズが逆転することもある）</li>
           <li>両チームの<b>直近OPS</b></li>
           <li><b>甲子園はホーム補正</b>＋浜風の風速で長打の出やすさを補正</li>
           <li>勝率の逆数から<b>控除率10%</b>を引いた値がオッズ</li>
@@ -1563,7 +1567,7 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
     <summary><b>オッズ算出</b><em>Odds Model</em><i>計算の内訳を見る</i></summary>
     <div class="foldbody">
     <div class="head"><h2>オッズ算出</h2><em>Odds Model</em></div>
-    <p class="hint"><span class="sn">オッズは固定値ではなく、下の要素をロジスティック回帰の形で足し合わせて阪神の勝率を出し、その逆数から控除率10%を引いて算出しています。</span></p>
+    <p class="hint"><span class="sn">オッズは固定値ではなく、下の要素をロジスティック回帰の形で足し合わせて阪神の勝率を出し、その逆数から控除率10%を引いて算出しています。</span><span class="sn">いちばん重いのは先発投手のFIP差で、次がシーズン勝率とチームOPS。</span><span class="sn">予告先発が未発表のあいだは両軍ともリーグ平均で計算するため、ほぼ互角の数字になります。</span></p>
     <div id="oddsmodel"></div>
     <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">係数は仮の重み付け。実測データが溜まったら再校正する前提の v1 モデル</p>
       </div>
@@ -1681,18 +1685,19 @@ const FORM = {
    ========================================================= */
 const ODDS_MODEL = {
   intercept: 0.00,   /* 切片 */
-  season:    2.00,   /* シーズン勝率差（阪神 − 相手）。いちばん素直な地力の指標 */
-  form:      0.35,   /* 直近10試合の勝率差。ブレが大きいので重みは小さく */
-  fip:       0.42,   /* 先発FIP差（相手 − 阪神）。低いほど good なので符号を反転して渡す */
-  ops:       2.50,   /* チームOPS差（阪神 − 相手） */
+  season:    1.20,   /* シーズン勝率差（阪神 − 相手）。地力のベース */
+  form:      0.30,   /* 直近10試合の勝率差。ブレが大きいので重みは小さく */
+  fip:       1.00,   /* 先発FIP差（相手 − 阪神）。この試合を決めるいちばん大きな要素 */
+  ops:       1.80,   /* チームOPS差（阪神 − 相手） */
   home:      0.14,   /* ホーム補正（NPBのホーム勝率はおよそ53%） */
   away:     -0.04,   /* ビジター補正 */
   park:      1.20,   /* その球場での実際の勝率と通算勝率の差（試合数が少ないうちは効きを弱める） */
   parkK:     15,     /* 縮小の強さ。この試合数で効き目が半分になる */
   wind:      0.045,  /* 浜風の効き（風速1m/sあたり） */
   vig:       0.10,   /* 控除率 10% */
-  pMin:      0.30,   /* 勝率のクリップ下限（1試合単位では一方的にならない） */
-  pMax:      0.70    /* 同・上限 */
+  squeeze:   0.45,   /* 出した勝率を50%側へ圧縮する強さ。本命に偏りすぎないための調整 */
+  pMin:      0.35,   /* 最終的な下限 */
+  pMax:      0.65    /* 最終的な上限 */
 };
 const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
 /* 球場別成績。data/latest.json が来ればそちら、無ければ日程表から集計する */
@@ -1762,7 +1767,9 @@ function calculateOdds(hanshinData, opponentData, conditions){
   parts.forEach(p=> p.z = p.x * p.w);
 
   const raw = 1/(1 + Math.exp(-z));
-  const p   = clamp(raw, M.pMin, M.pMax);
+  /* いきなり上限で切ると先発の差が消えてしまうので、まず50%側へ圧縮してから念のため丸める。
+     これで「エース同士」と「エース対苦手投手」の差がオッズに残る */
+  const p = clamp(0.5 + (raw - 0.5) * M.squeeze, M.pMin, M.pMax);
 
   /* 勝率の逆数から控除率ぶんを差し引いたものをオッズとする */
   const mk = q => Math.max(1.05, Math.round((1/q) * (1 - M.vig) * 10) / 10);
@@ -2783,30 +2790,64 @@ function remainingVs(team){
   }));
   return n;
 }
+/* 日程表の結果から、相手球団ごとの勝敗を数える（交流戦を含む） */
+function h2hFromSchedule(){
+  const out = {};
+  DAYS.forEach(d=>(d.games||[]).forEach(g=>{
+    if(!g.b || g.void || !g.s) return;
+    const o = out[g.b] || (out[g.b] = {w:0, l:0, d:0, n:0});
+    o.n++;
+    if(isDraw(g)) o.d++;
+    else if(winnerOf(g) === 0) o.w++;
+    else o.l++;
+  }));
+  return out;
+}
 function renderH2H(){
   const box = document.getElementById("h2h");
   if(!box) return;
-  const rows = Object.keys(TEAM)
-    .filter(n=>n!==HOME && TEAM[n].lg===TEAM[HOME].lg && TEAM[n].h2h)
-    .sort((a,b)=>TEAM[a].rank-TEAM[b].rank);
+  const sched = h2hFromSchedule();
   const color = PLAYERS[1] ? PLAYERS[1].color : "var(--gold)";
-  box.innerHTML = `<div class="tablewrap"><table class="hh"><thead><tr>
-      <th class="l">対戦球団</th><th>今季</th><th>勝率</th><th class="l">この日程表</th><th>残り</th><th>相手の直近10</th>
-    </tr></thead><tbody>${rows.map(n=>{
-      const t = TEAM[n], [w,l,d] = t.h2h;
-      const rate = (w+l) ? w/(w+l) : 0;
-      const sr = scheduleRecord(n);
-      const rf = recentForm(n);
-      return `<tr style="--accent:${color}">
-        <td class="l nm3">${n}<i style="font-style:normal;font-family:var(--gothic);font-size:13px;color:var(--ink-dim);margin-left:8px">${t.lg}${t.rank}位</i></td>
-        <td class="rec ${rate>=.5?"win":"los"}">${w}勝${l}敗${d?`${d}分`:""}
-          <i class="hhbar"><i style="width:${Math.round(rate*100)}%"></i></i></td>
-        <td class="${rate>=.5?"win":"los"}">${rate.toFixed(3).replace(/^0/,"")}</td>
-        <td class="l">${sr.n ? `${sr.w}勝${sr.l}敗${sr.d?`${sr.d}分`:""}` : "—"}</td>
-        <td>${remainingVs(n) || "—"}</td>
-        <td>${rf.w}勝${rf.l}敗</td>
-      </tr>`;
-    }).join("")}</tbody></table></div>`;
+
+  /* セ・リーグは公式の対戦表、交流戦は日程の結果から集計する */
+  const league = Object.keys(TEAM)
+    .filter(n=>n !== HOME && TEAM[n].h2h)
+    .sort((a,b)=>TEAM[a].rank - TEAM[b].rank)
+    .map(n=>({name:n, rec:TEAM[n].h2h, inter:false}));
+  const inter = Object.keys(sched)
+    .filter(n=>!TEAM[n])
+    .map(n=>({name:n, rec:[sched[n].w, sched[n].l, sched[n].d], inter:true}))
+    .sort((a,b)=> (b.rec[0]+b.rec[1]) - (a.rec[0]+a.rec[1]) || a.name.localeCompare(b.name,"ja"));
+
+  if(!league.length && !inter.length){
+    box.innerHTML = `<p class="bbnone">${sent("まだ対戦成績がありません。")}</p>`;
+    return;
+  }
+  const line = (r, label) => {
+    const [w,l,dr] = r.rec;
+    const rate = (w+l) ? w/(w+l) : 0;
+    const t = TEAM[r.name];
+    const rf = t ? recentForm(r.name) : null;
+    const rest = remainingVs(r.name);
+    return `<tr style="--accent:${color}">
+      <td class="l nm3">${r.name}${t ? `<i class="lgtag">${t.lg}${t.rank}位</i>` : `<i class="lgtag inter">交流戦</i>`}</td>
+      <td class="rec ${rate>=.5?"win":"los"}">${w}勝${l}敗${dr?`${dr}分`:""}
+        <i class="hhbar"><i style="width:${Math.round(rate*100)}%"></i></i></td>
+      <td class="${rate>=.5?"win":"los"}">${rate.toFixed(3).replace(/^0/,"")}</td>
+      <td>${rest || "—"}</td>
+      <td>${rf ? `${rf.w}勝${rf.l}敗` : "—"}</td>
+    </tr>`;
+  };
+  const head = `<tr><th class="l">対戦球団</th><th>今季</th><th>勝率</th><th>残り</th><th>相手の直近10</th></tr>`;
+  const sep = (label)=>`<tr class="h2hsep"><td colspan="5">${label}</td></tr>`;
+  box.innerHTML = `<div class="tablewrap"><table class="hh">
+    <thead>${head}</thead>
+    <tbody>
+      ${league.map(r=>line(r)).join("")}
+      ${inter.length ? sep("交流戦") + inter.map(r=>line(r)).join("") : ""}
+    </tbody></table></div>
+    ${inter.length ? `<p class="fine" style="margin:10px 2px 0;font-size:13px;color:var(--ink-dim)">${
+      sent("交流戦は日程の結果から集計しています。")}</p>` : ""}`;
 }
 
 /* ---------- 球場別成績 ---------- */
