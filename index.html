@@ -1269,6 +1269,52 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   margin-left:8px;padding:2px 8px;border-radius:20px;vertical-align:1px}
 .hmk{background:rgba(255,209,0,.16);color:var(--gold)}
 .nxt{background:var(--gold);color:#120E06;font-weight:700}
+/* この先の日程（簡易一覧） */
+.tlfar>summary{color:var(--gold)}
+.farrow{display:flex;align-items:baseline;gap:12px;padding:11px 4px;font-size:14px;
+  border-bottom:1px dotted rgba(245,240,225,.09)}
+.farrow:last-child{border-bottom:none}
+.farrow.rest{color:var(--ink-dim)}
+.fard{font-family:var(--sys);font-weight:600;min-width:78px}
+.farc{font-weight:600;letter-spacing:.02em}
+.farv{color:var(--ink-dim);font-size:13px}
+.fart{margin-left:auto;color:var(--ink-dim);font-size:13px}
+
+/* ラベルと数字が詰まって読めなかったので間隔を空ける（直近10試合7勝3敗 → 直近10試合 7勝3敗） */
+.ln i b,.ln.kk i b{margin-left:6px}
+.ln{gap:3px 16px}
+.ln i{white-space:nowrap}
+.chstat b{margin-left:5px}
+
+/* 統合したセ・リーグ表 */
+.tt tr.metm{background:linear-gradient(90deg,rgba(255,209,0,.13),transparent)}
+.tt tr.metm td.n{color:var(--gold)}
+.tt td.p{text-align:center;font-weight:600}
+.tt td.d.st{font-size:12.5px}
+.tt td.d.st.w{color:var(--gold)}
+.tt td.d.st.l{color:var(--steel)}
+.tt td.pl{color:var(--gold);font-weight:600}
+.tt td.mi2{color:var(--steel);font-weight:600}
+.tt{min-width:720px}
+
+/* 折りたたみセクション（オッズ算出） */
+.foldsec{
+  display:block;margin-top:56px;border:1px solid var(--line);border-radius:12px;
+  background:rgba(245,240,225,.02);opacity:1;transform:none;
+}
+.foldsec>summary{
+  list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+}
+.foldsec>summary::-webkit-details-marker{display:none}
+.foldsec>summary::after{content:"＋";margin-left:auto;color:var(--gold);font-size:17px}
+.foldsec[open]>summary::after{content:"−"}
+.foldsec[open]>summary{border-bottom:1px solid var(--line)}
+.foldsec>summary b{font-size:20px;letter-spacing:.06em;font-weight:800}
+.foldsec>summary em{font-style:normal;font-family:var(--sys);font-size:12px;letter-spacing:.12em;color:var(--ink-dim)}
+.foldsec>summary i{font-style:normal;font-size:13px;color:var(--gold)}
+.foldbody{padding:18px}
+.foldbody .head{display:none}
+@media(max-width:760px){.foldbody{padding:15px 13px}.foldsec>summary{padding:14px 15px}}
 </style>
 </head>
 <body>
@@ -1308,11 +1354,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   <div class="entrants"><b>畑　山</b><b>根　来</b><b>今　井</b></div>
   <div class="lampwrap"><a class="lamp" id="lamp" href="#today-anchor"></a></div>
   <nav class="secnav" id="secnav">
-    <a class="hot" href="#nav-predict">予想する</a><a href="#nav-schedule">日程・結果</a><a href="#nav-odds">オッズ</a>
+    <a class="hot" href="#nav-predict">予想する</a><a href="#nav-schedule">日程・結果</a>
     <a href="#nav-standings">順位</a><a href="#nav-board">戦況</a><a href="#nav-personal">個人成績</a>
-    <a href="#nav-chart">推移</a><a href="#nav-comeback">逆転</a><a href="#nav-records">記録室</a><a href="#nav-upsets">大穴</a>
-    <a href="#nav-parks">球場別</a><a href="#nav-npb">セ・リーグ</a><a href="#nav-teams">球団</a><a href="#nav-stats">選手成績</a><a href="#nav-h2h">対戦成績</a>
-    <a id="navTrends" href="#trendsWrap" style="display:none">傾向</a><a href="#nav-rules">規定</a>
+    <a href="#nav-chart">推移</a><a id="navComeback" href="#nav-comeback" style="display:none">逆転</a><a href="#nav-records">記録室</a><a href="#nav-upsets">大穴</a>
+    <a href="#nav-parks">球場別</a><a href="#nav-teams">セ・リーグ</a><a href="#nav-stats">選手成績</a><a href="#nav-h2h">対戦成績</a>
+    <a id="navTrends" href="#trendsWrap" style="display:none">傾向</a><a href="#nav-rules">規定</a><a href="#nav-odds">オッズ算出</a>
   </nav>
 </header>
 
@@ -1330,7 +1376,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   <div class="grouplabel"><span>今日やること</span></div>
   <section class="reveal" id="nav-predict">
     <div class="head"><h2>予想入力</h2><em>Your Pick</em></div>
-    <p class="hint"><span class="sn">まず自分の名前を選び、勝つと思う球団をタップ。</span><span class="sn">オッズ＝的中時の倍率で、数字が大きいほど不利と見られている側です。</span><span class="sn">締切は試合日の0時。前日の夜までに入れてください。</span></p>
+    <p class="hint"><span class="sn">まず自分の名前を選び、勝つと思う球団をタップ。</span><span class="sn">オッズ＝的中時の倍率で、数字が大きいほど不利と見られている側です。</span><span class="sn">締切は試合日の0時。前日の夜までに入れてください。</span><span class="sn">表示は今日から3日分。先の試合は予告先発が出てから並びます。</span></p>
     <div id="deadline"></div>
     <div id="postorder"></div>
     <div id="predict"></div>
@@ -1339,13 +1385,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <div class="head"><h2>日程・結果</h2><em id="scheduleRange"></em></div>
     <div id="timeline"></div>
   </section>
-  <section class="reveal" id="nav-odds">
-    <div class="head"><h2>オッズ算出</h2><em>Odds Model</em></div>
-    <p class="hint"><span class="sn">オッズは固定値ではなく、下の要素をロジスティック回帰の形で足し合わせて阪神の勝率を出し、その逆数から控除率10%を引いて算出しています。</span></p>
-    <div id="oddsmodel"></div>
-    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">係数は仮の重み付け。実測データが溜まったら再校正する前提の v1 モデル</p>
-  </section>
-  <div class="grouplabel"><span>3人のバトル</span></div>
   <section class="reveal" id="nav-standings">
     <div class="head"><h2>順位</h2><em>Standings</em></div>
     <div class="standings" id="standings"></div>
@@ -1401,19 +1440,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <p class="hint"><span class="sn">今季の阪神の成績を球場ごとに集計したもの。</span><span class="sn">オッズの「球場相性」にも反映されます。</span></p>
     <div id="parks"></div>
   </section>
-  <section class="reveal" id="nav-npb">
-    <div class="head"><h2>セ・リーグ順位表</h2><em>NPB Standings</em></div>
-    <div id="npbstandings"></div>
-    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">NPB公式の勝敗表から自動取得。直近10試合と連勝・連敗は日程の結果から算出しています</p>
-  </section>
   <section class="reveal" id="nav-teams">
-    <div class="head"><h2>球団 戦力一覧</h2><em id="teamCount"></em></div>
+    <div class="head"><h2>セ・リーグ</h2><em id="teamCount"></em></div>
     <div class="tablewrap" id="teams"></div>
-    <p class="fine" style="margin:8px 2px 0;font-size:13px;color:var(--ink-dim)">見出しをタップで並び替え／球団名をタップでその球団の詳細／表は横にスクロールできます</p>
+    <p class="fine" style="margin:8px 2px 0;font-size:13px;color:var(--ink-dim)">見出しをタップで並び替え／球団名をタップでその球団の詳細と対戦履歴／表は横にスクロールできます</p>
   </section>
   <section class="reveal" id="nav-stats">
     <div class="head"><h2>選手成績</h2><em>Leaders</em></div>
-    <p class="hint"><span class="sn">阪神タイガースの個人成績。</span><span class="sn">毎日12時と17時に自動更新されます。</span></p>
+    <p class="hint"><span class="sn">阪神タイガースの個人成績。</span><span class="sn">毎日 9時・12時・18時・22時に自動更新されます。</span></p>
     <div id="statsboard"></div>
   </section>
   <section class="reveal" id="nav-h2h">
@@ -1484,6 +1518,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       </div>
     </div>
   </section>
+  <details class="foldsec reveal" id="nav-odds">
+    <summary><b>オッズ算出</b><em>Odds Model</em><i>計算の内訳を見る</i></summary>
+    <div class="foldbody">
+    <div class="head"><h2>オッズ算出</h2><em>Odds Model</em></div>
+    <p class="hint"><span class="sn">オッズは固定値ではなく、下の要素をロジスティック回帰の形で足し合わせて阪神の勝率を出し、その逆数から控除率10%を引いて算出しています。</span></p>
+    <div id="oddsmodel"></div>
+    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">係数は仮の重み付け。実測データが溜まったら再校正する前提の v1 モデル</p>
+      </div>
+  </details>
   <footer><span>熱　覇</span><span id="updated"></span></footer>
 </div>
 
@@ -2310,6 +2353,7 @@ function upcomingGames(){
       if(!g.a || !g.b) return;
       if(g.void) return;
       if(settled(g)) return;
+      if(!withinWindow(d.d)) return;                  /* 1週間より先は受け付けない */
       if(g.oa===undefined || g.ob===undefined) return;
       out.push({id:`${d.d}-${i}`, date:d.d, no:i+1, time:g.t, round:g.r, g,
                 closed: isClosed(d.d)});
@@ -2319,11 +2363,25 @@ function upcomingGames(){
 }
 /* ---------- 優勝までの道のり / 逆転ライン / 大穴 ---------- */
 
+/* 逆転ラインは終盤だけ意味がある。残り試合がこの数以下になったら出す */
+const COMEBACK_FROM = 10;
 function renderComeback(){
   const box = document.getElementById("comeback");
   if(!box) return;
+  const sec = document.getElementById("nav-comeback");
   const {totals, topPt} = STATE;
-  if(!totals.length){ box.innerHTML=""; return; }
+  const t = TEAM[HOME] || {};
+  const seasonLeft = (t.w != null) ? GAMES_PER_SEASON - (t.w + t.l + t.d) : 999;
+  if(!totals.length || seasonLeft > COMEBACK_FROM){
+    if(sec) sec.style.display = "none";
+    box.innerHTML = "";
+    const nav = document.getElementById("navComeback");
+    if(nav) nav.style.display = "none";
+    return;
+  }
+  if(sec) sec.style.display = "";
+  const navc = document.getElementById("navComeback");
+  if(navc) navc.style.display = "";
   const leader = totals[0];
   const R = remainingMax();
   box.innerHTML = `<div class="cbox">
@@ -2801,18 +2859,18 @@ function teamRow(name, odds, runs, state, showNote, g, side){
   if(!name) return `<div class="row"><span class="pref">&nbsp;</span><span class="nm2" style="opacity:.34">対戦相手</span></div>`;
   const t = TEAM[name];
   if(!t) return `<div class="row"><span class="pref">&nbsp;</span><span class="nm2">${name}</span></div>`;
-  const u = (label, val) => `<i>${label}<b>${val}</b></i>`;
+  const u = (label, val) => `<i>${label}<b>${val}</b></i>`;   /* ラベルと数字の間隔はCSSで空ける */
   const sp = (g && g.sp) ? g.sp[side] : null;
   const rf = recentForm(name, g ? g._i : undefined);
   const spline = sp ? `<span class="ln kk">${u("先発", sp)}${u("FIP", fipOf(sp).toFixed(2))}</span>` : "";
-  const line = `<span class="ln">${u("打", t.avg||"—")}${u("OPS", t.ops!=null?t.ops.toFixed(3).replace(/^0/,""):"—")}${u("防", t.era!=null?t.era.toFixed(2):"—")}${u("直近10", `${rf.w}勝${rf.l}敗`)}</span>`;
+  const line = `<span class="ln">${u("打率", t.avg||"—")}${u("OPS", t.ops!=null?t.ops.toFixed(3).replace(/^0/,""):"—")}${u("防御率", t.era!=null?t.era.toFixed(2):"—")}${u("直近10試合", `${rf.w}勝${rf.l}敗`)}</span>`;
   const f = FORM[name];
   const note = !showNote ? "" :
     (f ? `<span class="cm"><b class="form">${f[0]}</b>${sent(f[1])}</span>`
        : (t.memo ? `<span class="cm">${sent(t.memo)}</span>` : ""));
   return `<div class="row ${state}">
     <span class="pref">${t.rank}位</span>
-    <span class="nm2">${name}${name===HOME?'<span class="alma">主役</span>':''}<span class="apps">${t.w}勝${t.l}敗${t.d}分</span>
+    <span class="nm2">${name}<span class="apps">${t.w}勝${t.l}敗${t.d}分</span>
       ${spline}${line}${note}</span>
     ${runs!==null?`<span class="runs">${runs}</span>`:""}
     <span class="odds">${odds?odds.toFixed(1)+"倍":"—"}</span>
@@ -2857,16 +2915,34 @@ function renderTimeline(){
   const fold = (d, i) => finished(d) || (nowIdx >= 0 && i < nowIdx);
   const future = DAYS.filter((d,i)=>!fold(d,i));
   const past   = DAYS.filter((d,i)=> fold(d,i));
-  const anchor = (future[0] || DAYS.find(d=>d.now) || {}).d;
+  const near = future.filter(d=>withinWindow(d.d));
+  const far  = future.filter(d=>!withinWindow(d.d));
+  const anchor = (near[0] || future[0] || DAYS.find(d=>d.now) || {}).d;
+  const farHtml = far.length
+    ? `<details class="tlpast tlfar"><summary>この先の日程（${far.filter(d=>!d.rest).length}試合）</summary>
+       <div class="tlpastb">${far.map(d=>{
+         if(d.rest) return `<div class="farrow rest"><span class="fard">${d.d}<i class="dow ${dowInfo(d.d).cls}">(${dowInfo(d.d).label})</i></span><span class="farc">試合なし</span></div>`;
+         const g = (d.games||[])[0] || {};
+         return `<div class="farrow">
+           <span class="fard">${d.d}<i class="dow ${dowInfo(d.d).cls}">(${dowInfo(d.d).label})</i></span>
+           <span class="farc">${g.r||""}</span>
+           <span class="farv">${g.venue||""}${g.home?"":"（ビジター）"}</span>
+           <span class="fart">${g.t||""}</span>
+         </div>`;
+       }).join("")}</div>
+       <p class="scnote">${sent("予告先発と天気が出そろってから、オッズつきのカードに切り替わります。")}</p>
+      </details>`
+    : "";
   const pastHtml = past.length
     ? `<details class="tlpast"><summary>終了した日程（${past.length}日ぶん）</summary>
        <div class="tlpastb">${past.map(d=>dayCard(d, anchor)).join("")}</div></details>`
     : "";
   document.getElementById("timeline").innerHTML =
-    future.map(d=>dayCard(d, anchor)).join("") + pastHtml;
-  const gd = DAYS.filter(d=>!d.rest);
+    near.map(d=>dayCard(d, anchor)).join("") + farHtml + pastHtml;
   const rangeEl = document.getElementById("scheduleRange");
-  if(rangeEl && gd.length) rangeEl.textContent = `${gd[0].d} → ${gd[gd.length-1].d}`;
+  const shown = near.filter(d=>!d.rest);
+  if(rangeEl) rangeEl.textContent = shown.length
+    ? `${shown[0].d} → ${shown[shown.length-1].d}` : "—";
   function dayCard(d, anchor){
     if(d.rest) return `<div class="restday"><b>${d.d}<i class="dow ${dowInfo(d.d).cls}">(${dowInfo(d.d).label})</i></b>試合なし${wbadge(d.d)}</div>`;
     const done = (d.games||[]).some(g=>settled(g));
@@ -2892,7 +2968,7 @@ function renderTimeline(){
 }
 
 /* ---------- 球団 戦力一覧 ---------- */
-let sortKey = 3, sortAsc = false;   // 既定は勝率降順
+let sortKey = 0, sortAsc = false;   // 既定は順位順
 function teamHistory(team){
   const past = [], next = [];
   DAYS.forEach(d=>{
@@ -2917,15 +2993,18 @@ function teamHistory(team){
 }
 let openTeam = null;
 function renderTeams(){
-  const KEYS = ["順位","球団","勝敗分","勝率","打率","OPS","防御率","直近10","得点"];
+  const KEYS = ["順","球団","勝","敗","分","勝率","差","貯金","直近10","連続","打率","OPS","防御率","得点"];
   const dead = eliminated();
   const rows = Object.keys(TEAM).map(n=>{
     const t = TEAM[n];
     const rf = recentForm(n);
     return {lg:t.lg, name:n, rank:t.rank, w:t.w, l:t.l, dr:t.d, avg:t.avg, ops:t.ops, era:t.era,
-            rate:(t.w+t.l)?t.w/(t.w+t.l):0, form:rf, memo:t.memo, runs:t.runs, ko:dead.has(n)};
+            rate:(t.w+t.l)?t.w/(t.w+t.l):0, form:rf, memo:t.memo, runs:t.runs,
+            gb:t.gb, bal:t.w-t.l, streak:t.streak, ko:dead.has(n)};
   });
-  const val = (r,k)=>[-r.rank, r.name, r.w, r.rate, parseFloat(r.avg)||-1, r.ops||-1, -(r.era||99), r.form.rate, (r.runs==null?-1:r.runs)][k];
+  const val = (r,k)=>[-r.rank, r.name, r.w, -r.l, r.dr, r.rate, -r.rank, r.bal, r.form.rate,
+                      ((r.streak&&r.streak.type==="win")?(r.streak.n||0):-((r.streak&&r.streak.n)||0)),
+                      parseFloat(r.avg)||-1, r.ops||-1, -(r.era||99), (r.runs==null?-1:r.runs)][k];
   rows.sort((a,b)=>{
     const x=val(a,sortKey), y=val(b,sortKey);
     const c = (typeof x==="string") ? x.localeCompare(y,"ja") : x-y;
@@ -2952,7 +3031,7 @@ function renderTeams(){
         <span>今季 <b>${t.h2h[0]}勝${t.h2h[1]}敗${t.h2h[2]?`${t.h2h[2]}分`:""}</b></span>
         <span>残り <b>${remainingVs(r.name)}試合</b></span>
       </div>` : "";
-    return `<tr class="tdetail"><td colspan="9">
+    return `<tr class="tdetail"><td colspan="14">
       <div class="dwrap">
         <div class="dtop">
           <span class="dname">${r.name}</span>
@@ -2977,15 +3056,20 @@ function renderTeams(){
   document.getElementById("teams").innerHTML =
     `<table class="tt"><thead><tr>${KEYS.map((k,i)=>
       `<th data-k="${i}" class="${i===sortKey?'s':''}">${k}${i===sortKey?(sortAsc?" ▲":" ▼"):""}</th>`).join("")}</tr></thead><tbody>`
-    + rows.map(r=>`<tr class="${r.ko?"ko":""} ${openTeam===r.name?"open":""}">
-        <td class="p">${r.rank}位</td>
-        <td class="n"><button class="tname" data-team="${r.name}">${r.name}</button>${r.name===HOME?'<span class="alma">主役</span>':''}</td>
-        <td class="d">${r.w}-${r.l}-${r.dr}</td>
+    + rows.map(r=>`<tr class="${r.ko?"ko":""} ${openTeam===r.name?"open":""} ${r.name===HOME?"metm":""}">
+        <td class="p">${r.rank}</td>
+        <td class="n"><button class="tname" data-team="${r.name}">${r.name}</button></td>
+        <td class="d">${r.w}</td>
+        <td class="d">${r.l}</td>
+        <td class="d">${r.dr}</td>
         <td class="d o">${r.rate.toFixed(3).replace(/^0/,"")}</td>
+        <td class="d">${r.gb||"—"}</td>
+        <td class="d ${r.bal>0?"pl":r.bal<0?"mi2":""}">${r.bal>0?"+":""}${r.bal}</td>
+        <td class="d">${r.form.w}勝${r.form.l}敗</td>
+        <td class="d st ${(r.streak&&r.streak.type)==="win"?"w":(r.streak&&r.streak.type)==="lose"?"l":""}">${(r.streak&&r.streak.label)||"—"}</td>
         <td class="d">${r.avg||"—"}</td>
         <td class="d">${r.ops!=null?r.ops.toFixed(3).replace(/^0/,""):"—"}</td>
         <td class="d">${r.era!=null?r.era.toFixed(2):"—"}</td>
-        <td class="d">${r.form.w}-${r.form.l}</td>
         <td class="d">${r.runs==null?"—":r.runs}</td>
       </tr>` + (openTeam===r.name ? detailRow(r) : "")).join("") + "</tbody></table>";
   document.querySelectorAll("#teams th").forEach(th=>th.addEventListener("click",()=>{
@@ -2998,7 +3082,7 @@ function renderTeams(){
     renderTeams();
   }));
   const el = document.getElementById("teamCount");
-  if(el) el.textContent = `セ・リーグ${rows.length}球団`;
+  if(el) el.textContent = `${rows.length}球団`;
 }
 
 /* ---------- 優勝の可能性 ---------- */
@@ -3201,6 +3285,25 @@ function jsDateToKey(iso){
   const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);
   return m ? `${+m[2]}/${+m[3]}` : null;
 }
+/* 予想の受付・日程表示は「今日から1週間」まで。先の試合は予告先発も天気も出ていないため */
+const SHOW_DAYS_AHEAD = 3;
+function dateObj(k){
+  const [m,d] = String(k).split("/").map(Number);
+  return (m && d) ? new Date(2026, m-1, d) : null;
+}
+/* 表示の起点。「本日」があればその日、無ければ最初の未消化の日 */
+function anchorDate(){
+  const now = DAYS.find(d=>d.now);
+  if(now) return dateObj(now.d);
+  let v = null;
+  DAYS.forEach(d=>{ if(!v && !d.rest && (d.games||[]).some(g=>!settled(g) && !g.void)) v = dateObj(d.d); });
+  return v || new Date();
+}
+function withinWindow(dateStr){
+  const a = anchorDate(), t = dateObj(dateStr);
+  if(!a || !t) return true;
+  return (t - a) / 86400000 <= SHOW_DAYS_AHEAD;
+}
 function dateNum(k){
   const [m,d] = String(k).split("/").map(Number);
   return (m||0)*100 + (d||0);
@@ -3248,47 +3351,6 @@ async function loadLive(force){
   }catch(e){
     renderLiveBar("ng", e.message || e);
   }
-}
-
-/* ---------- セ・パ順位表 ---------- */
-const LG_TAB = "セ";
-function standingsRows(lg){
-  if(LIVE && LIVE.standings && LIVE.standings[lg] && LIVE.standings[lg].length) return LIVE.standings[lg];
-  /* JSONが無いときは埋め込みの TEAM から作る */
-  return Object.keys(TEAM).filter(n=>TEAM[n].lg===lg)
-    .map(n=>{
-      const t = TEAM[n];
-      return {team:n, rank:t.rank, w:t.w, l:t.l, d:t.d,
-              pct:(t.w+t.l)? t.w/(t.w+t.l) : 0,
-              gb:t.gb||null, balance:t.w-t.l, run_diff:null,
-              last10:{w:t.last10[0], l:t.last10[1], d:0}, streak:t.streak};
-    }).sort((a,b)=>a.rank-b.rank);
-}
-function renderNpbStandings(){
-  const box = document.getElementById("npbstandings");
-  if(!box) return;
-  const rows = standingsRows(LG_TAB);
-  box.innerHTML = `<div class="tablewrap"><table class="npbt"><thead><tr>
-      <th>順</th><th class="l">球団</th><th>勝</th><th>敗</th><th>分</th><th>勝率</th><th>差</th>
-      <th>貯金</th><th class="hidesp">得失点</th><th>直近10</th><th>連続</th>
-    </tr></thead><tbody>${rows.map(r=>{
-      const bal = r.balance != null ? r.balance : (r.w - r.l);
-      const emb = TEAM[r.team] || {};
-      const l10 = (r.last10 && (r.last10.w + r.last10.l) > 0) ? r.last10
-                : (emb.last10 ? {w:emb.last10[0], l:emb.last10[1]} : {w:"-", l:"-"});
-      const st = (r.streak && r.streak.label && r.streak.label !== "—") ? r.streak : (emb.streak || {});
-      return `<tr class="${r.team===HOME?"me":""}">
-        <td class="no2">${r.rank||""}</td>
-        <td class="l tmn">${r.team}</td>
-        <td>${r.w}</td><td>${r.l}</td><td>${r.d}</td>
-        <td>${Number(r.pct||0).toFixed(3).replace(/^0/,"")}</td>
-        <td>${r.gb==null||r.gb==="-"?"—":r.gb}</td>
-        <td class="${bal>0?"pl":bal<0?"mi2":""}">${bal>0?"+":""}${bal}</td>
-        <td class="hidesp">${r.run_diff==null?"—":(r.run_diff>0?"+":"")+r.run_diff}</td>
-        <td>${l10.w}勝${l10.l}敗</td>
-        <td class="st ${st.type==="win"?"w":st.type==="lose"?"l":""}">${st.label||"—"}</td>
-      </tr>`;
-    }).join("")}</tbody></table></div>`;
 }
 
 /* ---------- 個人成績リーダーボード ---------- */
@@ -3435,7 +3497,6 @@ function renderAll(){
   safe("timeline", renderTimeline);
   safe("teams", renderTeams);
   safe("trends", renderTrends);
-  safe("npbstandings", renderNpbStandings);
   safe("stats", renderStats);
   safe("parks", renderParks);
   safe("matchup", renderMatchup);
