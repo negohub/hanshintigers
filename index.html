@@ -2971,7 +2971,7 @@ function applyLive(js){
       if(row.d != null) t.d = row.d;
       t.gb = row.gb; t.balance = row.balance;
       t.rf = row.rf; t.ra = row.ra; t.runDiff = row.run_diff;
-      t.streak = row.streak;
+      if(row.streak && row.streak.label) t.streak = row.streak;
       if(row.last10 && (row.last10.w + row.last10.l) > 0){
         t.last10 = [row.last10.w, row.last10.l];
       }
@@ -3025,12 +3025,13 @@ function applyLive(js){
     if(pb.wind != null) g.wind = Number(pb.wind);
     if(pb.weather){
       g.weather = pb.weather;
-      WEATHER[d] = {
+      if(!pb.weather.dome && pb.weather.temp != null) WEATHER[d] = {
         icon: pb.weather.dome ? "🏟" : (pb.weather.pop >= 50 ? "🌧" : pb.weather.pop >= 30 ? "🌦" : "🌤"),
         text: pb.weather.dome ? "ドーム" : "",
         hi: Math.round(pb.weather.temp ?? 0), lo: Math.round(pb.weather.temp ?? 0),
         pop: pb.weather.pop ?? 0, alert: (pb.weather.pop ?? 0) >= 70
       };
+      else delete WEATHER[d];
     }
     /* 「本日」の位置も最新にする */
     DAYS.forEach(x=>{ if(x.now) delete x.now; });
@@ -3118,8 +3119,10 @@ function renderNpbStandings(){
       <th>貯金</th><th class="hidesp">得失点</th><th>直近10</th><th>連続</th>
     </tr></thead><tbody>${rows.map(r=>{
       const bal = r.balance != null ? r.balance : (r.w - r.l);
-      const l10 = r.last10 || {w:"-",l:"-"};
-      const st = r.streak || {};
+      const emb = TEAM[r.team] || {};
+      const l10 = (r.last10 && (r.last10.w + r.last10.l) > 0) ? r.last10
+                : (emb.last10 ? {w:emb.last10[0], l:emb.last10[1]} : {w:"-", l:"-"});
+      const st = (r.streak && r.streak.label && r.streak.label !== "—") ? r.streak : (emb.streak || {});
       return `<tr class="${r.team===HOME?"me":""}">
         <td class="no2">${r.rank||""}</td>
         <td class="l tmn">${r.team}</td>
