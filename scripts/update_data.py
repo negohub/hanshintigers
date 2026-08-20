@@ -876,6 +876,32 @@ def fetch_starter_page() -> Dict[str, Dict[str, Optional[str]]]:
         if pending_team and name and not norm_team(name):
             out.setdefault(cur_date, {}).setdefault(pending_team, name)
         pending_team = None
+    # ロゴ画像で拾えなかった場合の保険：本文テキストから「球団名 → 直後の人名」を拾う
+    try:
+        text = soup.get_text("\n")
+        cur = None
+        pending = None
+        for raw in text.split("\n"):
+            t = norm_text(raw)
+            if not t:
+                continue
+            m = re.search(r"(\d{1,2})月(\d{1,2})日", t)
+            if m and "予告先発" in t:
+                cur = f"{int(m.group(1))}/{int(m.group(2))}"
+                pending = None
+                continue
+            if not cur:
+                continue
+            team = norm_team(t)
+            if team and len(t) <= 14:
+                pending = team
+                continue
+            if pending and 1 < len(t) <= 12 and not re.search(r"[0-9:：（）()]", t):
+                out.setdefault(cur, {}).setdefault(pending, t)
+                pending = None
+    except Exception as e:  # noqa: BLE001
+        log(f"  テキスト解析でも失敗: {e}")
+
     if out:
         for d in sorted(out):
             log(f"  {d}: " + " / ".join(f"{k} {v}" for k, v in out[d].items()))
@@ -920,8 +946,14 @@ def _probable_for(target: date,
     opp_sp = g["away_starter"] if is_home else g["home_starter"]
     # 日程ページに載っていなければ、予告先発ページの方を使う
     day = (starters or {}).get(key, {})
-    han_sp = han_sp or day.get(HOME_TEAM)
-    opp_sp = opp_sp or day.get(opp)
+    src_h = "日程" if han_sp else ""
+    src_o = "日程" if opp_sp else ""
+    if not han_sp and day.get(HOME_TEAM):
+        han_sp, src_h = day[HOME_TEAM], "予告先発ページ"
+    if not opp_sp and day.get(opp):
+        opp_sp, src_o = day[opp], "予告先発ページ"
+    if not han_sp:
+        log(f"  !! {key} の{HOME_TEAM}の先発が取れていません（この日の予告先発ページの中身: {day}）")
 
     item = {
         "date": target.isoformat(),
@@ -937,7 +969,8 @@ def _probable_for(target: date,
                  if g["home_score"] is not None else None,
     }
     log(f"予告先発 {key}: {item['card']} @{item['venue']} "
-        f"{item['hanshin_pitcher'] or '未発表'} vs {item['opponent_pitcher'] or '未発表'}")
+        f"{item['hanshin_pitcher'] or '未発表'}[{src_h or '-'}] vs "
+        f"{item['opponent_pitcher'] or '未発表'}[{src_o or '-'}]")
     return item
 
 
