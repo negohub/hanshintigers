@@ -54,7 +54,8 @@ except ImportError:  # pragma: no cover
 # =====================================================================
 
 JST = timezone(timedelta(hours=9))
-SEASON = int(os.environ.get("NPB_SEASON", datetime.now(JST).year))
+_season_env = (os.environ.get("NPB_SEASON") or "").strip()
+SEASON = int(_season_env) if _season_env.isdigit() else datetime.now(JST).year
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_PATH = os.path.join(ROOT, "data", "latest.json")
@@ -92,6 +93,7 @@ TEAM_ALIASES = {
     "西武": "西武", "埼玉西武ライオンズ": "西武", "ライオンズ": "西武", "L": "西武",
 }
 
+HOME_TEAM = "阪神"
 CENTRAL = ["阪神", "巨人", "ＤｅＮＡ", "広島", "ヤクルト", "中日"]
 
 # 球場の位置と「浜風の吹いてくる方位」
@@ -354,70 +356,160 @@ def fetch_standings() -> Dict[str, List[Dict[str, Any]]]:
 
 
 # =====================================================================
-# ② 直近10試合・連勝／連敗（日程結果から算出）
+# ② NPB公式の月別日程ページを1枚読んで、結果・予告先発をまとめて取る
+#    https://npb.jp/games/<season>/schedule_<MM>_detail.html
+#    1ページに全球団の「対戦カード／スコア／球場／開始時間／予告先発」が
+#    載っているので、ここを起点にすると取りこぼしが少ない。
 # =====================================================================
 
-def fetch_recent_form(days: int = 45) -> Dict[str, Dict[str, Any]]:
-    """スポーツナビの日別スコアから、球団ごとの直近10試合と連勝/連敗を作る"""
-    if BeautifulSoup is None:
-        log("直近10試合: BeautifulSoup が無いのでスキップ")
-        return {}
-    results: Dict[str, List[Dict[str, Any]]] = {}
-    today = datetime.now(JST).date()
-    got = 0
-    for i in range(1, days + 1):
-        d = today - timedelta(days=i)
-        url = f"https://baseball.yahoo.co.jp/npb/schedule/?date={d.isoformat()}"
-        html = get(url)
-        time.sleep(0.4)
-        if not html:
+SCHEDULE = "https://npb.jp/games/{season}/schedule_{mm}_detail.html"
+
+_DATE_RE = re.compile(r"(\d{1,2})[/／](\d{1,2})")
+_SCORE_RE = re.compile(r"^(.+?)(\d{1,2})\s*[-−–]\s*(\d{1,2})(.+)$")
+_TIME_RE = re.compile(r"(\d{1,2}):(\d{2})")
+
+
+def _split_card(text: str):
+    """「巨人 7 - 8 DeNA」→ (巨人, 7, 8, DeNA) / 「阪神 - ヤクルト」→ (阪神, None, None, ヤクルト)"""
+    t = norm_text(text)
+    if not t:
+        return None
+    m = _SCORE_RE.match(t)
+    if m:
+        home, hs, as_, away = norm_team(m.group(1)), to_int(m.group(2)), to_int(m.group(3)), norm_team(m.group(4))
+        if home and away:
+            return home, hs, as_, away
+    if "中止" in t:
+        parts = [norm_team(x) for x in re.split(r"中止", t)]
+        parts = [p for p in parts if p]
+        if len(parts) == 2:
+            return parts[0], None, None, parts[1]
+    # スコア無し（これからの試合）。チーム名が2つ並んでいるはず
+    found = []
+    for m2 in re.finditer(r"[ぁ-んァ-ヶ一-龠ａ-ｚＡ-Ｚa-zA-Z]{2,10}", t):
+        nm = norm_team(m2.group(0))
+        if nm and nm not in found:
+            found.append(nm)
+    if len(found) == 2:
+        return found[0], None, None, found[1]
+    return None
+
+
+def _split_starters(text: str):
+    """「先発：下村 先発：高橋」→ (下村, 高橋)。責任投手（勝：/敗：）は無視"""
+    t = norm_text(text)
+    if not t or "先発" not in t:
+        return None, None
+    names = re.findall(r"先発[:：]([^\s先勝敗]{1,10})", t)
+    if len(names) >= 2:
+        return names[0], names[1]
+    if len(names) == 1:
+        return names[0], None
+    return None, None
+
+
+def fetch_month_games(month: int, season: int = None) -> List[Dict[str, Any]]:
+    """月別日程ページから、その月の全試合を取り出す"""
+    season = season or SEASON
+    url = SCHEDULE.format(season=season, mm=f"{month:02d}")
+    log(f"日程ページ {url}")
+    html = get(url)
+    time.sleep(SLEEP)
+    if not html:
+        return []
+    games: List[Dict[str, Any]] = []
+    cur_date = None
+    for df in read_tables(html):
+        df = flatten_columns(df)
+        if df.shape[1] < 3:
             continue
-        got += 1
-        soup = BeautifulSoup(html, "html.parser")
-        text = soup.get_text("\n")
-        # 「巨人 3 - 2 阪神」のような並びを拾う
-        for m in re.finditer(r"([^\n\d]{2,10}?)\s*(\d{1,2})\s*[-−]\s*(\d{1,2})\s*([^\n\d]{2,10})", text):
-            a, sa, sb, b = norm_team(m.group(1)), to_int(m.group(2)), to_int(m.group(3)), norm_team(m.group(4))
-            if not a or not b or a == b or sa is None or sb is None:
+        for rec in df.to_dict("records"):
+            vals = [v for v in rec.values()]
+            texts = [norm_text(v) for v in vals]
+            # 日付
+            for tx in texts[:1]:
+                m = _DATE_RE.search(tx)
+                if m:
+                    cur_date = f"{int(m.group(1))}/{int(m.group(2))}"
+            if not cur_date:
                 continue
-            for team, mine, opp in ((a, sa, sb), (b, sb, sa)):
-                results.setdefault(team, []).append(
-                    {"date": d.isoformat(), "mine": mine, "opp": opp})
-    if not got:
+            # 対戦カード（チーム名が2つ入っているセル）
+            card = None
+            for tx in texts:
+                got = _split_card(tx)
+                if got and got[0] != got[3]:
+                    card = got
+                    break
+            if not card:
+                continue
+            home, hs, as_, away = card
+            # 球場と開始時間
+            venue, start = None, None
+            for tx in texts:
+                pk = norm_park(tx)
+                if pk and not venue:
+                    venue = pk
+                    tm = _TIME_RE.search(tx)
+                    if tm:
+                        start = f"{int(tm.group(1))}:{tm.group(2)}"
+            sp_h, sp_a = None, None
+            for tx in texts:
+                a, b = _split_starters(tx)
+                if a:
+                    sp_h, sp_a = a, b
+                    break
+            games.append({"date": cur_date, "month": month, "home": home, "away": away,
+                          "home_score": hs, "away_score": as_, "venue": venue,
+                          "start_time": start, "home_starter": sp_h, "away_starter": sp_a})
+    log(f"  → {len(games)}試合")
+    return games
+
+
+def fetch_recent_form(days: int = 45) -> Dict[str, Dict[str, Any]]:
+    """月別日程の結果から、球団ごとの直近10試合と連勝／連敗を作る"""
+    today = datetime.now(JST).date()
+    months = [today.month]
+    if today.day <= 12:                     # 月初は前月ぶんも見る
+        months.insert(0, 12 if today.month == 1 else today.month - 1)
+    allg: List[Dict[str, Any]] = []
+    for m in months:
+        allg.extend(fetch_month_games(m))
+    if not allg:
         return {}
 
+    def key(g):
+        mm, dd = g["date"].split("/")
+        return (g["month"], int(dd))
+
+    results: Dict[str, List[bool]] = {}
+    for g in sorted(allg, key=key):
+        if g["home_score"] is None or g["away_score"] is None:
+            continue
+        if g["home_score"] == g["away_score"]:
+            continue                        # 引き分けは連続記録に影響しない
+        hw = g["home_score"] > g["away_score"]
+        results.setdefault(g["home"], []).append(hw)
+        results.setdefault(g["away"], []).append(not hw)
+
     form: Dict[str, Dict[str, Any]] = {}
-    for team, games in results.items():
-        # 日付昇順にして重複を除く
-        seen, uniq = set(), []
-        for g in sorted(games, key=lambda x: x["date"]):
-            key = (g["date"], g["mine"], g["opp"])
-            if key in seen:
-                continue
-            seen.add(key)
-            uniq.append(g)
-        last10 = uniq[-10:]
-        w = sum(1 for g in last10 if g["mine"] > g["opp"])
-        l = sum(1 for g in last10 if g["mine"] < g["opp"])
-        dr = len(last10) - w - l
-        streak_n, streak_type = 0, None
-        for g in reversed(uniq):
-            if g["mine"] == g["opp"]:
-                continue
-            t = "win" if g["mine"] > g["opp"] else "lose"
-            if streak_type is None:
-                streak_type, streak_n = t, 1
-            elif streak_type == t:
-                streak_n += 1
+    for team, seq in results.items():
+        last10 = seq[-10:]
+        w = sum(1 for x in last10 if x)
+        n, t = 0, None
+        for x in reversed(seq):
+            if t is None:
+                t, n = x, 1
+            elif t == x:
+                n += 1
             else:
                 break
         form[team] = {
-            "last10": {"w": w, "l": l, "d": dr},
-            "streak": {"type": streak_type, "n": streak_n,
-                       "label": (f"{streak_n}連勝" if streak_type == "win"
-                                 else f"{streak_n}連敗" if streak_type == "lose" else "—")},
+            "last10": {"w": w, "l": len(last10) - w, "d": 0},
+            "streak": {"type": ("win" if t else "lose") if t is not None else None, "n": n,
+                       "label": (f"{n}連勝" if t else f"{n}連敗") if t is not None else "—"},
         }
     log(f"直近10試合 → {len(form)}球団ぶん算出")
+    globals()["_SCHEDULE_CACHE"] = allg
     return form
 
 
@@ -618,59 +710,47 @@ def fetch_players(teams: List[str]) -> Dict[str, Dict[str, List[Dict[str, Any]]]
 # ⑤ 予告先発と試合条件
 # =====================================================================
 
+def _resolve_pitcher(short: Optional[str], roster: List[Dict[str, Any]]) -> Optional[str]:
+    """「下村」→「下村 海翔」。同じ球団の登録投手から姓で引き当てる"""
+    if not short:
+        return None
+    key = norm_text(short)
+    if not key:
+        return None
+    for p in roster or []:
+        nm = norm_text(p.get("name"))
+        if nm == key or nm.startswith(key) or key.startswith(nm):
+            return p.get("name")
+    return short
+
+
 def fetch_probables(target: date) -> List[Dict[str, Any]]:
-    """スポーツナビの日程ページから阪神戦の予告先発を拾う"""
-    if BeautifulSoup is None:
-        log("予告先発: BeautifulSoup が無いのでスキップ")
+    """月別日程ページから、その日の阪神戦（カード・球場・予告先発）を取る"""
+    key = f"{target.month}/{target.day}"
+    games = globals().get("_SCHEDULE_CACHE") or fetch_month_games(target.month)
+    rows = [g for g in games
+            if g["date"] == key and HOME_TEAM in (g["home"], g["away"])]
+    if not rows:
+        log(f"予告先発: {key} の{HOME_TEAM}戦は日程に見つからず")
         return []
-    url = f"https://baseball.yahoo.co.jp/npb/schedule/?date={target.isoformat()}"
-    log(f"予告先発 {url}")
-    html = get(url)
-    if not html:
-        return []
-    soup = BeautifulSoup(html, "html.parser")
-    games: List[Dict[str, Any]] = []
-
-    for card in soup.select("li, tr, div"):
-        text = card.get_text(" ", strip=True)
-        if "阪神" not in text or len(text) > 400:
-            continue
-        teams = []
-        for m in re.finditer(r"[ぁ-んァ-ヶ一-龠ａ-ｚA-Za-z]{2,12}", text):
-            t = norm_team(m.group(0))
-            if t and t not in teams:
-                teams.append(t)
-        if len(teams) < 2 or "阪神" not in teams:
-            continue
-        park = norm_park(text)
-        tm = re.search(r"(\d{1,2}):(\d{2})", text)
-        # 「先発 才木 － 戸郷」のような並び
-        pitchers = re.findall(r"(?:先発|予告)?[\s:：]*([一-龠ぁ-んァ-ヶA-Za-zー・]{2,10})\s*[－\-–]\s*([一-龠ぁ-んァ-ヶA-Za-zー・]{2,10})", text)
-        opp = [t for t in teams if t != "阪神"][0]
-        home_first = teams[0] != "阪神"     # スポナビは「ビジター vs ホーム」表記
-        item = {
-            "date": target.isoformat(),
-            "opponent": opp,
-            "card": f"対{opp}",
-            "venue": park,
-            "home": (park == "甲子園"),
-            "start_time": f"{tm.group(1)}:{tm.group(2)}" if tm else "18:00",
-            "hanshin_pitcher": None,
-            "opponent_pitcher": None,
-            "_raw": text[:200],
-        }
-        if pitchers:
-            a, b = pitchers[0]
-            if home_first:
-                item["opponent_pitcher"], item["hanshin_pitcher"] = a, b
-            else:
-                item["hanshin_pitcher"], item["opponent_pitcher"] = a, b
-        games.append(item)
-        break
-
-    if not games:
-        log("  → 阪神戦の予告先発は見つからず")
-    return games
+    g = rows[0]
+    is_home = g["home"] == HOME_TEAM
+    opp = g["away"] if is_home else g["home"]
+    item = {
+        "date": target.isoformat(),
+        "opponent": opp,
+        "card": f"対{opp}",
+        "venue": g.get("venue"),
+        "home": is_home,
+        "start_time": g.get("start_time") or "18:00",
+        "hanshin_pitcher": g["home_starter"] if is_home else g["away_starter"],
+        "opponent_pitcher": g["away_starter"] if is_home else g["home_starter"],
+        "score": ([g["home_score"], g["away_score"]] if is_home else [g["away_score"], g["home_score"]])
+                 if g["home_score"] is not None else None,
+    }
+    log(f"予告先発: {item['card']} @{item['venue']} "
+        f"{item['hanshin_pitcher']} vs {item['opponent_pitcher']}")
+    return [item]
 
 
 # =====================================================================
@@ -696,8 +776,7 @@ def fetch_weather(park: Optional[str], target: date,
         return None
     cfg = PARKS[park]
     if cfg.get("dome"):
-        return {"park": park, "dome": True, "text": "ドーム", "wind_speed": 0,
-                "hamakaze": 0, "pop": 0}
+        return {"park": park, "dome": True, "text": "ドーム", "wind_speed": 0, "hamakaze": 0}
     url = ("https://api.open-meteo.com/v1/forecast"
            f"?latitude={cfg['lat']}&longitude={cfg['lon']}"
            "&hourly=temperature_2m,precipitation_probability,wind_speed_10m,wind_direction_10m"
@@ -775,9 +854,7 @@ def build(target: date) -> Dict[str, Any]:
             f = (form or {}).get(row["team"])
             if f:
                 row.update(f)
-            elif not row.get("last10"):
-                row["last10"] = {"w": 5, "l": 5, "d": 0}
-                row["streak"] = {"type": None, "n": 0, "label": "—"}
+            # 取れなかった場合は入れない（サイト側の登録値がそのまま生きる）
     data["standings"] = standings
 
     # チーム指標
@@ -798,17 +875,12 @@ def build(target: date) -> Dict[str, Any]:
             if p.get("fip") is not None:
                 fip_index[p["name"]] = p["fip"]
     for g in data["probables"]:
-        for side, team_key in (("hanshin", "阪神"), ("opponent", g.get("opponent"))):
-            name = g.get(f"{side}_pitcher")
-            if not name:
-                continue
-            hit = fip_index.get(name)
-            if hit is None:
-                for k, v in fip_index.items():
-                    if name in k or k in name:
-                        hit = v
-                        break
-            g[f"{side}_fip"] = hit
+        for side, team_key in (("hanshin", HOME_TEAM), ("opponent", g.get("opponent"))):
+            roster = ((data.get("players") or {}).get(team_key) or {}).get("pitchers", [])
+            full = _resolve_pitcher(g.get(f"{side}_pitcher"), roster)
+            if full:
+                g[f"{side}_pitcher"] = full
+            g[f"{side}_fip"] = fip_index.get(full) if full else None
         # 天気
         hour = int((g.get("start_time") or "18:00").split(":")[0])
         w = fetch_weather(g.get("venue"), target, hour)
@@ -824,9 +896,14 @@ def build(target: date) -> Dict[str, Any]:
     return data
 
 
+# 勝敗表の「対神／対巨／対デ…」列を球団名に戻す
+H2H_COLS = {"対神": "阪神", "対巨": "巨人", "対デ": "ＤｅＮＡ",
+            "対ヤ": "ヤクルト", "対広": "広島", "対中": "中日"}
+
+
 def fetch_h2h() -> Dict[str, Dict[str, int]]:
-    """NPB公式のチーム別対戦成績表から、阪神の対戦成績を取り出す"""
-    url = NPB.format(season=SEASON, page="std_ci.html")   # セ・リーグ 対戦成績
+    """セ・リーグ勝敗表の対戦成績欄から、阪神の球団別成績を取り出す"""
+    url = NPB.format(season=SEASON, page="std_c.html")
     log(f"対戦成績 {url}")
     html = get(url)
     time.sleep(SLEEP)
@@ -835,22 +912,26 @@ def fetch_h2h() -> Dict[str, Dict[str, int]]:
     out: Dict[str, Dict[str, int]] = {}
     for df in read_tables(html):
         df = flatten_columns(df)
+        cols = list(df.columns)
+        if not any(c in H2H_COLS for c in cols):
+            continue
         for rec in df.to_dict("records"):
             row_team = None
             for v in rec.values():
                 row_team = norm_team(v)
                 if row_team:
                     break
-            if row_team != "阪神":
+            if row_team != HOME_TEAM:
                 continue
             for col, val in rec.items():
-                opp = norm_team(col)
-                if not opp or opp == "阪神":
+                opp = H2H_COLS.get(norm_text(col))
+                if not opp or opp == HOME_TEAM:
                     continue
-                m = re.match(r"^(\d+)\D+(\d+)\D+(\d+)$", norm_text(val))
+                t = norm_text(val)
+                m = re.match(r"^(\d+)[-−–](\d+)(?:\((\d+)\))?$", t)
                 if m:
                     out[opp] = {"w": int(m.group(1)), "l": int(m.group(2)),
-                                "d": int(m.group(3))}
+                                "d": int(m.group(3) or 0)}
         if out:
             break
     log(f"  → {len(out)}球団ぶん")
