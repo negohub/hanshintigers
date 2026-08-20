@@ -1414,6 +1414,20 @@ tr.lead .plate.total{color:var(--cream);text-shadow:none}
 }
 /* 開いたままのセクションは今までどおり */
 section.reveal{margin-top:44px}
+/* オッズの内訳（試合カードの中）を折りたたみに */
+.oddshead{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 15px;
+  border-top:1px dashed var(--line);font-family:var(--sys);font-size:13px;color:var(--ink-dim)}
+.oddshead>span b{color:var(--gold);font-size:16px;font-weight:700;margin-left:4px}
+.oddsfold{margin-left:auto;flex-basis:100%}
+.oddsfold>summary{list-style:none;cursor:pointer;font-size:12.5px;color:var(--clay);
+  padding:2px 0;display:inline-block}
+.oddsfold>summary::-webkit-details-marker{display:none}
+.oddsfold>summary::after{content:" ＋";font-size:11px}
+.oddsfold[open]>summary::after{content:" −"}
+.oddsfold .oddsline{border-top:none;padding:6px 0 0}
+.oddsfold .fipline{padding-bottom:2px}
+.oddsfold .fipline i{color:rgba(237,229,214,.62)}
+.oddsfold .fipline b{color:var(--gold)}
 </style>
 </head>
 <body>
@@ -2352,16 +2366,8 @@ function renderBetBoard(){
 function renderDeadline(){
   const box = document.getElementById("deadline");
   if(!box) return;
-  const all = upcomingGames().filter(it=>!it.closed);
-  const items = all.filter(it=>!it.waiting);
-  if(!items.length){
-    const w = all.find(it=>it.waiting);
-    box.innerHTML = w
-      ? `<div class="dlbox wait"><b>${w.date} は予告先発の発表待ち</b>
-         <span class="dlok">${sent("先発が出しだいオッズが決まり、予想を受け付けます。")}</span></div>`
-      : "";
-    return;
-  }
+  const items = upcomingGames().filter(it=>!it.closed);
+  if(!items.length){ box.innerHTML = ""; return; }
   const date = items[0].date;                       /* 直近の受付中の日 */
   const day  = items.filter(it=>it.date === date);
   const left = dayDeadline(date).getTime() - Date.now();
@@ -2509,9 +2515,9 @@ function upcomingGames(){
       if(openDates(PREDICT_GAMES).indexOf(d.d) < 0) return;   /* 受付は手前の試合だけ */
       if(g.oa===undefined || g.ob===undefined) return;
       const sp = g.sp || [];
+      if(!(sp[0] && sp[1])) return;               /* 予告先発が出るまでは並べない */
       out.push({id:`${d.d}-${i}`, date:d.d, no:i+1, time:g.t, round:g.r, g,
-                closed: isClosed(d.d),
-                waiting: !(sp[0] && sp[1])});      /* 予告先発が出るまでは受け付けない */
+                closed: isClosed(d.d), waiting:false});
     });
   });
   return out;
@@ -2649,7 +2655,8 @@ function renderPredict(){
     bindPredict(); return;
   }
   if(!list.length){
-    box.innerHTML = `<div class="pbox"><div class="pwhos">${whoBtns}</div><p class="pask">予想できる試合がまだありません</p></div>`;
+    box.innerHTML = `<div class="pbox"><div class="pwhos">${whoBtns}</div>
+      <p class="pask">${sent("予告先発の発表待ちです。先発が出るとオッズが決まり、ここに並びます。")}</p></div>`;
     bindPredict(); return;
   }
 
@@ -2705,11 +2712,9 @@ function renderPredict(){
     return `<div class="pday"><div class="pdate">${date}<i class="dow ${dowInfo(date).cls}">(${dowInfo(date).label})</i>${budget?`<em class="pbadge ${round==="準決勝"?"sf":"qf"}">${round}・ポイントベット制</em>`:""}</div>${budgetBar}${rows}</div>`;
   }).join("");
 
-  const openN = list.filter(it=>!it.waiting).length;
   box.innerHTML = `<div class="pbox">
     <div class="pwhos">${whoBtns}</div>
-    <div class="psum">選択 <b>${done}</b>/${openN}試合　全部的中なら <b>+${Math.round(expect*10)/10}</b>pt${
-      list.length > openN ? `　<i style="font-style:normal;color:var(--steel)">（${list.length-openN}試合は予告先発の発表待ち）</i>` : ""}</div>
+    <div class="psum">選択 <b>${done}</b>/${list.length}試合　全部的中なら <b>+${Math.round(expect*10)/10}</b>pt</div>
     ${days}
     <div class="pacts">
       <button class="pact" id="predCopy">予想をコピー</button>
@@ -3066,8 +3071,8 @@ function teamRow(name, odds, runs, state, showNote, g, side){
   const sp = (g && g.sp) ? g.sp[side] : null;
   const rf = recentForm(name, g ? g._i : undefined);
   const spline = sp
-    ? `<span class="ln kk">${u("先発", sp)}${u("FIP", fipOf(sp).toFixed(2))}</span>`
-    : (showNote ? `<span class="ln kk"><i>先発<b>未発表</b></i><i>FIP<b>${LEAGUE_FIP.toFixed(2)}</b>で暫定計算</i></span>` : "");
+    ? `<span class="ln kk">${u("先発", sp)}</span>`
+    : (showNote ? `<span class="ln kk"><i>先発<b>未発表</b></i></span>` : "");
   const line = `<span class="ln">${u("打率", t.avg||"—")}${u("OPS", t.ops!=null?t.ops.toFixed(3).replace(/^0/,""):"—")}${u("防御率", t.era!=null?t.era.toFixed(2):"—")}${u("直近10試合", `${rf.w}勝${rf.l}敗`)}</span>`;
   const f = FORM[name];
   const note = !showNote ? "" :
@@ -3093,10 +3098,19 @@ function gameCard(g,i,done,date){
       return `<span class="chip ${h?"":"miss"}" style="${h?`--c:${p.color}`:""}">${p.name}${h?" 的中":" 外れ"}</span>`;
     }).join("")}</div>` : "";
   const m = g.model;
-  const oddsline = (!settled(g) && m) ? `<div class="oddsline">
-      <i>推定勝率 <b>${(m.p*100).toFixed(1)}%</b></i>
-      ${m.parts.filter(p=>p.key!=="base" && (p.key!=="wind" || (g.home && g.wind)))
-          .map(p=>`<i>${p.label} <b>${p.z>=0?"+":""}${r2(p.z)}</b></i>`).join("")}
+  const oddsline = (!settled(g) && m) ? `<div class="oddshead">
+      <span>推定勝率 <b>${(m.p*100).toFixed(1)}%</b></span>
+      <details class="oddsfold"><summary>内訳</summary>
+        ${(()=>{ const sp = g.sp || [];
+          if(!sp[0] && !sp[1]) return "";
+          const f = n => n ? fipOf(n).toFixed(2) : LEAGUE_FIP.toFixed(2);
+          return `<div class="oddsline fipline">
+            <i>${g.a} ${sp[0]||"未発表"} <b>FIP ${f(sp[0])}</b></i>
+            <i>${g.b} ${sp[1]||"未発表"} <b>FIP ${f(sp[1])}</b></i>
+          </div>`; })()}
+        <div class="oddsline">${m.parts.filter(p=>p.key!=="base" && (p.key!=="wind" || (g.home && g.wind)))
+          .map(p=>`<i>${p.label} <b>${p.z>=0?"+":""}${r2(p.z)}</b></i>`).join("")}</div>
+      </details>
     </div>` : "";
   const hm = g.home ? `<span class="hm">${g.venue}</span>` : `<span class="hm away">${g.venue}</span>`;
   return `<div class="g ${g.a?"":"tbd"} ${g.void?"void":""} ${g.home?"homeg":"awayg"}">
@@ -3107,11 +3121,7 @@ function gameCard(g,i,done,date){
 }
 function renderTimeline(){
   const {daily, played} = STATE;
-  const wbadge = (date)=>{
-    const w = WEATHER[date];
-    if(!w) return "";
-    return `<span class="wbadge ${w.alert?"walert2":""}">${w.icon} ${w.hi}°/${w.lo}° 降水${w.pop}%${w.alert?'<b>中止の可能性</b>':""}</span>`;
-  };
+  const wbadge = ()=>"";   /* 天気の表示はしない（浜風の計算にだけ使う） */
   const finished = d => {
     const live = (d.games||[]).filter(g=>!g.void);
     return live.length > 0 && live.every(g=>g.s);
@@ -3147,8 +3157,8 @@ function renderTimeline(){
     near.map(d=>dayCard(d, anchor)).join("") + farHtml + pastHtml;
   const rangeEl = document.getElementById("scheduleRange");
   const shown = near.filter(d=>!d.rest);
-  if(rangeEl) rangeEl.textContent = shown.length
-    ? `${shown[0].d} → ${shown[shown.length-1].d}` : "—";
+  if(rangeEl) rangeEl.textContent = !shown.length ? "—"
+    : (shown.length === 1 ? shown[0].d : `${shown[0].d} → ${shown[shown.length-1].d}`);
   function dayCard(d, anchor){
     if(d.rest) return `<div class="restday"><b>${d.d}<i class="dow ${dowInfo(d.d).cls}">(${dowInfo(d.d).label})</i></b>試合なし${wbadge(d.d)}</div>`;
     const done = (d.games||[]).some(g=>settled(g));
