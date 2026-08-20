@@ -322,6 +322,8 @@ def parse_standings(html: str, league: str) -> List[Dict[str, Any]]:
                 "gb": pick(rec, "差", "ゲーム差", "gb"),
                 "rf": rf, "ra": ra,
                 "run_diff": (rf - ra) if (rf is not None and ra is not None) else None,
+                "home_rec": norm_text(pick(rec, "ホーム")) or None,
+                "road_rec": norm_text(pick(rec, "ロード")) or None,
                 "hr": to_int(pick(rec, "本塁打", "本")),
                 "avg": to_float(pick(rec, "打率")),
                 "era": to_float(pick(rec, "防御率")),
@@ -465,21 +467,29 @@ def fetch_month_games(month: int, season: int = None) -> List[Dict[str, Any]]:
     return games
 
 
-def fetch_recent_form(days: int = 45) -> Dict[str, Dict[str, Any]]:
-    """月別日程の結果から、球団ごとの直近10試合と連勝／連敗を作る"""
+def load_season_games() -> List[Dict[str, Any]]:
+    """今季の全試合（3月〜今月）を月別日程ページからまとめて読む。1回だけ実行してキャッシュ"""
+    cached = globals().get("_SCHEDULE_CACHE")
+    if cached:
+        return cached
     today = datetime.now(JST).date()
-    months = [today.month]
-    if today.day <= 12:                     # 月初は前月ぶんも見る
-        months.insert(0, 12 if today.month == 1 else today.month - 1)
     allg: List[Dict[str, Any]] = []
-    for m in months:
+    for m in range(3, today.month + 1):
         allg.extend(fetch_month_games(m))
+    globals()["_SCHEDULE_CACHE"] = allg
+    return allg
+
+
+def fetch_recent_form(days: int = 45) -> Dict[str, Dict[str, Any]]:
+    """日程の結果から、球団ごとの直近10試合と連勝／連敗を作る"""
+    allg = load_season_games()
     if not allg:
         return {}
 
+    order = {m: i for i, m in enumerate(sorted({g["month"] for g in allg}))}
+
     def key(g):
-        mm, dd = g["date"].split("/")
-        return (g["month"], int(dd))
+        return (order.get(g["month"], 0), int(g["date"].split("/")[1]))
 
     results: Dict[str, List[bool]] = {}
     for g in sorted(allg, key=key):
@@ -509,8 +519,72 @@ def fetch_recent_form(days: int = 45) -> Dict[str, Dict[str, Any]]:
                        "label": (f"{n}連勝" if t else f"{n}連敗") if t is not None else "—"},
         }
     log(f"直近10試合 → {len(form)}球団ぶん算出")
-    globals()["_SCHEDULE_CACHE"] = allg
     return form
+
+
+def fetch_hanshin_games() -> List[Dict[str, Any]]:
+    """阪神の今季の全試合（開幕〜今月）をサイト用の形に整えて返す"""
+    allg = load_season_games()
+    out: List[Dict[str, Any]] = []
+    for g in allg:
+        if HOME_TEAM not in (g["home"], g["away"]):
+            continue
+        is_home = g["home"] == HOME_TEAM
+        opp = g["away"] if is_home else g["home"]
+        mm, dd = g["date"].split("/")
+        score = None
+        if g["home_score"] is not None and g["away_score"] is not None:
+            score = ([g["home_score"], g["away_score"]] if is_home
+                     else [g["away_score"], g["home_score"]])
+        out.append({
+            "date": f"{SEASON}-{int(mm):02d}-{int(dd):02d}",
+            "opponent": opp,
+            "venue": g.get("venue"),
+            "home": is_home,
+            "start_time": g.get("start_time"),
+            "score": score,
+            "hanshin_starter": (g["home_starter"] if is_home else g["away_starter"]),
+            "opponent_starter": (g["away_starter"] if is_home else g["home_starter"]),
+        })
+    out.sort(key=lambda x: x["date"])
+    log(f"阪神の今季全試合 → {len(out)}試合（うち終了 {sum(1 for x in out if x['score'])}）")
+    return out
+
+
+def fetch_park_stats() -> Dict[str, Dict[str, Any]]:
+    """阪神の球場別成績（勝敗分・得点・失点）を今季の全試合から集計する"""
+    allg = load_season_games()
+    if not allg:
+        return {}
+    out: Dict[str, Dict[str, Any]] = {}
+    for g in allg:
+        if HOME_TEAM not in (g["home"], g["away"]):
+            continue
+        if g["home_score"] is None or g["away_score"] is None:
+            continue
+        park = g.get("venue")
+        if not park:
+            continue
+        is_home = g["home"] == HOME_TEAM
+        rf = g["home_score"] if is_home else g["away_score"]
+        ra = g["away_score"] if is_home else g["home_score"]
+        o = out.setdefault(park, {"g": 0, "w": 0, "l": 0, "d": 0, "rf": 0, "ra": 0, "home": is_home})
+        o["g"] += 1
+        o["rf"] += rf
+        o["ra"] += ra
+        if rf > ra:
+            o["w"] += 1
+        elif rf < ra:
+            o["l"] += 1
+        else:
+            o["d"] += 1
+    for park, o in out.items():
+        n = o["w"] + o["l"]
+        o["pct"] = round(o["w"] / n, 3) if n else None
+        o["rf_avg"] = round(o["rf"] / o["g"], 2) if o["g"] else None
+        o["ra_avg"] = round(o["ra"] / o["g"], 2) if o["g"] else None
+    log(f"球場別成績 → {len(out)}球場ぶん集計")
+    return out
 
 
 # =====================================================================
@@ -727,7 +801,7 @@ def _resolve_pitcher(short: Optional[str], roster: List[Dict[str, Any]]) -> Opti
 def fetch_probables(target: date) -> List[Dict[str, Any]]:
     """月別日程ページから、その日の阪神戦（カード・球場・予告先発）を取る"""
     key = f"{target.month}/{target.day}"
-    games = globals().get("_SCHEDULE_CACHE") or fetch_month_games(target.month)
+    games = load_season_games() or fetch_month_games(target.month)
     rows = [g for g in games
             if g["date"] == key and HOME_TEAM in (g["home"], g["away"])]
     if not rows:
@@ -893,6 +967,12 @@ def build(target: date) -> Dict[str, Any]:
     # 対戦成績（阪神から見た球団別）
     data["h2h"] = section("h2h", lambda: fetch_h2h(), prev.get("h2h", {}))
 
+    # 球場別成績（阪神）
+    data["park_stats"] = section("park_stats", fetch_park_stats, prev.get("park_stats", {}))
+
+    # 阪神の今季全試合（日程表と終了した日程に使う）
+    data["season_games"] = section("season_games", fetch_hanshin_games, prev.get("season_games", []))
+
     return data
 
 
@@ -987,6 +1067,12 @@ def main() -> int:
         for t in cen:
             log(f"  {t['rank']}位 {t['team']} {t['w']}勝{t['l']}敗{t['d']}分 "
                 f"勝率{t['pct']:.3f} 直近10 {t.get('last10', {}).get('w', '-')}勝")
+    ps = data.get("park_stats") or {}
+    if ps:
+        log("球場別成績（阪神）:")
+        for park, o in sorted(ps.items(), key=lambda x: -x[1]["g"]):
+            log(f"  {park} {o['g']}試合 {o['w']}勝{o['l']}敗{o['d']}分 "
+                f"得点{o['rf_avg']} 失点{o['ra_avg']}")
     for g in data.get("probables", []):
         log(f"予告先発: {g['card']} @{g.get('venue')} "
             f"{g.get('hanshin_pitcher')}({g.get('hanshin_fip')}) vs "
