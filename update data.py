@@ -522,6 +522,35 @@ def fetch_recent_form(days: int = 45) -> Dict[str, Dict[str, Any]]:
     return form
 
 
+def fetch_hanshin_games() -> List[Dict[str, Any]]:
+    """阪神の今季の全試合（開幕〜今月）をサイト用の形に整えて返す"""
+    allg = load_season_games()
+    out: List[Dict[str, Any]] = []
+    for g in allg:
+        if HOME_TEAM not in (g["home"], g["away"]):
+            continue
+        is_home = g["home"] == HOME_TEAM
+        opp = g["away"] if is_home else g["home"]
+        mm, dd = g["date"].split("/")
+        score = None
+        if g["home_score"] is not None and g["away_score"] is not None:
+            score = ([g["home_score"], g["away_score"]] if is_home
+                     else [g["away_score"], g["home_score"]])
+        out.append({
+            "date": f"{SEASON}-{int(mm):02d}-{int(dd):02d}",
+            "opponent": opp,
+            "venue": g.get("venue"),
+            "home": is_home,
+            "start_time": g.get("start_time"),
+            "score": score,
+            "hanshin_starter": (g["home_starter"] if is_home else g["away_starter"]),
+            "opponent_starter": (g["away_starter"] if is_home else g["home_starter"]),
+        })
+    out.sort(key=lambda x: x["date"])
+    log(f"阪神の今季全試合 → {len(out)}試合（うち終了 {sum(1 for x in out if x['score'])}）")
+    return out
+
+
 def fetch_park_stats() -> Dict[str, Dict[str, Any]]:
     """阪神の球場別成績（勝敗分・得点・失点）を今季の全試合から集計する"""
     allg = load_season_games()
@@ -940,6 +969,9 @@ def build(target: date) -> Dict[str, Any]:
 
     # 球場別成績（阪神）
     data["park_stats"] = section("park_stats", fetch_park_stats, prev.get("park_stats", {}))
+
+    # 阪神の今季全試合（日程表と終了した日程に使う）
+    data["season_games"] = section("season_games", fetch_hanshin_games, prev.get("season_games", []))
 
     return data
 

@@ -1322,6 +1322,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   text-shadow:0 6px 24px rgba(0,0,0,.7);
 }
 .logofb b{display:block;font-weight:800;font-size:1.24em;letter-spacing:-.01em}
+.offmark{font-size:12.5px;letter-spacing:.06em;padding:3px 11px;border-radius:20px;
+  background:rgba(143,163,184,.16);color:var(--steel);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -1364,10 +1366,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   <div class="entrants"><b>畑　山</b><b>根　来</b><b>今　井</b></div>
   <div class="lampwrap"><a class="lamp" id="lamp" href="#today-anchor"></a></div>
   <nav class="secnav" id="secnav">
-    <a class="hot" href="#nav-predict">予想する</a><a href="#nav-schedule">日程・結果</a>
+    <a href="#nav-schedule">次の試合</a><a class="hot" href="#nav-predict">予想する</a>
     <a href="#nav-standings">順位</a><a href="#nav-board">戦況</a><a href="#nav-personal">個人成績</a>
-    <a href="#nav-chart">推移</a><a id="navComeback" href="#nav-comeback" style="display:none">逆転</a><a href="#nav-records">記録室</a><a href="#nav-upsets">大穴</a>
-    <a href="#nav-parks">球場別</a><a href="#nav-teams">セ・リーグ</a><a href="#nav-stats">選手成績</a><a href="#nav-h2h">対戦成績</a>
+    <a href="#nav-chart">推移</a><a href="#nav-records">記録室</a><a id="navUpsets" href="#nav-upsets" style="display:none">大穴</a>
+    <a id="navComeback" href="#nav-comeback" style="display:none">逆転</a><a id="navBets" href="#nav-bets" style="display:none">采配</a>
+    <a href="#nav-teams">セ・リーグ</a><a href="#nav-parks">球場別</a><a href="#nav-h2h">対戦成績</a><a href="#nav-stats">選手成績</a>
     <a id="navTrends" href="#trendsWrap" style="display:none">傾向</a><a href="#nav-rules">規定</a><a href="#nav-odds">オッズ算出</a>
   </nav>
 </header>
@@ -1384,18 +1387,19 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   </details>
 
   <div class="grouplabel"><span>今日やること</span></div>
-  <section class="reveal" id="nav-predict">
-    <div class="head"><h2>予想入力</h2><em>Your Pick</em></div>
-    <p class="hint"><span class="sn">まず自分の名前を選び、勝つと思う球団をタップ。</span><span class="sn">オッズ＝的中時の倍率で、数字が大きいほど不利と見られている側です。</span><span class="sn">締切は試合日の0時。前日の夜までに入れてください。</span><span class="sn">受け付けるのは次の2試合まで。1試合終わるごとに次が開きます。</span></p>
-    <div id="deadline"></div>
-    <div id="postorder"></div>
-    <div id="predict"></div>
-  </section>
   <section class="reveal" id="nav-schedule">
     <div class="head"><h2>次の試合</h2><em id="scheduleRange"></em></div>
     <p class="hint"><span class="sn">カードで出すのは次の1試合だけ。</span><span class="sn">先の試合は成績もオッズも動くので、終わるごとに切り替わります。</span></p>
     <div id="timeline"></div>
   </section>
+  <section class="reveal" id="nav-predict">
+    <div class="head"><h2>予想入力</h2><em>Your Pick</em></div>
+    <p class="hint"><span class="sn">まず自分の名前を選び、勝つと思う球団をタップ。</span><span class="sn">オッズ＝的中時の倍率で、数字が大きいほど不利と見られている側です。</span><span class="sn">締切は試合日の0時。前日の夜までに入れてください。</span><span class="sn">受け付けるのは次の2試合まで。1試合終わるごとに次が開きます。</span><span class="sn">バトルの開始は8/21から。今夜の試合は対象外です。</span></p>
+    <div id="deadline"></div>
+    <div id="postorder"></div>
+    <div id="predict"></div>
+  </section>
+  <div class="grouplabel"><span>バトルの状況</span></div>
   <section class="reveal" id="nav-standings">
     <div class="head"><h2>順位</h2><em>Standings</em></div>
     <div class="standings" id="standings"></div>
@@ -1426,10 +1430,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       <div class="legend" id="legend"></div>
     </div>
   </section>
-  <section class="reveal" id="nav-comeback">
-    <div class="head"><h2>逆転ライン</h2><em>Comeback</em></div>
-    <div id="comeback"></div>
-  </section>
   <section class="reveal" id="nav-records">
     <div class="head"><h2>記録室</h2><em>Record Book</em></div>
     <p class="hint"><span class="sn">全試合の的中データから自動計算しています。</span><span class="sn">来季の比較対象になります。</span></p>
@@ -1440,26 +1440,26 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <div class="upsets" id="upsets"></div>
     <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">オッズが高い側（対抗）を当てた試合を、倍率の高い順に表示</p>
   </section>
+  <section class="reveal" id="nav-comeback">
+    <div class="head"><h2>逆転ライン</h2><em>Comeback</em></div>
+    <div id="comeback"></div>
+  </section>
   <section class="reveal" id="nav-bets">
     <div class="head"><h2>采配</h2><em>Tactics</em></div>
     <p class="hint"><span class="sn">ポイントベット制はCS・日本シリーズのみ。</span><span class="sn">3人の持ち点の振り分けと、決着したときに動くptを試合前に公開します。</span></p>
     <div id="betboard"></div>
   </section>
   <div class="grouplabel"><span>阪神のデータ</span></div>
-  <section class="reveal" id="nav-parks">
-    <div class="head"><h2>球場別成績</h2><em>By Ballpark</em></div>
-    <p class="hint"><span class="sn">今季の阪神の成績を球場ごとに集計したもの。</span><span class="sn">オッズの「球場相性」にも反映されます。</span></p>
-    <div id="parks"></div>
-  </section>
+  <div class="grouplabel"><span>阪神のデータ</span></div>
   <section class="reveal" id="nav-teams">
     <div class="head"><h2>セ・リーグ</h2><em id="teamCount"></em></div>
     <div class="tablewrap" id="teams"></div>
     <p class="fine" style="margin:8px 2px 0;font-size:13px;color:var(--ink-dim)">見出しをタップで並び替え／球団名をタップでその球団の詳細と対戦履歴／表は横にスクロールできます</p>
   </section>
-  <section class="reveal" id="nav-stats">
-    <div class="head"><h2>選手成績</h2><em>Leaders</em></div>
-    <p class="hint"><span class="sn">阪神タイガースの個人成績。</span><span class="sn">毎日 9時・12時・18時・22時に自動更新されます。</span></p>
-    <div id="statsboard"></div>
+  <section class="reveal" id="nav-parks">
+    <div class="head"><h2>球場別成績</h2><em>By Ballpark</em></div>
+    <p class="hint"><span class="sn">開幕から今日までの阪神の成績を球場ごとに集計したもの。</span><span class="sn">オッズの「球場相性」にも反映されます。</span></p>
+    <div id="parks"></div>
   </section>
   <section class="reveal" id="nav-h2h">
     <div class="head"><h2>対戦成績</h2><em>Head to Head</em></div>
@@ -1467,12 +1467,21 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <div id="matchup"></div>
     <div id="h2h"></div>
   </section>
+  <details class="foldsec reveal" id="nav-stats">
+    <summary><b>選手成績</b><em>Leaders</em><i>打率・本塁打・FIPなどTOP5</i></summary>
+    <div class="foldbody">
+    <div class="head"><h2>選手成績</h2><em>Leaders</em></div>
+    <p class="hint"><span class="sn">阪神タイガースの個人成績。</span><span class="sn">毎日 9時・12時・18時・22時に自動更新されます。</span></p>
+    <div id="statsboard"></div>
+      </div>
+  </details>
   <section class="reveal" id="trendsWrap" style="display:none">
     <div class="head"><h2>勝敗の傾向</h2><em>Match-up Trends</em></div>
     <div class="trendbox" id="trends"></div>
     <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">対戦カードごとに、その試合のオッズで本命だった方／チーム防御率が良い方が、実際どれだけ勝っているかを集計</p>
   </section>
   <div class="grouplabel"><span>ルール</span></div>
+  <div class="grouplabel"><span>ルールと計算</span></div>
   <section class="reveal" id="nav-rules">
     <div class="head"><h2>大会規定</h2><em>Rules</em></div>
     <div class="rules">
@@ -1484,7 +1493,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
           <li><b>3連続的中で ＋1点</b></li>
           <li><b>3連続外しで −1点</b></li>
           <li>CS・日本シリーズは<b>ポイントベット制</b>を併用する</li>
-          <li><b>8/20の第118戦から開始</b>。それ以前の試合は予想対象外</li>
+          <li><b>8/21の対DeNA戦（横浜）から開始</b>。それ以前の試合は予想対象外</li>
         </ul>
       </div>
       <div class="rulebox">
@@ -1560,6 +1569,8 @@ const PLAYERS = [
 const HOME = "阪神";                       /* 主役。常に games[].a に入れる */
 const HOME_PARK = "甲子園";                 /* 浜風の補正が入るのはここだけ */
 const RATE = 100;
+/* 予想バトルの開始日。これより前の試合は日程には出すが得点計算の対象外 */
+const BATTLE_START = "8/21";
 /* =========================================================
    ② 球団データ（セ・リーグ6球団）  出典：NPB公式（2026/8/19終了時点）
    w/l/d       … 今季成績
@@ -1875,10 +1886,10 @@ const DAYS = [
  ]},
  {d:"8/20", now:true, games:[
    {t:"18:00", r:"対ヤクルト", a:"阪神", b:"ヤクルト", home:true, venue:"京セラD大阪", sp:["下村海翔","高橋奎二"],
-    tag:"ここから予想バトル開幕。7月10日と同じ顔合わせで、前回は高橋が7回1失点10奪三振。下村はヤクルト戦11イニング自責点2と好相性"}
+    tag:"予想バトル開幕の前夜。7月10日と同じ顔合わせで、前回は高橋が7回1失点10奪三振。下村はヤクルト戦11イニング自責点2と好相性"}
  ]},
  {d:"8/21", games:[
-   {t:"18:00", r:"対ＤｅＮＡ", a:"阪神", b:"ＤｅＮＡ", home:false, venue:"横浜", tag:"予告先発は前日発表。DeNAとは今季8勝8敗の五分"}
+   {t:"18:00", r:"対ＤｅＮＡ", a:"阪神", b:"ＤｅＮＡ", home:false, venue:"横浜", tag:"ここから予想バトル開幕。DeNAとは今季8勝8敗の五分で、横浜での相性が問われる3連戦"}
  ]},
  {d:"8/22", games:[
    {t:"18:00", r:"対ＤｅＮＡ", a:"阪神", b:"ＤｅＮＡ", home:false, venue:"横浜", tag:"予報はくもり一時雨。中止の可能性あり"}
@@ -1923,7 +1934,7 @@ function applyStreakBonus(){
   PLAYERS.forEach(p=>{
     let run = 0, type = null;
     DAYS.forEach(d=>{
-      if(d.scored === false) return;                 /* 予想対象外の日は数えない */
+      if(d.scored === false || dateNum(d.d) < dateNum(BATTLE_START)) return;   /* 開始前は数えない */
       (d.games||[]).forEach(g=>{
         if(!g.s || g.void || isDraw(g)) return;      /* 引き分けは記録に影響しない */
         const hit = (g.hits||[]).includes(p.name);
@@ -1943,7 +1954,7 @@ applyStreakBonus();
 
 
 /* 予想対象の日。live取り込みで日程が増えるので、そのつど作り直す */
-const scoredDays = () => DAYS.filter(d=>d.scored!==false && !d.rest);
+const scoredDays = () => DAYS.filter(d=>d.scored!==false && !d.rest && dateNum(d.d) >= dateNum(BATTLE_START));
 let STATE = {};
 function compute(sheet){
   const daily={}, cum={}, run={};
@@ -1979,7 +1990,8 @@ function compute(sheet){
 }
 
 /* ---------- スコアボード ---------- */
-const boardCols = () => DAYS.filter(d=>d.scored!==false).map(d=>({d:d.d, rest:!!d.rest}));
+const boardCols = () => DAYS.filter(d=>d.scored!==false && dateNum(d.d) >= dateNum(BATTLE_START))
+  .map(d=>({d:d.d, rest:!!d.rest}));
 function renderBoard(){
   const {daily, run, played, topPt} = STATE;
   /* 休養日は daily に入らないので、日付で対応づける（位置でずらすと休養日ぶん1日ずれる） */
@@ -2182,10 +2194,15 @@ function renderBetBoard(){
     const open = d=>(d.games||[]).some(g=>!g.void && g.a && g.b && !g.s) ? 0 : 1;
     return open(x) - open(y);
   });
+  const sec = document.getElementById("nav-bets"), nav = document.getElementById("navBets");
   if(!days.length){
-    box.innerHTML = `<p class="bbnone">${sent("まだ配分が登録されていません。3人ぶんの予想が出そろったら、ここに振り分けが並びます。")}</p>`;
-    return;
+    if(sec) sec.style.display = "none";
+    if(nav) nav.style.display = "none";
+    box.innerHTML = "";
+    return;                                   /* CS・日本シリーズが来るまで出さない */
   }
+  if(sec) sec.style.display = "";
+  if(nav) nav.style.display = "";
   box.innerHTML = days.map(d=>{
     const gs = (d.games||[]).filter(g=>!g.void && g.a && g.b);
     const budget = BET_BUDGET[gs[0].r];
@@ -2364,6 +2381,7 @@ function upcomingGames(){
       if(!g.a || !g.b) return;
       if(g.void) return;
       if(settled(g)) return;
+      if(d.scored === false || dateNum(d.d) < dateNum(BATTLE_START)) return;  /* 開始前は受け付けない */
       if(openDates(PREDICT_GAMES).indexOf(d.d) < 0) return;   /* 受付は手前の試合だけ */
       if(g.oa===undefined || g.ob===undefined) return;
       out.push({id:`${d.d}-${i}`, date:d.d, no:i+1, time:g.t, round:g.r, g,
@@ -2469,7 +2487,15 @@ function renderUpsets(){
     });
   });
   rows.sort((a,b)=>b.odd-a.odd);
-  if(!rows.length){ box.innerHTML = `<p class="unone">まだ大穴的中はありません</p>`; return; }
+  const sec = document.getElementById("nav-upsets"), nav = document.getElementById("navUpsets");
+  if(!rows.length){
+    if(sec) sec.style.display = "none";
+    if(nav) nav.style.display = "none";
+    box.innerHTML = "";
+    return;
+  }
+  if(sec) sec.style.display = "";
+  if(nav) nav.style.display = "";
   box.innerHTML = rows.slice(0,5).map((r,i)=>`<div class="urow ${i===0?"top":""}">
     <span class="uodd">${r.odd.toFixed(1)}倍</span>
     <span class="uteam">${r.team}</span>
@@ -2966,7 +2992,8 @@ function renderTimeline(){
     const rdCls = d.final ? "f" : (home ? "qf" : "");
     const b = Object.entries(d.bonus||{}).map(([n,v])=>
       `<div class="bonus ${v<0?"minus":""}">${v>0?"◎ 3連続的中":"▽ 3連続外し"}　${n} ${v>0?"+":""}${v}pt</div>`).join("");
-    const off = d.scored===false ? `<span class="nth">予想対象外</span>` : "";
+    const off = (d.scored===false || dateNum(d.d) < dateNum(BATTLE_START))
+      ? `<span class="offmark">予想対象外</span>` : "";
     return `<article class="day ${d.final?"final":""} ${rdCls==="qf"?"qf-day":""} ${d.now?"now":(done?"done":"")}" ${d.d===anchor?'id="today-anchor"':""}>
       <div class="dayhead">
         <span class="d">${d.d}<i class="dow ${dowInfo(d.d).cls}">(${dowInfo(d.d).label}${dowInfo(d.d).holiday?"・祝":""})</i></span>
@@ -3240,6 +3267,26 @@ function applyLive(js){
   });
   /* 球場別成績 */
   if(js.park_stats && Object.keys(js.park_stats).length) PARK_STATS = js.park_stats;
+  /* 今季の全試合（開幕から）を日程表に流し込む */
+  (js.season_games || []).forEach(sg=>{
+    const key = jsDateToKey(sg.date);
+    if(!key) return;
+    let day = byDate(key);
+    if(!day){ day = {d:key, games:[]}; DAYS.push(day); }
+    day.rest = false;
+    day.games = day.games || [];
+    let g = day.games.find(x=>x.a === HOME);
+    if(!g){ g = {a:HOME}; day.games.push(g); }
+    if(settled(g) && g.hits) return;               /* 予想バトル中の試合は触らない */
+    if(sg.opponent){ g.b = sg.opponent; g.r = `対${sg.opponent}`; }
+    if(sg.venue) g.venue = sg.venue;
+    if(sg.home != null) g.home = !!sg.home;
+    if(sg.start_time) g.t = sg.start_time;
+    if(sg.score) g.s = sg.score;
+    const sp = [sg.hanshin_starter, sg.opponent_starter];
+    if(sp[0] || sp[1]) g.sp = [sp[0] || (g.sp||[])[0], sp[1] || (g.sp||[])[1]];
+  });
+  DAYS.sort((a,b)=>dateNum(a.d) - dateNum(b.d));
   /* 対戦成績 */
   Object.entries(js.h2h || {}).forEach(([name, r])=>{
     if(TEAM[name] && r) TEAM[name].h2h = [r.w||0, r.l||0, r.d||0];
@@ -3309,7 +3356,9 @@ function upcomingList(){
   return out;
 }
 function openDates(n){
-  return upcomingList().slice(0, n).map(x=>x.day.d);
+  return upcomingList()
+    .filter(x=>x.day.scored !== false && dateNum(x.day.d) >= dateNum(BATTLE_START))
+    .slice(0, n).map(x=>x.day.d);
 }
 function dateObj(k){
   const [m,d] = String(k).split("/").map(Number);
