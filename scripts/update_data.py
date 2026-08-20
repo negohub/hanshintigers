@@ -674,13 +674,22 @@ def fetch_team_stats() -> Dict[str, Dict[str, Any]]:
 # ④ 個人成績（野手・投手）
 # =====================================================================
 
+FIP_SHRINK_IP = 25.0      # この投球回で「実測」と「リーグ平均」が半々になる
+LEAGUE_FIP = 3.30         # 未登録・登板の少ない投手はここへ寄せる
+
+
 def calc_fip(hr: Optional[float], bb: Optional[float], hbp: Optional[float],
              so: Optional[float], ip: Optional[float]) -> Optional[float]:
-    """FIP = (13*被HR + 3*(四球+死球) - 2*奪三振) / 投球回 + 3.20"""
+    """FIP = (13*被HR + 3*(四球+死球) - 2*奪三振) / 投球回 + 3.20
+
+    投球回が少ないと数字が跳ねるので、n/(n+40) でリーグ平均へ寄せる。
+    3イニングの投手の FIP 6.00 をそのまま使うとオッズが壊れるため。"""
     if ip is None or ip <= 0:
         return None
     hr, bb, hbp, so = (hr or 0), (bb or 0), (hbp or 0), (so or 0)
-    return round((13 * hr + 3 * (bb + hbp) - 2 * so) / ip + FIP_CONST, 2)
+    raw = (13 * hr + 3 * (bb + hbp) - 2 * so) / ip + FIP_CONST
+    weight = ip / (ip + FIP_SHRINK_IP)
+    return round(raw * weight + LEAGUE_FIP * (1 - weight), 2)
 
 
 def calc_woba(rec: Dict[str, Any]) -> Optional[float]:
@@ -802,8 +811,14 @@ def fetch_players(teams: List[str]) -> Dict[str, Dict[str, List[Dict[str, Any]]]
 
 
 # =====================================================================
-# ⑤ 予告先発と試合条件
+# ⑤ 予告先発
+#    NPB公式の日程ページは試合後にまとめて更新されるため、翌日ぶんは
+#    専用の「予告先発」ページ（npb.jp/announcement/starter/）の方が早い。
+#    日程ページ → 予告先発ページ の順に見て、拾えた方を採用する。
 # =====================================================================
+
+STARTER_URL = "https://npb.jp/announcement/starter/"
+
 
 def _resolve_pitcher(short: Optional[str], roster: List[Dict[str, Any]]) -> Optional[str]:
     """「下村」→「下村 海翔」。同じ球団の登録投手から姓で引き当てる"""
@@ -819,13 +834,68 @@ def _resolve_pitcher(short: Optional[str], roster: List[Dict[str, Any]]) -> Opti
     return short
 
 
+def fetch_starter_page() -> Dict[str, Dict[str, Optional[str]]]:
+    """NPBの予告先発ページから「日付 → {球団: 投手}」を作る。
+
+    ページの並びはこの形（球団はロゴ画像のalt、投手は選手ページへのリンク）。
+        6月21日の予告先発投手
+        [img alt=読売ジャイアンツ] [a 井上 温大]
+        [img alt=中日ドラゴンズ]   [a 柳 裕也]
+        （東京ドーム）14:00
+    """
+    if BeautifulSoup is None:
+        log("予告先発ページ: BeautifulSoup が無いのでスキップ")
+        return {}
+    log(f"予告先発ページ {STARTER_URL}")
+    html = get(STARTER_URL)
+    time.sleep(SLEEP)
+    if not html:
+        return {}
+    soup = BeautifulSoup(html, "html.parser")
+    out: Dict[str, Dict[str, Optional[str]]] = {}
+    cur_date, pending_team = None, None
+    for el in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "img", "a"]):
+        if el.name in ("h1", "h2", "h3", "h4", "h5", "h6"):
+            m = re.search(r"(\d{1,2})月(\d{1,2})日", norm_text(el.get_text()))
+            if m and "予告先発" in norm_text(el.get_text()):
+                cur_date = f"{int(m.group(1))}/{int(m.group(2))}"
+                pending_team = None
+            continue
+        if not cur_date:
+            continue
+        if el.name == "img":
+            team = norm_team(el.get("alt") or el.get("title"))
+            if team:
+                pending_team = team
+            continue
+        # <a> のうち、選手ページへのリンクだけを投手名とみなす
+        href = el.get("href") or ""
+        if "/bis/players/" not in href:
+            continue
+        name = norm_text(el.get_text())
+        if pending_team and name and not norm_team(name):
+            out.setdefault(cur_date, {}).setdefault(pending_team, name)
+        pending_team = None
+    if out:
+        for d in sorted(out):
+            log(f"  {d}: " + " / ".join(f"{k} {v}" for k, v in out[d].items()))
+    else:
+        log("  → 予告先発は見つからず")
+    return out
+
+
 def fetch_probables(target: date, days: int = 2) -> List[Dict[str, Any]]:
     """今日から days 日ぶんの阪神戦（カード・球場・予告先発）を取る。
     予想の締切が試合日の0時なので、前夜に発表される『明日の先発』まで拾う"""
+    starters = {}
+    try:
+        starters = fetch_starter_page()
+    except Exception as e:  # noqa: BLE001
+        log(f"  予告先発ページの解析に失敗: {e}")
     out: List[Dict[str, Any]] = []
     for i in range(days):
         d = target + timedelta(days=i)
-        got = _probable_for(d)
+        got = _probable_for(d, starters)
         if got:
             out.append(got)
     if not out:
@@ -833,7 +903,9 @@ def fetch_probables(target: date, days: int = 2) -> List[Dict[str, Any]]:
     return out
 
 
-def _probable_for(target: date) -> Optional[Dict[str, Any]]:
+def _probable_for(target: date,
+                  starters: Optional[Dict[str, Dict[str, Optional[str]]]] = None
+                  ) -> Optional[Dict[str, Any]]:
     key = f"{target.month}/{target.day}"
     games = load_season_games() or fetch_month_games(target.month)
     rows = [g for g in games
@@ -843,6 +915,14 @@ def _probable_for(target: date) -> Optional[Dict[str, Any]]:
     g = rows[0]
     is_home = g["home"] == HOME_TEAM
     opp = g["away"] if is_home else g["home"]
+
+    han_sp = g["home_starter"] if is_home else g["away_starter"]
+    opp_sp = g["away_starter"] if is_home else g["home_starter"]
+    # 日程ページに載っていなければ、予告先発ページの方を使う
+    day = (starters or {}).get(key, {})
+    han_sp = han_sp or day.get(HOME_TEAM)
+    opp_sp = opp_sp or day.get(opp)
+
     item = {
         "date": target.isoformat(),
         "opponent": opp,
@@ -850,9 +930,10 @@ def _probable_for(target: date) -> Optional[Dict[str, Any]]:
         "venue": g.get("venue"),
         "home": is_home,
         "start_time": g.get("start_time") or "18:00",
-        "hanshin_pitcher": g["home_starter"] if is_home else g["away_starter"],
-        "opponent_pitcher": g["away_starter"] if is_home else g["home_starter"],
-        "score": ([g["home_score"], g["away_score"]] if is_home else [g["away_score"], g["home_score"]])
+        "hanshin_pitcher": han_sp,
+        "opponent_pitcher": opp_sp,
+        "score": ([g["home_score"], g["away_score"]] if is_home
+                  else [g["away_score"], g["home_score"]])
                  if g["home_score"] is not None else None,
     }
     log(f"予告先発 {key}: {item['card']} @{item['venue']} "
