@@ -1264,6 +1264,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .hot{background:var(--bronze);color:var(--gold)}
 .vgo{background:var(--bronze);color:var(--gold)}
 .ytm{color:var(--gold)}
+.hh tr.me2{background:linear-gradient(90deg,rgba(255,209,0,.12),transparent)}
+.hmk,.nxt{font-style:normal;font-family:var(--sys);font-size:11.5px;letter-spacing:.04em;
+  margin-left:8px;padding:2px 8px;border-radius:20px;vertical-align:1px}
+.hmk{background:rgba(255,209,0,.16);color:var(--gold)}
+.nxt{background:var(--gold);color:#120E06;font-weight:700}
 </style>
 </head>
 <body>
@@ -1306,7 +1311,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <a class="hot" href="#nav-predict">予想する</a><a href="#nav-schedule">日程・結果</a><a href="#nav-odds">オッズ</a>
     <a href="#nav-standings">順位</a><a href="#nav-board">戦況</a><a href="#nav-personal">個人成績</a>
     <a href="#nav-chart">推移</a><a href="#nav-comeback">逆転</a><a href="#nav-records">記録室</a><a href="#nav-upsets">大穴</a>
-    <a href="#nav-npb">セ・リーグ</a><a href="#nav-teams">球団</a><a href="#nav-stats">選手成績</a><a href="#nav-h2h">対戦成績</a>
+    <a href="#nav-parks">球場別</a><a href="#nav-npb">セ・リーグ</a><a href="#nav-teams">球団</a><a href="#nav-stats">選手成績</a><a href="#nav-h2h">対戦成績</a>
     <a id="navTrends" href="#trendsWrap" style="display:none">傾向</a><a href="#nav-rules">規定</a>
   </nav>
 </header>
@@ -1391,6 +1396,11 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <div id="betboard"></div>
   </section>
   <div class="grouplabel"><span>阪神のデータ</span></div>
+  <section class="reveal" id="nav-parks">
+    <div class="head"><h2>球場別成績</h2><em>By Ballpark</em></div>
+    <p class="hint"><span class="sn">今季の阪神の成績を球場ごとに集計したもの。</span><span class="sn">オッズの「球場相性」にも反映されます。</span></p>
+    <div id="parks"></div>
+  </section>
   <section class="reveal" id="nav-npb">
     <div class="head"><h2>セ・リーグ順位表</h2><em>NPB Standings</em></div>
     <div id="npbstandings"></div>
@@ -1591,12 +1601,33 @@ const ODDS_MODEL = {
   ops:       2.50,   /* チームOPS差（阪神 − 相手） */
   home:      0.14,   /* ホーム補正（NPBのホーム勝率はおよそ53%） */
   away:     -0.04,   /* ビジター補正 */
+  park:      1.20,   /* その球場での実際の勝率と通算勝率の差（試合数が少ないうちは効きを弱める） */
+  parkK:     15,     /* 縮小の強さ。この試合数で効き目が半分になる */
   wind:      0.045,  /* 浜風の効き（風速1m/sあたり） */
   vig:       0.10,   /* 控除率 10% */
   pMin:      0.30,   /* 勝率のクリップ下限（1試合単位では一方的にならない） */
   pMax:      0.70    /* 同・上限 */
 };
 const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+/* 球場別成績。data/latest.json が来ればそちら、無ければ日程表から集計する */
+let PARK_STATS = null;
+function parkStats(){
+  if(PARK_STATS && Object.keys(PARK_STATS).length) return PARK_STATS;
+  const out = {};
+  DAYS.forEach(d=>(d.games||[]).forEach(g=>{
+    if(!g.s || g.void || !g.venue) return;
+    const o = out[g.venue] || (out[g.venue] = {g:0, w:0, l:0, d:0, rf:0, ra:0, home:!!g.home});
+    o.g++; o.rf += g.s[0]; o.ra += g.s[1];
+    if(g.s[0] > g.s[1]) o.w++; else if(g.s[0] < g.s[1]) o.l++; else o.d++;
+  }));
+  Object.values(out).forEach(o=>{
+    const n = o.w + o.l;
+    o.pct = n ? o.w/n : null;
+    o.rf_avg = o.g ? o.rf/o.g : null;
+    o.ra_avg = o.g ? o.ra/o.g : null;
+  });
+  return out;
+}
 const r2 = n => Math.round(n*100)/100;
 
 /**
@@ -1614,6 +1645,19 @@ function calculateOdds(hanshinData, opponentData, conditions){
   const opsEdge  = hanshinData.ops  - opponentData.ops;           /* 打力（＋なら阪神有利） */
   const wind     = c.home && c.venue === HOME_PARK ? (c.wind || 0) : 0;
 
+  /* 球場相性：その球場での勝率が通算勝率とどれだけ違うか。
+     サンプルが少ないうちは n/(n+K) で通算勝率のほうへ寄せる */
+  const ps = parkStats()[c.venue];
+  const seasonPct = hanshinData.pct || 0.5;
+  let parkEdge = 0, parkDetail = `${c.venue||"—"}での成績はまだありません`;
+  if(ps && (ps.w + ps.l) >= 3){
+    const n = ps.w + ps.l;
+    const pw = ps.w / n;
+    parkEdge = (pw - seasonPct) * (n / (n + M.parkK));
+    parkDetail = `${c.venue} ${ps.w}勝${ps.l}敗${ps.d?`${ps.d}分`:""}`
+      + `（${pw.toFixed(3).replace(/^0/,"")}／通算${seasonPct.toFixed(3).replace(/^0/,"")}）`;
+  }
+
   /* 浜風はライトからホーム方向へ吹き、長打を消す。
      打力で上回っている側の優位を削り、投手力で上回っている側を後押しする */
   const windEdge = wind * (0.30 * fipEdge - 3.0 * opsEdge);
@@ -1625,6 +1669,7 @@ function calculateOdds(hanshinData, opponentData, conditions){
     {key:"fip",   label:"先発投手のFIP",   detail:`${hanshinData.sp||"—"} ${hanshinData.fip.toFixed(2)} / ${opponentData.sp||"—"} ${opponentData.fip.toFixed(2)}`, x:fipEdge,  w:M.fip},
     {key:"ops",   label:"チームOPS",       detail:`阪神 ${hanshinData.ops.toFixed(3)} / ${opponentData.name||"相手"} ${opponentData.ops.toFixed(3)}`, x:opsEdge,  w:M.ops},
     {key:"venue", label:"試合会場",        detail:`${c.venue||"—"}（${c.home?"ホーム":"ビジター"}）`, x:1, w:(c.home ? M.home : M.away)},
+    {key:"park",  label:"球場相性",        detail:parkDetail, x:parkEdge, w:M.park},
     {key:"wind",  label:"浜風",            detail: wind ? `${wind}m/s・長打の出づらさを補正` : "屋内／ビジターのため影響なし", x:windEdge, w:M.wind}
   ];
   const z = parts.reduce((s,p)=> s + p.x * p.w, 0);
@@ -2648,6 +2693,35 @@ function renderH2H(){
     }).join("")}</tbody></table></div>`;
 }
 
+/* ---------- 球場別成績 ---------- */
+function renderParks(){
+  const box = document.getElementById("parks");
+  if(!box) return;
+  const ps = parkStats();
+  const rows = Object.keys(ps).map(k=>({park:k, ...ps[k]}))
+    .filter(r=>r.g > 0)
+    .sort((a,b)=> (b.home - a.home) || (b.g - a.g));
+  if(!rows.length){ box.innerHTML = `<p class="bbnone">${sent("まだ球場別の成績がありません。")}</p>`; return; }
+  const next = (()=>{ let v=null; DAYS.forEach(d=>(d.games||[]).forEach(g=>{
+    if(v===null && !settled(g) && !g.void) v = g.venue; })); return v; })();
+  box.innerHTML = `<div class="tablewrap"><table class="hh"><thead><tr>
+      <th class="l">球場</th><th>試合</th><th>勝敗分</th><th>勝率</th><th>平均得点</th><th>平均失点</th><th>得失点</th>
+    </tr></thead><tbody>${rows.map(r=>{
+      const diff = r.rf - r.ra;
+      return `<tr class="${r.park===next?"me2":""}" style="--accent:${r.home?"var(--gold)":"rgba(245,240,225,.3)"}">
+        <td class="l nm3">${r.park}${r.home?'<i class="hmk">主催</i>':""}${r.park===next?'<i class="nxt">次戦</i>':""}</td>
+        <td>${r.g}</td>
+        <td class="rec ${r.pct!=null&&r.pct>=.5?"win":"los"}">${r.w}勝${r.l}敗${r.d?`${r.d}分`:""}</td>
+        <td class="${r.pct!=null&&r.pct>=.5?"win":"los"}">${r.pct!=null?r.pct.toFixed(3).replace(/^0/,""):"—"}</td>
+        <td>${r.rf_avg!=null?r.rf_avg.toFixed(2):"—"}</td>
+        <td>${r.ra_avg!=null?r.ra_avg.toFixed(2):"—"}</td>
+        <td class="${diff>0?"win":diff<0?"los":""}">${diff>0?"+":""}${diff}</td>
+      </tr>`;
+    }).join("")}</tbody></table></div>
+    <p class="fine" style="margin:10px 2px 0;font-size:13px;color:var(--ink-dim)">${
+      sent("勝率が高い球場ほどオッズが阪神寄りに動きます。ただし試合数が少ないうちは通算勝率のほうへ寄せて計算しています。")}</p>`;
+}
+
 /* ---------- オッズ算出の内訳 ---------- */
 function renderOddsModel(){
   const box = document.getElementById("oddsmodel");
@@ -3068,6 +3142,8 @@ function applyLive(js){
     if(s.hr  != null) t.hr  = s.hr;
     if(s.runs!= null) t.runs= s.runs;
   });
+  /* 球場別成績 */
+  if(js.park_stats && Object.keys(js.park_stats).length) PARK_STATS = js.park_stats;
   /* 対戦成績 */
   Object.entries(js.h2h || {}).forEach(([name, r])=>{
     if(TEAM[name] && r) TEAM[name].h2h = [r.w||0, r.l||0, r.d||0];
@@ -3361,6 +3437,7 @@ function renderAll(){
   safe("trends", renderTrends);
   safe("npbstandings", renderNpbStandings);
   safe("stats", renderStats);
+  safe("parks", renderParks);
   safe("matchup", renderMatchup);
   safe("jump", updateJumpLink);
 }
