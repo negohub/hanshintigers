@@ -1,0 +1,109 @@
+name: daily-data-update
+
+# JSTで 9:00 / 12:00 / 18:00 / 22:00 の1日4回。
+#    9:00 … 前夜の結果と順位表の反映
+#   12:00 … 予告先発の確認
+#   18:00 … 試合直前の最終確認（天気・風速もここで更新）
+#   22:00 … その日の試合結果・個人成績の反映
+# GitHubのcronはUTC指定。JST−9時間で書いています。
+# 混雑時に数分〜十数分ずれることがあります（仕様）。
+on:
+  schedule:
+    - cron: "0 0 * * *"
+    - cron: "0 3 * * *"
+    - cron: "0 9 * * *"
+    - cron: "0 13 * * *"
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: "対象日 (YYYY-MM-DD)。空なら当日"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-data-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: リポジトリを取得
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Python をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 依存パッケージをインストール
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: データを収集
+        id: collect
+        env:
+          TZ: Asia/Tokyo
+        run: |
+          set -o pipefail
+          ARGS=""
+          if [ -n "${{ github.event.inputs.target_date }}" ]; then
+            ARGS="--date ${{ github.event.inputs.target_date }}"
+          fi
+          python scripts/update_data.py $ARGS 2>&1 | tee /tmp/update.log
+
+      - name: 差分を確認
+        id: diff
+        run: |
+          if [ -n "$(git status --porcelain data/)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git --no-pager diff --stat data/ || true
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "データに変更はありませんでした"
+          fi
+
+      - name: コミットしてプッシュ
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git commit -m "chore(data): NPBデータを自動更新 ($(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M JST'))"
+          # 同時刻の別実行と衝突したら rebase して再試行
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push && exit 0
+            echo "push に失敗。${i}回目のリトライ"
+            sleep 5
+          done
+          exit 1
+
+      - name: 収集ログを保存
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: update-log-${{ github.run_id }}
+          path: /tmp/update.log
+          retention-days: 7
+
+      - name: サマリを表示
+        if: always()
+        run: |
+          {
+            echo "### NPBデータ更新"
+            echo ""
+            echo "- 変更あり: \`${{ steps.diff.outputs.changed }}\`"
+            echo ""
+            echo '```'
+            tail -n 40 /tmp/update.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
