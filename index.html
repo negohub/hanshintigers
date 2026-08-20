@@ -5,19 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>猛虎必勝 — 阪神タイガース ペナントレース勝敗予想</title>
 <meta name="description" content="畑山・根来・今井の3人による、阪神タイガース2026 ペナントレース勝敗予想バトル。オッズは直近成績・先発FIP・OPS・球場条件から自動算出。">
-<link rel="icon" href="favicon.png" sizes="32x32">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://negohub.github.io/hanshintigers/">
+
+<!-- ファビコンとホーム画面アイコン。ロゴ1枚を使い回すので追加ファイルは不要 -->
+<link rel="icon" type="image/png" href="hanshin_logo.png">
+<link rel="apple-touch-icon" href="hanshin_logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="hanshin_logo.png">
+
+<!-- ホーム画面から開いたときにフルスクリーンのアプリのように見せる -->
 <meta name="apple-mobile-web-app-title" content="猛虎必勝">
+<meta name="application-name" content="猛虎必勝">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0B0908">
+<meta name="color-scheme" content="dark">
+
+<!-- LINEやSNSに貼ったときの見え方 -->
 <meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="猛虎必勝">
-<meta property="og:title" content="猛虎必勝 — 阪神タイガース ペナントレース勝敗予想">
-<meta property="og:description" content="畑山・根来・今井の3人による、阪神タイガース2026 ペナントレース勝敗予想バトル。当てたらオッズぶんのpt、最下位が首位に点差×100円。">
-<meta property="og:image" content="ogp.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="preload" as="image" href="hero.jpg">
+<meta property="og:title" content="2026年阪神タイガース勝敗予想">
+<meta property="og:description" content="畑山・根来・今井の3人による勝敗予想バトル。オッズはシーズン勝率・直近10試合・先発FIP・チームOPS・球場条件から自動算出。当てたらオッズぶんのpt、最下位が首位に点差×100円。">
+<meta property="og:url" content="https://negohub.github.io/hanshintigers/">
+<meta property="og:image" content="https://negohub.github.io/hanshintigers/hanshin_logo.png">
+<meta property="og:image:width" content="1080">
+<meta property="og:image:height" content="1080">
+<meta property="og:image:alt" content="阪神タイガース">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2026年阪神タイガース勝敗予想">
+<meta name="twitter:description" content="3人の勝敗予想バトル。オッズは毎日自動算出。">
+<meta name="twitter:image" content="https://negohub.github.io/hanshintigers/hanshin_logo.png">
 <style>
 :root{
   --ink:#F5F0E1;            /* ライン白 */
@@ -60,10 +78,11 @@ section{margin-top:76px}
 /* ヒーロー：銀傘と蔦 */
 .hero{position:relative;overflow:hidden;padding:70px 20px 54px;text-align:center;isolation:isolate}
 .hero .photo{
+  /* 写真は使わず、黒地に金のグラデーションだけを敷く */
   position:absolute;inset:0;z-index:-5;
-  background-image:url("hero.jpg");
-  background-size:cover;background-position:center 62%;
-  opacity:.6;filter:saturate(.75) brightness(.62) contrast(1.05);
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(255,209,0,.16), transparent 62%),
+    linear-gradient(180deg, #14110C 0%, var(--soil-deep) 100%);
 }
 .hero::before{content:"";position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:150%;height:340px;z-index:-4;
   background:radial-gradient(closest-side, rgba(255,240,205,.18), rgba(255,213,74,.05) 46%, transparent 72%)}
@@ -1324,6 +1343,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .logofb b{display:block;font-weight:800;font-size:1.24em;letter-spacing:-.01em}
 .offmark{font-size:12.5px;letter-spacing:.06em;padding:3px 11px;border-radius:20px;
   background:rgba(143,163,184,.16);color:var(--steel);white-space:nowrap}
+
+/* ホーム画面から起動したときのノッチ／ホームバー対策 */
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.wrap{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
 </style>
 </head>
 <body>
