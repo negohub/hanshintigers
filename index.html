@@ -1351,6 +1351,12 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
 .hh .lgtag.inter{color:var(--gold);background:rgba(255,209,0,.12);padding:2px 8px;border-radius:20px;font-size:11.5px}
 .hh tr.h2hsep td{padding:14px 6px 8px;font-size:12.5px;letter-spacing:.14em;color:var(--gold);
   font-weight:700;border-bottom:1px solid var(--line);text-align:left}
+.prow.waiting{opacity:.62}
+.prow.waiting .pteam{cursor:default}
+.pwait{white-space:nowrap;margin-left:9px;padding:2px 9px;border-radius:20px;font-style:normal;
+  font-size:12.5px;background:rgba(143,163,184,.18);color:var(--steel)}
+.dlbox.wait{background:rgba(143,163,184,.09);border-color:rgba(143,163,184,.3)}
+.dlbox.wait>b{color:var(--steel)}
 </style>
 </head>
 <body>
@@ -1421,7 +1427,7 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
   </section>
   <section class="reveal" id="nav-predict">
     <div class="head"><h2>予想入力</h2><em>Your Pick</em></div>
-    <p class="hint"><span class="sn">まず自分の名前を選び、勝つと思う球団をタップ。</span><span class="sn">オッズ＝的中時の倍率で、数字が大きいほど不利と見られている側です。</span><span class="sn">締切は試合日の0時。前日の夜までに入れてください。</span><span class="sn">受け付けるのは次の2試合まで。1試合終わるごとに次が開きます。</span><span class="sn">バトルの開始は8/21から。今夜の試合は対象外です。</span></p>
+    <p class="hint"><span class="sn">まず自分の名前を選び、勝つと思う球団をタップ。</span><span class="sn">オッズ＝的中時の倍率で、数字が大きいほど不利と見られている側です。</span><span class="sn">締切は試合日の0時。前日の夜までに入れてください。</span><span class="sn">予想できるのは予告先発が発表された試合だけ。</span><span class="sn">前夜に先発が出るとオッズが決まり、受付が開きます。</span><span class="sn">バトルの開始は8/21から。今夜の試合は対象外です。</span></p>
     <div id="deadline"></div>
     <div id="postorder"></div>
     <div id="predict"></div>
@@ -1548,6 +1554,7 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
         <ul>
           <li>LINEに予想を貼る順番は、<b>その時点の順位が上の人から</b></li>
           <li>上位者の予想を丸写ししても差は縮まらないため、後追いの利点がなくなる</li>
+          <li>予想できるのは<b>予告先発が発表された試合</b>のみ</li>
           <li>締切は<b>試合日の0時</b>。日付が変われば入力・変更できない</li>
           <li>前日の夜までに入力しておくこと</li>
         </ul>
@@ -2264,8 +2271,16 @@ function renderBetBoard(){
 function renderDeadline(){
   const box = document.getElementById("deadline");
   if(!box) return;
-  const items = upcomingGames().filter(it=>!it.closed);
-  if(!items.length){ box.innerHTML = ""; return; }
+  const all = upcomingGames().filter(it=>!it.closed);
+  const items = all.filter(it=>!it.waiting);
+  if(!items.length){
+    const w = all.find(it=>it.waiting);
+    box.innerHTML = w
+      ? `<div class="dlbox wait"><b>${w.date} は予告先発の発表待ち</b>
+         <span class="dlok">${sent("先発が出しだいオッズが決まり、予想を受け付けます。")}</span></div>`
+      : "";
+    return;
+  }
   const date = items[0].date;                       /* 直近の受付中の日 */
   const day  = items.filter(it=>it.date === date);
   const left = dayDeadline(date).getTime() - Date.now();
@@ -2412,8 +2427,10 @@ function upcomingGames(){
       if(d.scored === false || dateNum(d.d) < dateNum(BATTLE_START)) return;  /* 開始前は受け付けない */
       if(openDates(PREDICT_GAMES).indexOf(d.d) < 0) return;   /* 受付は手前の試合だけ */
       if(g.oa===undefined || g.ob===undefined) return;
+      const sp = g.sp || [];
       out.push({id:`${d.d}-${i}`, date:d.d, no:i+1, time:g.t, round:g.r, g,
-                closed: isClosed(d.d)});
+                closed: isClosed(d.d),
+                waiting: !(sp[0] && sp[1])});      /* 予告先発が出るまでは受け付けない */
     });
   });
   return out;
@@ -2575,11 +2592,11 @@ function renderPredict(){
     const rows = items.map(it=>{
       const sel = picks[it.id];
       const bet = budget ? (bets[it.id]||1) : 1;
-      if(sel===0 || sel===1){ done++; expect += (sel===0 ? it.g.oa : it.g.ob) * bet; }
+      if(!it.waiting && (sel===0 || sel===1)){ done++; expect += (sel===0 ? it.g.oa : it.g.ob) * bet; }
       const btn = (side)=>{
         const name = side===0 ? it.g.a : it.g.b;
         const odd  = side===0 ? it.g.oa : it.g.ob;
-        return `<button class="pteam ${sel===side?"on":""}" data-id="${it.id}" data-side="${side}" ${it.closed?"disabled":""}>
+        return `<button class="pteam ${sel===side?"on":""}" data-id="${it.id}" data-side="${side}" ${(it.closed||it.waiting)?"disabled":""}>
           <span class="ptn">${name}</span><b>${odd.toFixed(1)}</b></button>`;
       };
       const betRow = !budget ? "" : `<div class="pbet">
@@ -2589,8 +2606,11 @@ function renderPredict(){
         <button class="pbetb" data-bet="${it.id}" data-delta="1" ${(left<=0||it.closed)?"disabled":""}>＋</button>
         <span class="pbetx">${(sel===0||sel===1) ? `的中で +${Math.round((sel===0?it.g.oa:it.g.ob)*bet*10)/10}pt` : "未選択"}</span>
       </div>`;
-      return `<div class="prow${it.closed?" closed":""}">
-        <div class="pmeta">${it.g.venue}　${it.time}${it.closed?'<em class="pclosed">締切</em>':""}</div>
+      const spTxt = (it.g.sp||[])[0] && (it.g.sp||[])[1]
+        ? `　${it.g.sp[0]} × ${it.g.sp[1]}` : "";
+      return `<div class="prow${it.closed?" closed":""}${it.waiting?" waiting":""}">
+        <div class="pmeta">${it.g.venue}　${it.time}${spTxt}${
+          it.closed?'<em class="pclosed">締切</em>' : (it.waiting?'<em class="pwait">予告先発 待ち</em>':"")}</div>
         <div class="pbtns">${btn(0)}<span class="pvs">×</span>${btn(1)}</div>
         ${betRow}
       </div>`;
@@ -2604,9 +2624,11 @@ function renderPredict(){
     return `<div class="pday"><div class="pdate">${date}<i class="dow ${dowInfo(date).cls}">(${dowInfo(date).label})</i>${budget?`<em class="pbadge ${round==="準決勝"?"sf":"qf"}">${round}・ポイントベット制</em>`:""}</div>${budgetBar}${rows}</div>`;
   }).join("");
 
+  const openN = list.filter(it=>!it.waiting).length;
   box.innerHTML = `<div class="pbox">
     <div class="pwhos">${whoBtns}</div>
-    <div class="psum">選択 <b>${done}</b>/${list.length}試合　全部的中なら <b>+${Math.round(expect*10)/10}</b>pt</div>
+    <div class="psum">選択 <b>${done}</b>/${openN}試合　全部的中なら <b>+${Math.round(expect*10)/10}</b>pt${
+      list.length > openN ? `　<i style="font-style:normal;color:var(--steel)">（${list.length-openN}試合は予告先発の発表待ち）</i>` : ""}</div>
     ${days}
     <div class="pacts">
       <button class="pact" id="predCopy">予想をコピー</button>
@@ -2669,6 +2691,7 @@ function bindPredict(){
       }
     }
     upcomingGames().forEach(it=>{
+      if(it.waiting) return;
       const sel = picks[it.id]; if(sel!==0 && sel!==1) return;
       const budget = BET_BUDGET[it.round] || 0;
       const bet = budget ? (bets[it.id]===undefined?1:bets[it.id]) : 0;
