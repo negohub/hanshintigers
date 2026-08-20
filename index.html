@@ -1214,7 +1214,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .grouplabel span{white-space:nowrap}
 .grouplabel::before{content:"";width:22px;height:2px;background:var(--gold);border-radius:2px;flex:none}
 .grouplabel::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(199,154,87,.35),transparent)}
-.grouplabel + section{margin-top:34px}
+.grouplabel + section,.grouplabel + .foldsec{margin-top:34px}
 @media(max-width:760px){.grouplabel{margin:52px 0 -14px;font-size:12.5px}.grouplabel + section{margin-top:28px}}
 
 /* ===== ヘッダーのロゴ（正方形のHTマーク向け） ===== */
@@ -1393,6 +1393,27 @@ tr.lead .plate.total{color:var(--cream);text-shadow:none}
 .grouplabel{color:rgba(216,183,122,.8)}
 .grouplabel::before{background:var(--clay)}
 .gtag{background:linear-gradient(90deg,rgba(199,154,87,.13),rgba(199,154,87,.03))}
+
+/* 折りたたみを一覧として並べたときの見た目 */
+.foldsec{margin-top:12px;border-radius:12px;background:rgba(237,229,214,.02);transition:border-color .2s}
+.foldsec + .foldsec{margin-top:10px}
+.foldsec[open]{background:rgba(237,229,214,.03);border-color:rgba(199,154,87,.28)}
+.foldsec>summary{padding:15px 17px;gap:10px}
+.foldsec>summary:hover b{color:var(--gold)}
+.foldsec>summary b{font-size:17.5px;font-weight:700;letter-spacing:.04em}
+.foldsec>summary em{font-size:11.5px;letter-spacing:.1em}
+.foldsec>summary i{font-size:13px;color:var(--ink-dim);flex-basis:100%;margin-top:-2px}
+.foldsec>summary::after{font-size:19px;align-self:center}
+.foldbody{padding:4px 17px 18px}
+.foldbody>.hint:first-child{margin-top:0}
+@media(max-width:760px){
+  .foldsec>summary{padding:14px 15px}
+  .foldsec>summary b{font-size:16.5px}
+  .foldsec>summary i{font-size:12.5px}
+  .foldbody{padding:2px 14px 16px}
+}
+/* 開いたままのセクションは今までどおり */
+section.reveal{margin-top:44px}
 </style>
 </head>
 <body>
@@ -1476,8 +1497,9 @@ tr.lead .plate.total{color:var(--cream);text-shadow:none}
     <div id="settlement"></div>
     <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">首位との点差と、現時点で3位が支払う精算額の目安を表示</p>
   </section>
-  <section class="reveal" id="nav-board">
-    <div class="head"><h2>戦況</h2><em>Live Board</em></div>
+  <details class="foldsec reveal" id="nav-board">
+    <summary><b>戦況</b><em>Live Board</em><i>3人の日別得点をスコアボードで</i></summary>
+    <div class="foldbody">
     <p class="hint"><span class="sn">数字はその日に獲得したpt。</span><span class="sn">当てた試合のオッズの合計です。</span></p>
     <div class="board" id="board" data-nav="board"><table class="line" id="lineTable"></table></div>
     <div class="tools">
@@ -1486,55 +1508,74 @@ tr.lead .plate.total{color:var(--cream);text-shadow:none}
       <p class="asof" id="asof"></p>
     </div>
     <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">3人の日別得点を、消化した試合の分だけ手動式スコアボードの形で表示</p>
-  </section>
-  <section class="reveal" id="nav-personal">
-    <div class="head"><h2>個人成績</h2><em>Hit Rate</em></div>
+    </div>
+  </details>
+  <details class="foldsec reveal" id="nav-personal">
+    <summary><b>個人成績</b><em>Hit Rate</em><i>各自の的中率と連勝・連敗</i></summary>
+    <div class="foldbody">
     <div class="personal" id="personal"></div>
     <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)"><span class="sn">これまでの全試合を通算した、各自の予想の勝敗と的中率。</span><span class="sn">○✕は開幕からの全試合の流れ、現在の連勝・連敗も表示</span></p>
-  </section>
-  <section class="reveal" id="nav-chart">
-    <div class="head"><h2>得点推移</h2><em>Cumulative</em></div>
+    </div>
+  </details>
+  <details class="foldsec reveal" id="nav-chart">
+    <summary><b>得点推移</b><em>Cumulative</em><i>累計得点の推移グラフ</i></summary>
+    <div class="foldbody">
     <div class="chart" id="chartBox">
       <svg id="chart" viewBox="0 0 720 260" role="img" aria-label="日別の累計得点推移"></svg>
       <div class="legend" id="legend"></div>
     </div>
-  </section>
-  <section class="reveal" id="nav-records">
-    <div class="head"><h2>記録室</h2><em>Record Book</em></div>
+    </div>
+  </details>
+  <details class="foldsec reveal" id="nav-records">
+    <summary><b>記録室</b><em>Record Book</em><i>最長連勝・最高配当などの記録</i></summary>
+    <div class="foldbody">
     <p class="hint"><span class="sn">全試合の的中データから自動計算しています。</span><span class="sn">来季の比較対象になります。</span></p>
     <div id="records"></div>
-  </section>
-  <section class="reveal" id="nav-upsets">
-    <div class="head"><h2>大穴的中</h2><em>Big Hits</em></div>
+    </div>
+  </details>
+  <details class="foldsec reveal" id="nav-upsets">
+    <summary><b>大穴的中</b><em>Big Hits</em><i>対抗を当てた試合</i></summary>
+    <div class="foldbody">
     <div class="upsets" id="upsets"></div>
     <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">オッズが高い側（対抗）を当てた試合を、倍率の高い順に表示</p>
-  </section>
-  <section class="reveal" id="nav-comeback">
-    <div class="head"><h2>逆転ライン</h2><em>Comeback</em></div>
+    </div>
+  </details>
+  <details class="foldsec reveal" id="nav-comeback">
+    <summary><b>逆転ライン</b><em>Comeback</em><i>首位までの必要pt</i></summary>
+    <div class="foldbody">
     <div id="comeback"></div>
-  </section>
-  <section class="reveal" id="nav-bets">
-    <div class="head"><h2>采配</h2><em>Tactics</em></div>
+    </div>
+  </details>
+  <details class="foldsec reveal" id="nav-bets">
+    <summary><b>采配</b><em>Tactics</em><i>CS・日本シリーズの持ち点配分</i></summary>
+    <div class="foldbody">
     <p class="hint"><span class="sn">ポイントベット制はCS・日本シリーズのみ。</span><span class="sn">3人の持ち点の振り分けと、決着したときに動くptを試合前に公開します。</span></p>
     <div id="betboard"></div>
-  </section>
+    </div>
+  </details>
   <div class="grouplabel"><span>阪神のデータ</span></div>
-  <section class="reveal" id="nav-teams">
-    <div class="head"><h2>セ・リーグ</h2><em id="teamCount"></em></div>
+  <details class="foldsec reveal" id="nav-teams">
+    <summary><b>セ・リーグ</b><em id="teamCount"></em><i>順位表・打率・OPS・防御率</i></summary>
+    <div class="foldbody">
     <div class="tablewrap" id="teams"></div>
     <p class="fine" style="margin:8px 2px 0;font-size:13px;color:var(--ink-dim)">見出しをタップで並び替え／球団名をタップでその球団の詳細と対戦履歴／表は横にスクロールできます</p>
-  </section>
-  <section class="reveal" id="nav-parks">
-    <div class="head"><h2>球場別成績</h2><em>By Ballpark</em></div>
+    </div>
+  </details>
+  <details class="foldsec reveal" id="nav-parks">
+    <summary><b>球場別成績</b><em>By Ballpark</em><i>球場ごとの勝敗と得失点</i></summary>
+    <div class="foldbody">
     <p class="hint"><span class="sn">開幕から今日までの阪神の成績を球場ごとに集計したもの。</span><span class="sn">オッズの「球場相性」にも反映されます。</span></p>
     <div id="parks"></div>
-  </section>
-  <section class="reveal" id="nav-h2h">
-    <div class="head"><h2>対戦成績</h2><em>Head to Head</em></div>
+    </div>
+  </details>
+  <details class="foldsec reveal" id="nav-h2h">
+    <summary><b>対戦成績</b><em>Head to Head</em><i>球団別の対戦成績と先発比較</i></summary>
+    <div class="foldbody">
     <p class="hint"><span class="sn">予告先発のFIP比較と、阪神の今季の対戦球団別成績。</span><span class="sn">交流戦も含みます。</span></p>
     <div id="matchup"></div>
     <div id="h2h"></div>
-  </section>
+    </div>
+  </details>
   <details class="foldsec reveal" id="nav-stats">
     <summary><b>選手成績</b><em>Leaders</em><i>打率・本塁打・FIPなどTOP5</i></summary>
     <div class="foldbody">
@@ -1543,14 +1584,17 @@ tr.lead .plate.total{color:var(--cream);text-shadow:none}
     <div id="statsboard"></div>
       </div>
   </details>
-  <section class="reveal" id="trendsWrap" style="display:none">
-    <div class="head"><h2>勝敗の傾向</h2><em>Match-up Trends</em></div>
+  <details class="foldsec reveal" id="trendsWrap" style="display:none">
+    <summary><b>勝敗の傾向</b><em>Match-up Trends</em><i>カード別の勝ち方の傾向</i></summary>
+    <div class="foldbody">
     <div class="trendbox" id="trends"></div>
     <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">対戦カードごとに、その試合のオッズで本命だった方／チーム防御率が良い方が、実際どれだけ勝っているかを集計。交流戦は対象外</p>
-  </section>
+    </div>
+  </details>
   <div class="grouplabel"><span>ルールと計算</span></div>
-  <section class="reveal" id="nav-rules">
-    <div class="head"><h2>大会規定</h2><em>Rules</em></div>
+  <details class="foldsec reveal" id="nav-rules">
+    <summary><b>大会規定</b><em>Rules</em><i>得点・オッズ・報酬のルール</i></summary>
+    <div class="foldbody">
     <div class="rules">
       <div class="rulebox">
         <h3>得点</h3>
@@ -1605,7 +1649,8 @@ tr.lead .plate.total{color:var(--cream);text-shadow:none}
         <p class="fine"><span class="sn">※レートは進捗に応じて変更。</span><span class="sn">CS進出が決まった時点で調整。</span></p>
       </div>
     </div>
-  </section>
+    </div>
+  </details>
   <details class="foldsec reveal" id="nav-odds">
     <summary><b>オッズ算出</b><em>Odds Model</em><i>計算の内訳を見る</i></summary>
     <div class="foldbody">
