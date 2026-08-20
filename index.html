@@ -1315,6 +1315,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .foldbody{padding:18px}
 .foldbody .head{display:none}
 @media(max-width:760px){.foldbody{padding:15px 13px}.foldsec>summary{padding:14px 15px}}
+.logowrap{position:relative}
+.logofb{
+  display:none;font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:.02em;
+  color:var(--gold);line-height:1.1;margin-bottom:18px;
+  text-shadow:0 6px 24px rgba(0,0,0,.7);
+}
+.logofb b{display:block;font-weight:800;font-size:1.24em;letter-spacing:-.01em}
 </style>
 </head>
 <body>
@@ -1347,7 +1354,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   </svg>
   <div class="stripes" aria-hidden="true"></div>
   <div class="stripes r" aria-hidden="true"></div>
-  <img class="logo" src="hanshin_logo.png" alt="阪神タイガース">
+  <div class="logowrap">
+    <img class="logo" id="siteLogo" src="hanshin_logo.png" alt="阪神タイガース">
+    <div class="logofb" id="logoFallback">HANSHIN <b>Tigers</b></div>
+  </div>
   <div class="kanmuri">2026 セントラル・リーグ ペナントレース</div>
   <h1><span class="t1">阪神タイガース</span><span class="t2">ペナントレース勝敗予想</span></h1>
   <div class="sub">阪神甲子園球場　<a class="sublink" href="#nav-schedule">残り日程</a></div>
@@ -1376,13 +1386,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   <div class="grouplabel"><span>今日やること</span></div>
   <section class="reveal" id="nav-predict">
     <div class="head"><h2>予想入力</h2><em>Your Pick</em></div>
-    <p class="hint"><span class="sn">まず自分の名前を選び、勝つと思う球団をタップ。</span><span class="sn">オッズ＝的中時の倍率で、数字が大きいほど不利と見られている側です。</span><span class="sn">締切は試合日の0時。前日の夜までに入れてください。</span><span class="sn">表示は今日から3日分。先の試合は予告先発が出てから並びます。</span></p>
+    <p class="hint"><span class="sn">まず自分の名前を選び、勝つと思う球団をタップ。</span><span class="sn">オッズ＝的中時の倍率で、数字が大きいほど不利と見られている側です。</span><span class="sn">締切は試合日の0時。前日の夜までに入れてください。</span><span class="sn">受け付けるのは次の2試合まで。1試合終わるごとに次が開きます。</span></p>
     <div id="deadline"></div>
     <div id="postorder"></div>
     <div id="predict"></div>
   </section>
   <section class="reveal" id="nav-schedule">
-    <div class="head"><h2>日程・結果</h2><em id="scheduleRange"></em></div>
+    <div class="head"><h2>次の試合</h2><em id="scheduleRange"></em></div>
+    <p class="hint"><span class="sn">カードで出すのは次の1試合だけ。</span><span class="sn">先の試合は成績もオッズも動くので、終わるごとに切り替わります。</span></p>
     <div id="timeline"></div>
   </section>
   <section class="reveal" id="nav-standings">
@@ -2353,7 +2364,7 @@ function upcomingGames(){
       if(!g.a || !g.b) return;
       if(g.void) return;
       if(settled(g)) return;
-      if(!withinWindow(d.d)) return;                  /* 1週間より先は受け付けない */
+      if(openDates(PREDICT_GAMES).indexOf(d.d) < 0) return;   /* 受付は手前の試合だけ */
       if(g.oa===undefined || g.ob===undefined) return;
       out.push({id:`${d.d}-${i}`, date:d.d, no:i+1, time:g.t, round:g.r, g,
                 closed: isClosed(d.d)});
@@ -2915,8 +2926,9 @@ function renderTimeline(){
   const fold = (d, i) => finished(d) || (nowIdx >= 0 && i < nowIdx);
   const future = DAYS.filter((d,i)=>!fold(d,i));
   const past   = DAYS.filter((d,i)=> fold(d,i));
-  const near = future.filter(d=>withinWindow(d.d));
-  const far  = future.filter(d=>!withinWindow(d.d));
+  const shownDates = openDates(SCHEDULE_CARDS);
+  const near = future.filter(d=>shownDates.indexOf(d.d) >= 0);
+  const far  = future.filter(d=>shownDates.indexOf(d.d) < 0);
   const anchor = (near[0] || future[0] || DAYS.find(d=>d.now) || {}).d;
   const farHtml = far.length
     ? `<details class="tlpast tlfar"><summary>この先の日程（${far.filter(d=>!d.rest).length}試合）</summary>
@@ -2930,7 +2942,7 @@ function renderTimeline(){
            <span class="fart">${g.t||""}</span>
          </div>`;
        }).join("")}</div>
-       <p class="scnote">${sent("予告先発と天気が出そろってから、オッズつきのカードに切り替わります。")}</p>
+       <p class="scnote">${sent("直前の成績や予告先発でオッズは動くので、カードは1試合終わるごとに次の試合へ切り替わります。")}</p>
       </details>`
     : "";
   const pastHtml = past.length
@@ -3285,8 +3297,20 @@ function jsDateToKey(iso){
   const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);
   return m ? `${+m[2]}/${+m[3]}` : null;
 }
-/* 予想の受付・日程表示は「今日から1週間」まで。先の試合は予告先発も天気も出ていないため */
-const SHOW_DAYS_AHEAD = 3;
+/* 先の試合は予告先発も直近成績も変わるので、出すのは手前だけにする */
+const SCHEDULE_CARDS = 1;   /* 日程にカードで出す試合数（次の1試合） */
+const PREDICT_GAMES  = 2;   /* 予想を受け付ける試合数（締切に間に合うよう明日ぶんまで） */
+/* これから行う試合を、日付順に並べて返す */
+function upcomingList(){
+  const out = [];
+  DAYS.forEach(d=>(d.games||[]).forEach(g=>{
+    if(!settled(g) && !g.void && g.a && g.b) out.push({day:d, g});
+  }));
+  return out;
+}
+function openDates(n){
+  return upcomingList().slice(0, n).map(x=>x.day.d);
+}
 function dateObj(k){
   const [m,d] = String(k).split("/").map(Number);
   return (m && d) ? new Date(2026, m-1, d) : null;
@@ -3298,11 +3322,6 @@ function anchorDate(){
   let v = null;
   DAYS.forEach(d=>{ if(!v && !d.rest && (d.games||[]).some(g=>!settled(g) && !g.void)) v = dateObj(d.d); });
   return v || new Date();
-}
-function withinWindow(dateStr){
-  const a = anchorDate(), t = dateObj(dateStr);
-  if(!a || !t) return true;
-  return (t - a) / 86400000 <= SHOW_DAYS_AHEAD;
 }
 function dateNum(k){
   const [m,d] = String(k).split("/").map(Number);
@@ -3651,6 +3670,21 @@ if("IntersectionObserver" in window){
   document.querySelectorAll(".reveal").forEach(el=>el.classList.add("on"));
 }
 
+
+/* ---------- ロゴ：png → webp → jpg の順に試し、無ければ文字ロゴ ---------- */
+(function(){
+  const img = document.getElementById("siteLogo");
+  const fb  = document.getElementById("logoFallback");
+  if(!img) return;
+  const candidates = ["hanshin_logo.png", "hanshin_logo.webp", "hanshin_logo.jpg", "hanshin_logo.jpeg"];
+  let i = 0;
+  img.addEventListener("error", ()=>{
+    i++;
+    if(i < candidates.length){ img.src = candidates[i] + "?t=" + Date.now(); return; }
+    img.style.display = "none";
+    if(fb) fb.style.display = "block";
+  });
+})();
 
 /* ---------- ヒーローの試合ランプ ---------- */
 (function(){
