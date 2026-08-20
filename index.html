@@ -1500,7 +1500,7 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
   <section class="reveal" id="trendsWrap" style="display:none">
     <div class="head"><h2>勝敗の傾向</h2><em>Match-up Trends</em></div>
     <div class="trendbox" id="trends"></div>
-    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">対戦カードごとに、その試合のオッズで本命だった方／チーム防御率が良い方が、実際どれだけ勝っているかを集計</p>
+    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">対戦カードごとに、その試合のオッズで本命だった方／チーム防御率が良い方が、実際どれだけ勝っているかを集計。交流戦は対象外</p>
   </section>
   <div class="grouplabel"><span>ルールと計算</span></div>
   <section class="reveal" id="nav-rules">
@@ -2816,7 +2816,7 @@ function renderParks(){
   const ps = parkStats();
   const rows = Object.keys(ps).map(k=>({park:k, ...ps[k]}))
     .filter(r=>r.g > 0)
-    .sort((a,b)=> (b.home - a.home) || (b.g - a.g));
+    .sort((a,b)=> ((b.home?1:0) - (a.home?1:0)) || (b.g - a.g));
   if(!rows.length){ box.innerHTML = `<p class="bbnone">${sent("まだ球場別の成績がありません。")}</p>`; return; }
   const next = (()=>{ let v=null; DAYS.forEach(d=>(d.games||[]).forEach(g=>{
     if(v===null && !settled(g) && !g.void) v = g.venue; })); return v; })();
@@ -3166,6 +3166,7 @@ function renderTrends(){
   DAYS.forEach(day=>{
     (day.games||[]).forEach(g=>{
       if(!g.r || !g.a || !g.b || !g.s || isDraw(g)) return;
+      if(!TEAM[g.b]) return;                 /* 交流戦（パ球団）はチーム指標が無いので除く */
       const w = winnerOf(g); if(w===null) return;
       const wn = w===0?g.a:g.b;
       const r = rounds[g.r] = rounds[g.r] || {n:0, favWin:0, favTotal:0, eraWin:0, eraTotal:0, opsWin:0, opsTotal:0, marginSum:0, homeN:0, homeW:0};
@@ -3199,7 +3200,7 @@ function renderTrends(){
         <li>オッズが低かった方が勝った試合：<b>${r.favWin}勝${r.favTotal-r.favWin}敗</b>（${favP??"—"}%）</li>
         <li>チーム防御率が良い方が勝った試合：<b>${r.eraWin}勝${r.eraTotal-r.eraWin}敗</b>（${eraP??"—"}%）</li>
         <li>チームOPSが高い方が勝った試合：<b>${r.opsWin}勝${r.opsTotal-r.opsWin}敗</b>（${opsP??"—"}%）</li>
-        <li>甲子園での阪神：<b>${r.homeW}勝${r.homeN-r.homeW}敗</b></li>
+        ${r.homeN ? `<li>主催試合での阪神：<b>${r.homeW}勝${r.homeN-r.homeW}敗</b></li>` : ""}
         <li>1試合あたりの平均得失点差：<b>${(r.marginSum/r.n).toFixed(1)}点</b></li>
       </ul>
     </div>`;
