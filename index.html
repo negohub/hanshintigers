@@ -2961,7 +2961,9 @@ function teamRow(name, odds, runs, state, showNote, g, side){
   const u = (label, val) => `<i>${label}<b>${val}</b></i>`;   /* ラベルと数字の間隔はCSSで空ける */
   const sp = (g && g.sp) ? g.sp[side] : null;
   const rf = recentForm(name, g ? g._i : undefined);
-  const spline = sp ? `<span class="ln kk">${u("先発", sp)}${u("FIP", fipOf(sp).toFixed(2))}</span>` : "";
+  const spline = sp
+    ? `<span class="ln kk">${u("先発", sp)}${u("FIP", fipOf(sp).toFixed(2))}</span>`
+    : (showNote ? `<span class="ln kk"><i>先発<b>未発表</b></i><i>FIP<b>${LEAGUE_FIP.toFixed(2)}</b>で暫定計算</i></span>` : "");
   const line = `<span class="ln">${u("打率", t.avg||"—")}${u("OPS", t.ops!=null?t.ops.toFixed(3).replace(/^0/,""):"—")}${u("防御率", t.era!=null?t.era.toFixed(2):"—")}${u("直近10試合", `${rf.w}勝${rf.l}敗`)}</span>`;
   const f = FORM[name];
   const note = !showNote ? "" :
