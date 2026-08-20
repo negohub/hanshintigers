@@ -819,15 +819,27 @@ def _resolve_pitcher(short: Optional[str], roster: List[Dict[str, Any]]) -> Opti
     return short
 
 
-def fetch_probables(target: date) -> List[Dict[str, Any]]:
-    """月別日程ページから、その日の阪神戦（カード・球場・予告先発）を取る"""
+def fetch_probables(target: date, days: int = 2) -> List[Dict[str, Any]]:
+    """今日から days 日ぶんの阪神戦（カード・球場・予告先発）を取る。
+    予想の締切が試合日の0時なので、前夜に発表される『明日の先発』まで拾う"""
+    out: List[Dict[str, Any]] = []
+    for i in range(days):
+        d = target + timedelta(days=i)
+        got = _probable_for(d)
+        if got:
+            out.append(got)
+    if not out:
+        log(f"予告先発: {target} 以降の{HOME_TEAM}戦は日程に見つからず")
+    return out
+
+
+def _probable_for(target: date) -> Optional[Dict[str, Any]]:
     key = f"{target.month}/{target.day}"
     games = load_season_games() or fetch_month_games(target.month)
     rows = [g for g in games
             if g["date"] == key and HOME_TEAM in (g["home"], g["away"])]
     if not rows:
-        log(f"予告先発: {key} の{HOME_TEAM}戦は日程に見つからず")
-        return []
+        return None
     g = rows[0]
     is_home = g["home"] == HOME_TEAM
     opp = g["away"] if is_home else g["home"]
@@ -843,9 +855,9 @@ def fetch_probables(target: date) -> List[Dict[str, Any]]:
         "score": ([g["home_score"], g["away_score"]] if is_home else [g["away_score"], g["home_score"]])
                  if g["home_score"] is not None else None,
     }
-    log(f"予告先発: {item['card']} @{item['venue']} "
-        f"{item['hanshin_pitcher']} vs {item['opponent_pitcher']}")
-    return [item]
+    log(f"予告先発 {key}: {item['card']} @{item['venue']} "
+        f"{item['hanshin_pitcher'] or '未発表'} vs {item['opponent_pitcher'] or '未発表'}")
+    return item
 
 
 # =====================================================================
@@ -958,9 +970,11 @@ def build(target: date) -> Dict[str, Any]:
     # 個人成績（阪神＋今日の対戦相手）
     probables = section("probables", lambda: fetch_probables(target), [])
     data["probables"] = probables
-    focus = ["阪神"]
-    if probables and probables[0].get("opponent"):
-        focus.append(probables[0]["opponent"])
+    focus = [HOME_TEAM]
+    for pb in (probables or []):
+        opp = pb.get("opponent")
+        if opp and opp not in focus:
+            focus.append(opp)
     data["players"] = section("players", lambda: fetch_players(focus), {})
 
     # 予告先発のFIPを個人成績から引く
