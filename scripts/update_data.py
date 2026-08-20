@@ -114,20 +114,21 @@ PARKS = {
     "ベルーナD":   {"lat": 35.7694, "lon": 139.4200, "dome": True},
 }
 
-# 球場名のゆらぎ吸収
-PARK_ALIASES = {
-    "阪神甲子園球場": "甲子園", "甲子園球場": "甲子園", "甲子園": "甲子園",
-    "京セラドーム大阪": "京セラD大阪", "京セラD": "京セラD大阪",
-    "東京ドーム": "東京ドーム",
-    "明治神宮野球場": "神宮", "神宮球場": "神宮", "神宮": "神宮",
-    "横浜スタジアム": "横浜", "ハマスタ": "横浜", "横浜": "横浜",
-    "MAZDA Zoom-Zoom スタジアム広島": "マツダ", "マツダスタジアム": "マツダ", "マツダ": "マツダ",
-    "バンテリンドーム ナゴヤ": "バンテリン", "バンテリンドーム": "バンテリン", "バンテリン": "バンテリン",
-    "みずほPayPayドーム福岡": "PayPayドーム", "PayPayドーム": "PayPayドーム",
-    "エスコンフィールド": "エスコン", "ES CON FIELD HOKKAIDO": "エスコン",
-    "ZOZOマリンスタジアム": "ZOZOマリン", "ZOZOマリン": "ZOZOマリン",
-    "楽天モバイルパーク宮城": "楽天モバイル",
-    "ベルーナドーム": "ベルーナD",
+# 球場名のゆらぎ吸収。NPBの日程ページは「みずほPayPay」「エスコンＦ」のように
+# 短く書かれることがあるので、含まれていれば一致とみなすキーワードで持つ
+PARK_KEYWORDS = {
+    "甲子園":      ["甲子園"],
+    "京セラD大阪":  ["京セラ"],
+    "東京ドーム":   ["東京ドーム"],
+    "神宮":        ["神宮"],
+    "横浜":        ["横浜スタジアム", "ハマスタ", "横浜"],
+    "マツダ":      ["マツダ", "MAZDA", "ZoomZoom"],
+    "バンテリン":   ["バンテリン", "ナゴヤドーム"],
+    "PayPayドーム": ["PayPay", "ヤフオク", "福岡ドーム"],
+    "エスコン":     ["エスコン", "ESCON"],
+    "ZOZOマリン":  ["ZOZO", "マリンスタジアム", "マリン"],
+    "楽天モバイル":  ["楽天モバイル", "楽天生命", "Koboパーク"],
+    "ベルーナD":    ["ベルーナ", "メットライフ", "西武ドーム"],
 }
 
 # FIP定数（要件の簡易式）
@@ -171,15 +172,29 @@ def norm_team(name: Any) -> Optional[str]:
 
 
 def norm_park(name: Any) -> Optional[str]:
+    """球場名を代表表記に寄せる。知らない球場（地方開催など）は None"""
     key = norm_text(name)
     if not key:
         return None
-    if key in PARK_ALIASES:
-        return PARK_ALIASES[key]
-    for alias, canon in PARK_ALIASES.items():
-        if norm_text(alias) in key:
-            return canon
+    for canon, words in PARK_KEYWORDS.items():
+        for w in words:
+            if norm_text(w) in key:
+                return canon
     return None
+
+
+def clean_venue(text: Any) -> Optional[str]:
+    """『京セラD大阪18:00』のような欄から球場名だけを取り出す。
+    知らない球場でも、そのままの名前で残す（地方開催を落とさないため）"""
+    t = norm_text(text)
+    if not t:
+        return None
+    t = re.sub(r"\d{1,2}:\d{2}.*$", "", t)          # 開始時間から後ろを落とす
+    t = re.sub(r"(中止|試合終了|回表|回裏|\d)+$", "", t)
+    t = t.strip("　 ・-")
+    if not t or len(t) > 14:
+        return None
+    return norm_park(t) or t
 
 
 def to_float(v: Any) -> Optional[float]:
@@ -445,15 +460,21 @@ def fetch_month_games(month: int, season: int = None) -> List[Dict[str, Any]]:
             if not card:
                 continue
             home, hs, as_, away = card
-            # 球場と開始時間
+            # 球場と開始時間（時刻が入っているセルが球場欄）
             venue, start = None, None
             for tx in texts:
-                pk = norm_park(tx)
-                if pk and not venue:
-                    venue = pk
-                    tm = _TIME_RE.search(tx)
-                    if tm:
-                        start = f"{int(tm.group(1))}:{tm.group(2)}"
+                if venue:
+                    break
+                tm = _TIME_RE.search(tx)
+                if tm:
+                    start = f"{int(tm.group(1))}:{tm.group(2)}"
+                    venue = clean_venue(tx)
+            if not venue:                       # 時刻が無い（中止など）の保険
+                for tx in texts:
+                    pk = norm_park(tx)
+                    if pk:
+                        venue = pk
+                        break
             sp_h, sp_a = None, None
             for tx in texts:
                 a, b = _split_starters(tx)
