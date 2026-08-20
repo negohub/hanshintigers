@@ -28,10 +28,10 @@
   --soil-deep:#0B0908;      /* 背景（黒） */
   --clay:#FFD100;           /* タイガースイエロー（主役の差し色） */
   --flag:#3B3468;
-  --crimson:#A5122B;        /* 縦縞の赤ライン／決着マーク */
-  --red:#E23A2E;
+  --crimson:#6E5210;        /* 縦縞の赤ライン／決着マーク */
+  --red:#FFC933;
   --gold:#FFD54A;
-  --sky:#5B9BD5;            /* 土曜表示用の青 */
+  --sky:#9FB2C4;            /* 土曜表示用の青 */
   --line:rgba(245,240,225,.15);
   --min:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
   --gothic:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
@@ -91,7 +91,7 @@ section{margin-top:76px}
   color:var(--ink);text-shadow:0 4px 0 rgba(0,0,0,.6), 0 0 46px rgba(255,213,74,.16);
 }
 .hero h1::before,.hero h1::after{content:"";position:absolute;top:0;bottom:0;width:5px;background:var(--crimson);
-  box-shadow:0 0 18px rgba(165,18,43,.7)}
+  box-shadow:0 0 18px rgba(110,82,16,.7)}
 .hero h1::before{left:-32px} .hero h1::after{right:-32px}
 .hero .sub{font-family:var(--min);font-weight:500;font-size:clamp(12px,3vw,15px);letter-spacing:.32em;
   margin-top:20px;text-indent:.32em;color:var(--ink-dim)}
@@ -163,7 +163,7 @@ th.who{
   transform-origin:top center;
 }
 .plate.zero{color:rgba(245,240,225,.2)}
-.plate.neg{color:#FF6B60}
+.plate.neg{color:#8FA3B8}
 .plate.pending{color:rgba(245,240,225,.13);font-size:14px}
 .plate.rest{color:rgba(245,240,225,.28);font-size:13px;font-family:var(--min);background:rgba(0,0,0,.16)}
 .plate.total{background:rgba(0,0,0,.6);font-size:23px;font-weight:700;color:var(--clay);box-shadow:inset 0 0 0 1px rgba(255,209,0,.5)}
@@ -180,7 +180,7 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .toggle:hover,.toggle:focus-visible{color:var(--clay);border-color:rgba(255,209,0,.65)}
 .sync{font-size:12px;letter-spacing:.08em;color:var(--ink-dim);font-family:var(--gothic);font-weight:400}
 .sync b{color:#7FCFA0;font-weight:700}
-.sync.err b{color:#FF6B60}
+.sync.err b{color:#8FA3B8}
 .tag-est{white-space:nowrap;font-family:var(--gothic);font-size:10.5px;letter-spacing:.08em;border:1px solid rgba(255,209,0,.5);color:var(--clay);padding:1px 6px;margin-left:8px;vertical-align:2px}
 .asof{margin:0 0 0 auto;font-family:var(--num);font-size:12.5px;letter-spacing:.14em;color:var(--ink-dim)}
 
@@ -192,13 +192,13 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .card .pt{font-family:var(--num);font-weight:700;font-size:40px;line-height:1}
 .card .pt small{font-family:var(--gothic);font-size:12px;font-weight:400;color:var(--ink-dim);margin-left:5px}
 .card .gap{font-size:12px;color:var(--ink-dim);margin-top:9px}
-.card .gap b{font-family:var(--num);color:#FF6B60;font-size:14px}
+.card .gap b{font-family:var(--num);color:#8FA3B8;font-size:14px}
 .card .pay{margin-top:13px;padding-top:11px;border-top:1px dashed var(--line);font-size:12px;color:var(--ink-dim);min-height:44px}
 .card .stt{margin-top:11px;padding:8px 10px;border-radius:8px;line-height:1.5}
 .card .stt em{display:block;font-style:normal;font-weight:800;font-size:13px;letter-spacing:.02em}
 .card .stt span{display:block;margin-top:2px;font-size:13px;color:var(--ink-dim)}
-.card .stt.out{background:rgba(224,133,133,.13);border:1px solid rgba(224,133,133,.3)}
-.card .stt.out em{color:#e08585}
+.card .stt.out{background:rgba(143,163,184,.13);border:1px solid rgba(143,163,184,.3)}
+.card .stt.out em{color:#8FA3B8}
 .card .stt.out em::before{content:"✕ "}
 .card .stt.won{background:rgba(255,213,74,.14);border:1px solid rgba(255,213,74,.34)}
 .card .stt.won em{color:var(--gold)}
@@ -207,8 +207,8 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .card.cdead .pt,.card.cdead .nm{color:var(--ink-dim)}
 .rt td.rtst{font-size:13px;color:var(--ink-dim);white-space:nowrap}
 .rt td.rtst b{font-weight:700}
-.rt td.rtst b.in{color:#8FB89A}
-.rt td.rtst b.out{color:#e08585}
+.rt td.rtst b.in{color:#D9C68F}
+.rt td.rtst b.out{color:#8FA3B8}
 .rt td.rtst b.top{color:var(--gold)}
 
 /* 球団の詳細パネル */
@@ -244,16 +244,16 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .dgr{white-space:nowrap;font-family:var(--min);font-size:13px;color:var(--ink-dim)}
 .dgo{font-family:var(--min);font-weight:700;font-size:13px}
 .dgs{font-family:var(--num);font-weight:700;font-size:13px}
-.dgame.w .dgs,.dgame.w .dgw{color:#8FE0B0}
-.dgame.l .dgs,.dgame.l .dgw{color:#E58A80}
+.dgame.w .dgs,.dgame.w .dgw{color:#FFD966}
+.dgame.l .dgs,.dgame.l .dgw{color:#8FA3B8}
 .dgw{font-size:12px}
 .dgh{white-space:nowrap;margin-left:auto;font-family:var(--gothic);font-size:13px;color:var(--ink-dim)}
-.dgh.miss{color:#E58A80}
+.dgh.miss{color:#8FA3B8}
 .dnone{font-size:12.5px;color:var(--ink-dim);padding:4px 0}
 .dnext{white-space:nowrap;margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);
   font-size:12.5px;color:var(--ink-dim);line-height:1.7}
 .dnext b{color:var(--ink);font-weight:700}
-.dnext.ko{color:#E58A80}
+.dnext.ko{color:#8FA3B8}
 
 /* 逆転ライン */
 .cbox{border:1px solid var(--line);background:rgba(0,0,0,.24);padding:16px}
@@ -262,7 +262,7 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .cbrow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:8px 0;font-size:12px;color:var(--ink-dim)}
 .cbrow + .cbrow{border-top:1px dotted rgba(245,240,225,.09)}
 .cbname{font-family:var(--min);font-weight:700;font-size:15px;color:var(--accent);min-width:44px}
-.cbgap{font-family:var(--num);font-size:13px;color:#FF6B60;min-width:60px}
+.cbgap{font-family:var(--num);font-size:13px;color:#8FA3B8;min-width:60px}
 .cbneed{flex:1;min-width:0}
 .cbneed b{font-family:var(--num);color:var(--ink);font-weight:700}
 .cbnote{margin:10px 0 0;font-size:12px;color:var(--ink-dim);line-height:1.6}
@@ -313,7 +313,7 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .pbadge.sf{background:rgba(229,155,60,.18);color:#E59B3C}
 .pbudget{margin:6px 0 8px;padding:7px 10px;border-radius:8px;font-size:12.5px;font-family:var(--num);letter-spacing:.02em}
 .pbudget.ok{background:rgba(255,209,0,.12);color:var(--gold)}
-.pbudget.warn{background:rgba(220,80,80,.12);color:#e08585}
+.pbudget.warn{background:rgba(143,163,184,.12);color:#8FA3B8}
 .pbudget b{font-size:13px}
 .intro{margin:0 0 16px;padding:0;border:1px solid var(--line);border-radius:10px;background:rgba(245,240,225,.02)}
 .intro>summary{list-style:none;cursor:pointer;padding:9px 13px;font-size:12px;letter-spacing:.06em;color:var(--gold)}
@@ -380,20 +380,20 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .tt.bbt td.bbl2{opacity:.4}
 .tt.bbt td.bbe{color:rgba(245,240,225,.22);font-family:var(--num)}
 .tt.bbt td.bbtot{font-family:var(--num);font-size:14px;color:var(--ink-dim)}
-.tt.bbt td.bbtot.bbng{color:#e08585}
+.tt.bbt td.bbtot.bbng{color:#8FA3B8}
 .dlbox{margin:0 0 10px;padding:10px 12px;border-radius:9px;border:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
 .dlbox>b{font-family:var(--num);font-size:14px;letter-spacing:.02em}
 .dlbox.ok{background:rgba(143,184,154,.08);border-color:rgba(143,184,154,.3)}
-.dlbox.ok>b{color:#8FB89A}
-.dlbox.ng{background:rgba(220,80,80,.09);border-color:rgba(220,80,80,.3)}
-.dlbox.ng>b{color:#e08585}
-.dlbox.urgent>b{text-shadow:0 0 14px rgba(224,133,133,.5)}
-.dlwarn{font-size:12px;color:#e08585}
+.dlbox.ok>b{color:#D9C68F}
+.dlbox.ng{background:rgba(143,163,184,.09);border-color:rgba(143,163,184,.3)}
+.dlbox.ng>b{color:#8FA3B8}
+.dlbox.urgent>b{text-shadow:0 0 14px rgba(143,163,184,.5)}
+.dlwarn{font-size:12px;color:#8FA3B8}
 .dlok{font-size:12px;color:var(--ink-dim)}
 .cbjudge{margin:2px 0 12px;padding:9px 11px;border-radius:8px;font-size:12.5px;line-height:1.7;background:rgba(245,240,225,.04);border-left:3px solid var(--line);color:var(--ink-dim)}
 .cbjudge.fixed{background:rgba(255,213,74,.1);border-left-color:var(--gold);color:var(--gold);font-family:var(--min);font-size:13.5px}
-.cbin{font-style:normal;display:inline-block;font-size:10.5px;letter-spacing:.06em;background:rgba(143,184,154,.18);color:#8FB89A;padding:1px 6px;border-radius:3px;margin-right:7px}
-.cbout{font-style:normal;display:inline-block;font-size:10.5px;letter-spacing:.06em;background:rgba(220,80,80,.2);color:#e08585;padding:1px 6px;border-radius:3px;margin-right:7px}
+.cbin{font-style:normal;display:inline-block;font-size:10.5px;letter-spacing:.06em;background:rgba(143,184,154,.18);color:#D9C68F;padding:1px 6px;border-radius:3px;margin-right:7px}
+.cbout{font-style:normal;display:inline-block;font-size:10.5px;letter-spacing:.06em;background:rgba(143,163,184,.2);color:#8FA3B8;padding:1px 6px;border-radius:3px;margin-right:7px}
 .pobox{margin:0 0 12px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:rgba(255,213,74,.06)}
 .pobox>b{display:block;font-family:var(--min);font-size:12px;letter-spacing:.08em;color:var(--gold);margin-bottom:6px}
 .poseq{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
@@ -435,7 +435,7 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .sgnone{font-family:var(--num);font-size:12.5px;color:rgba(245,240,225,.28)}
 .sgoff .sgsong{font-weight:400;color:var(--ink-dim)}
 .sgoff .d{color:rgba(245,240,225,.45)}
-.rt td.bd{color:#e08585;font-weight:600}
+.rt td.bd{color:#8FA3B8;font-weight:600}
 .stbox{margin-top:12px;padding:11px 12px;border:1px solid var(--line);border-radius:10px}
 .sthead{font-size:12px;letter-spacing:.08em;color:var(--ink-dim);margin-bottom:7px}
 .stline{font-size:12.5px;line-height:1.75;font-family:var(--num)}
@@ -444,11 +444,11 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .stnet{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px;padding-top:9px;border-top:1px solid var(--line)}
 .stn{font-size:12.5px;font-family:var(--num)}
 .stn.plus{color:var(--gold)}
-.stn.minus{color:#e08585}
+.stn.minus{color:#8FA3B8}
 .pbetreset{margin-left:8px;padding:3px 8px;border-radius:6px;border:1px solid var(--line);background:transparent;color:inherit;font-size:12px;cursor:pointer;font-family:inherit}
 .prow.closed{opacity:.45}
 .prow.closed .pteam{cursor:default}
-.pclosed{white-space:nowrap;margin-left:8px;padding:1px 6px;border-radius:5px;background:rgba(220,80,80,.18);color:#e08585;font-style:normal;font-size:11.5px;letter-spacing:.04em}
+.pclosed{white-space:nowrap;margin-left:8px;padding:1px 6px;border-radius:5px;background:rgba(143,163,184,.18);color:#8FA3B8;font-style:normal;font-size:11.5px;letter-spacing:.04em}
 .pbet{display:flex;align-items:center;gap:7px;margin-top:6px;padding-left:2px}
 .pbetl{white-space:nowrap;font-size:13px;color:var(--ink-dim);letter-spacing:.04em}
 .pbetb{width:24px;height:24px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:14px;line-height:1;cursor:pointer}
@@ -476,23 +476,23 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .ppct b{font-family:var(--num);color:var(--ink);font-weight:600}
 .streak{white-space:nowrap;display:inline-block;font-family:var(--min);font-size:11.5px;letter-spacing:.04em;
   padding:1px 8px;margin-left:8px;font-weight:700}
-.streak.w{background:rgba(143,224,176,.16);color:#8FE0B0}
-.streak.l{background:rgba(214,90,80,.16);color:#E58A80}
+.streak.w{background:rgba(255,217,102,.16);color:#FFD966}
+.streak.l{background:rgba(143,163,184,.16);color:#8FA3B8}
 .best{white-space:nowrap;font-family:var(--gothic);font-size:12px;color:var(--ink-dim);margin-top:8px;letter-spacing:.02em}
 .form{display:flex;gap:3px;margin-top:10px;flex-wrap:wrap}
 .fdot{
   font-family:var(--num);font-size:10px;font-weight:700;width:16px;height:16px;line-height:16px;
   text-align:center;border-radius:50%;flex:0 0 auto;
 }
-.fdot.w{background:rgba(143,224,176,.16);color:#8FE0B0}
-.fdot.l{background:rgba(214,90,80,.14);color:#E58A80}
+.fdot.w{background:rgba(255,217,102,.16);color:#FFD966}
+.fdot.l{background:rgba(143,163,184,.14);color:#8FA3B8}
 
 .card .pay b{font-family:var(--num);font-size:19px;color:var(--clay)}
 
 /* 見出し */
 .head{display:flex;align-items:center;gap:14px;margin-bottom:20px}
 .head h2::before{content:"";display:inline-block;width:15px;height:15px;margin-right:11px;vertical-align:-2px;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='9' fill='%23F3EFE2'/%3E%3Cpath d='M4.4 3 Q8.4 10 4.4 17 M15.6 3 Q11.6 10 15.6 17' fill='none' stroke='%23C8102E' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat center/contain}
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='9' fill='%23F3EFE2'/%3E%3Cpath d='M4.4 3 Q8.4 10 4.4 17 M15.6 3 Q11.6 10 15.6 17' fill='none' stroke='%23C8901A' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat center/contain}
 .head h2{font-family:var(--min);font-weight:800;font-size:clamp(20px,4vw,26px);margin:0;letter-spacing:.14em;white-space:nowrap}
 .head::after{content:"";flex:1;height:1px;background:var(--line)}
 .head em{font-style:normal;font-family:var(--num);font-size:12px;letter-spacing:.2em;color:var(--ink-dim)}
@@ -525,7 +525,7 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .day.final{border-left-color:var(--crimson)}
 .day.qf-day{border-left-color:var(--gold)}
 .day.sf-day{border-left-color:#E59B3C}
-.day.final .g{border-color:rgba(165,18,43,.55);background:linear-gradient(180deg,rgba(165,18,43,.16),rgba(0,0,0,.24))}
+.day.final .g{border-color:rgba(110,82,16,.55);background:linear-gradient(180deg,rgba(110,82,16,.16),rgba(0,0,0,.24))}
 .g.qf{position:relative;border-color:rgba(255,213,74,.45);background:linear-gradient(180deg,rgba(255,213,74,.10),rgba(0,0,0,.22))}
 .g.sf{position:relative;border-color:rgba(229,150,60,.55);background:linear-gradient(180deg,rgba(229,150,60,.14),rgba(0,0,0,.24))}
 .g.gf{position:relative}
@@ -642,7 +642,7 @@ tr.lead th.who::after{content:"首位";font-family:var(--gothic);font-size:11px;
 .chip{white-space:nowrap;font-size:12px;font-weight:700;padding:2px 9px;background:var(--c,#555);color:#120E06;letter-spacing:.04em}
 .chip.miss{background:transparent;color:rgba(245,240,225,.32);border:1px dashed var(--line);font-weight:400}
 .bonus{margin-top:11px;font-family:var(--min);font-size:12.5px;letter-spacing:.06em;color:var(--gold)}
-.bonus.minus{color:#FF6B60}
+.bonus.minus{color:#8FA3B8}
 .restday{border-left:2px solid var(--line);padding:14px 18px;margin-bottom:26px;
   background:repeating-linear-gradient(135deg,rgba(255,209,0,.14) 0 9px,transparent 9px 18px);
   font-family:var(--min);letter-spacing:.16em;color:var(--ink-dim)}
@@ -750,7 +750,7 @@ body{
 .omt td{padding:7px 4px;border-bottom:1px solid rgba(245,240,225,.07);white-space:nowrap}
 .omt td.r{text-align:right}
 .omt td.v{color:var(--gold);font-weight:600}
-.omt td.v.mi{color:#E58A80}
+.omt td.v.mi{color:#8FA3B8}
 .omt td.lb{font-family:var(--min);font-size:12.5px;white-space:normal}
 .omt td.dt{color:rgba(245,240,225,.5);font-size:11.5px;white-space:normal}
 .omfoot{display:flex;gap:10px;flex-wrap:wrap;margin-top:11px;padding-top:10px;border-top:1px dashed var(--line);
@@ -767,7 +767,7 @@ body{
 .hh td.nm3{font-family:var(--min);font-size:14px;border-left:3px solid var(--accent);padding-left:9px}
 .hh td.rec{font-size:14.5px;font-weight:600}
 .hh td.win{color:var(--gold)}
-.hh td.los{color:#E58A80}
+.hh td.los{color:#8FA3B8}
 .hhbar{display:block;height:5px;border-radius:3px;background:rgba(245,240,225,.12);overflow:hidden;margin-top:5px}
 .hhbar i{display:block;height:100%;background:var(--gold)}
 /* 1日1試合が基本なのでカードは1列。会場バッジと時刻が重ならないよう余白を確保 */
@@ -784,8 +784,8 @@ body{
 .livebar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 14px;padding:8px 12px;
   border:1px solid var(--line);border-radius:9px;font-family:var(--num);font-size:12px;color:var(--ink-dim)}
 .livebar i{width:8px;height:8px;border-radius:50%;background:var(--ink-dim);flex:none}
-.livebar.ok i{background:#8FE0B0;box-shadow:0 0 10px rgba(143,224,176,.7)}
-.livebar.ng i{background:#E58A80}
+.livebar.ok i{background:#FFD966;box-shadow:0 0 10px rgba(255,217,102,.7)}
+.livebar.ng i{background:#8FA3B8}
 .livebar b{font-family:var(--num);color:var(--gold);font-weight:600}
 .livebar .src{margin-left:auto;font-size:11px;opacity:.7}
 .livebar button{margin-left:6px;padding:3px 10px;border-radius:6px;border:1px solid var(--line);
@@ -808,10 +808,10 @@ body{
 .npbt tr.me .tmn{border-left-color:var(--gold)}
 .npbt .no2{color:var(--ink-dim);font-size:12px}
 .npbt .pl{color:var(--gold);font-weight:600}
-.npbt .mi2{color:#E58A80;font-weight:600}
+.npbt .mi2{color:#8FA3B8;font-weight:600}
 .npbt .st{font-family:var(--min);font-size:11.5px}
-.npbt .st.w{color:#8FE0B0}
-.npbt .st.l{color:#E58A80}
+.npbt .st.w{color:#FFD966}
+.npbt .st.l{color:#8FA3B8}
 @media(max-width:760px){.npbt .hidesp{display:none}}
 
 /* 個人成績リーダーボード */
@@ -1190,6 +1190,84 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
 .sgwrap .sgnone{font-size:13px}
 .ytm{font-size:10.5px}
 .cbday i,.cbday1{font-size:13px}
+
+/* ===== セクションのグループ見出し ===== */
+.grouplabel{
+  display:flex;align-items:center;gap:14px;margin:64px 0 -18px;
+  font-size:13px;letter-spacing:.2em;color:rgba(255,209,0,.72);font-weight:700;
+}
+.grouplabel span{white-space:nowrap}
+.grouplabel::before{content:"";width:22px;height:2px;background:var(--gold);border-radius:2px;flex:none}
+.grouplabel::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,209,0,.35),transparent)}
+.grouplabel + section{margin-top:34px}
+@media(max-width:760px){.grouplabel{margin:52px 0 -14px;font-size:12.5px}.grouplabel + section{margin-top:28px}}
+
+/* ===== ヘッダーのロゴを主役に ===== */
+.logo{
+  width:min(320px,74vw);margin:0 auto 20px;
+  filter:drop-shadow(0 10px 30px rgba(0,0,0,.75));
+}
+@media(max-width:760px){.logo{width:min(280px,80vw);margin-bottom:16px}}
+.hero{padding-top:44px}
+.kanmuri{margin-top:2px}
+.hero h1{margin-top:14px}
+
+/* ===== 「予想する」を目立たせる ===== */
+.secnav a.hot{
+  background:var(--gold);color:#120E06;border-color:var(--gold);font-weight:700;
+  box-shadow:0 0 0 3px rgba(255,209,0,.18);
+}
+.secnav a.hot::before{content:"●";color:var(--crimson);font-size:7px;margin-right:6px;vertical-align:2px}
+.secnav a.hot:hover,.secnav a.hot:focus-visible{background:#FFDD44;color:#120E06}
+
+/* =========================================================
+   配色の最終調整：黒 × タイガースイエローの2色に絞る
+   赤は使わず、「良い数字＝金」「悪い数字＝スチール（寒色）」で対比させる。
+   日曜・祝日も赤ではなく淡い金で区別する。
+   ========================================================= */
+:root{
+  --steel:#8FA3B8;          /* 負・減点・警告 */
+  --bronze:#6E5210;         /* 帯や強調の下地 */
+  --cream:#FFD966;          /* 勝ち・的中 */
+}
+/* ★コメントの帯：白抜きの赤帯 → 金のライン＋クリーム文字 */
+.gtag{
+  background:linear-gradient(90deg,rgba(255,209,0,.16),rgba(255,209,0,.04));
+  color:rgba(255,232,170,.95);
+  border-left:3px solid var(--gold);
+  padding:9px 15px;
+}
+/* 曜日：日曜・祝日は淡い金、土曜はスチール */
+.dow.sun{color:#E8BE5C}
+.dow.sat{color:var(--sky)}
+/* ヒーローのランプは金で点滅 */
+.lamp i{background:var(--gold);box-shadow:0 0 10px rgba(255,209,0,.8)}
+/* 決勝・注目日のマークもブロンズ地に金文字へ */
+.dayhead .rd.f{background:var(--bronze);border-color:var(--bronze);color:var(--gold)}
+.rmark.gf{background:var(--bronze);color:var(--gold)}
+.day.final .g{border-color:rgba(255,209,0,.4);
+  background:linear-gradient(180deg,rgba(255,209,0,.08),rgba(0,0,0,.24))}
+/* 勝ち／負けの表示 */
+.badge.out{background:rgba(143,163,184,.22);color:var(--steel)}
+.hh td.los,.npbt .mi2,.rt td.bd{color:var(--steel)}
+.fdot.l{background:rgba(143,163,184,.16);color:var(--steel)}
+.streak.l{background:rgba(143,163,184,.16);color:var(--steel)}
+.livebar.ng i{background:var(--steel)}
+.stn.minus{color:var(--steel)}
+.omt td.v.mi{color:var(--steel)}
+.muside.better .mf{color:var(--gold)}
+.pick{background:var(--gold);color:#120E06}
+.ser{font-style:normal;font-family:var(--sys);font-size:12px;letter-spacing:.04em;
+  color:rgba(255,209,0,.72);margin-left:10px;padding:2px 8px;border-radius:20px;
+  background:rgba(255,209,0,.10)}
+
+/* 残っていた深紅の名残もブロンズ／金に寄せる */
+.hero h1::before,.hero h1::after{background:linear-gradient(180deg,var(--gold),rgba(255,209,0,.25));box-shadow:0 0 18px rgba(255,209,0,.35)}
+.secnav a.hot::before{color:#120E06}
+.day.final{border-left-color:var(--gold)}
+.hot{background:var(--bronze);color:var(--gold)}
+.vgo{background:var(--bronze);color:var(--gold)}
+.ytm{color:var(--gold)}
 </style>
 </head>
 <body>
@@ -1222,19 +1300,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
   </svg>
   <div class="stripes" aria-hidden="true"></div>
   <div class="stripes r" aria-hidden="true"></div>
-  <div class="kanmuri">2026 セントラル・リーグ ペナントレース</div>
   <img class="logo" src="hanshin_logo.png" alt="阪神タイガース">
-  <div class="kai">第1回</div>
+  <div class="kanmuri">2026 セントラル・リーグ ペナントレース</div>
   <h1><span class="t1">阪神タイガース</span><span class="t2">ペナントレース勝敗予想</span></h1>
   <div class="sub">阪神甲子園球場　<a class="sublink" href="#nav-schedule">残り日程</a></div>
   <div class="entrants"><b>畑　山</b><b>根　来</b><b>今　井</b></div>
   <div class="lampwrap"><a class="lamp" id="lamp" href="#today-anchor"></a></div>
   <nav class="secnav" id="secnav">
-    <a href="#nav-board">戦況</a><a href="#nav-standings">順位</a><a href="#nav-personal">個人成績</a>
-    <a href="#nav-predict">予想</a><a href="#nav-bets">采配</a><a href="#nav-schedule">日程</a><a href="#nav-teams">対戦球団</a>
-    <a href="#nav-stats">選手成績</a><a href="#nav-odds">オッズ</a><a href="#nav-records">記録室</a><a href="#nav-upsets">大穴</a><a href="#nav-chart">推移</a>
-    <a href="#nav-comeback">逆転</a><a id="navTrends" href="#trendsWrap" style="display:none">傾向</a>
-    <a href="#nav-h2h">対戦成績</a><a href="#nav-rules">規定</a>
+    <a class="hot" href="#nav-predict">予想する</a><a href="#nav-schedule">日程・結果</a><a href="#nav-odds">オッズ</a>
+    <a href="#nav-standings">順位</a><a href="#nav-board">戦況</a><a href="#nav-personal">個人成績</a>
+    <a href="#nav-chart">推移</a><a href="#nav-comeback">逆転</a><a href="#nav-records">記録室</a><a href="#nav-upsets">大穴</a>
+    <a href="#nav-npb">セ・リーグ</a><a href="#nav-teams">球団</a><a href="#nav-stats">選手成績</a><a href="#nav-h2h">対戦成績</a>
+    <a id="navTrends" href="#trendsWrap" style="display:none">傾向</a><a href="#nav-rules">規定</a>
   </nav>
 </header>
 
@@ -1270,6 +1347,32 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <p class="dim">引き分けは全員ノーカウント。<b>3連続的中で+1pt／3連続外しで−1pt</b>。<a href="#nav-rules">規定を見る</a></p>
   </details>
 
+  <div class="grouplabel"><span>今日やること</span></div>
+  <section class="reveal" id="nav-predict">
+    <div class="head"><h2>予想入力</h2><em>Your Pick</em></div>
+    <p class="hint"><span class="sn">まず自分の名前を選び、勝つと思う球団をタップ。</span><span class="sn">オッズ＝的中時の倍率で、数字が大きいほど不利と見られている側です。</span><span class="sn">締切は試合日の0時。前日の夜までに入れてください。</span></p>
+    <div id="deadline"></div>
+    <div id="postorder"></div>
+    <div id="predict"></div>
+  </section>
+  <section class="reveal" id="nav-schedule">
+    <div class="head"><h2>日程・結果</h2><em id="scheduleRange"></em></div>
+    <div id="timeline"></div>
+  </section>
+  <section class="reveal" id="nav-odds">
+    <div class="head"><h2>オッズ算出</h2><em>Odds Model</em></div>
+    <p class="hint"><span class="sn">オッズは固定値ではなく、下の要素をロジスティック回帰の形で足し合わせて阪神の勝率を出し、その逆数から控除率10%を引いて算出しています。</span></p>
+    <div id="oddsmodel"></div>
+    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">係数は仮の重み付け。実測データが溜まったら再校正する前提の v1 モデル</p>
+  </section>
+  <div class="grouplabel"><span>3人のバトル</span></div>
+  <section class="reveal" id="nav-standings">
+    <div class="head"><h2>順位</h2><em>Standings</em></div>
+    <div class="standings" id="standings"></div>
+    <div id="ranktable"></div>
+    <div id="settlement"></div>
+    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">首位との点差と、現時点で3位が支払う精算額の目安を表示</p>
+  </section>
   <section class="reveal" id="nav-board">
     <div class="head"><h2>戦況</h2><em>Live Board</em></div>
     <p class="hint"><span class="sn">数字はその日に獲得したpt。</span><span class="sn">当てた試合のオッズの合計です。</span></p>
@@ -1281,60 +1384,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     </div>
     <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">3人の日別得点を、消化した試合の分だけ手動式スコアボードの形で表示</p>
   </section>
-  <section class="reveal" id="nav-standings">
-    <div class="head"><h2>順位</h2><em>Standings</em></div>
-    <div class="standings" id="standings"></div>
-    <div id="ranktable"></div>
-    <div id="settlement"></div>
-    <div id="npbstandings"></div>
-    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">首位との点差と、現時点で3位が支払う精算額の目安を表示</p>
-  </section>
   <section class="reveal" id="nav-personal">
     <div class="head"><h2>個人成績</h2><em>Hit Rate</em></div>
     <div class="personal" id="personal"></div>
     <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)"><span class="sn">これまでの全試合を通算した、各自の予想の勝敗と的中率。</span><span class="sn">○✕は開幕からの全試合の流れ、現在の連勝・連敗も表示</span></p>
-  </section>
-  <section class="reveal" id="nav-predict">
-    <div class="head"><h2>予想入力</h2><em>Your Pick</em></div>
-    <p class="hint"><span class="sn">オッズ＝的中時の倍率。</span><span class="sn">2.1の側を当てれば +2.1pt。</span><span class="sn">数字が大きいほど不利と見られている側です。</span><span class="sn">締切は試合日の0時なので、前日の夜までに入れてください。</span></p>
-    <div id="deadline"></div>
-    <div id="postorder"></div>
-    <div id="predict"></div>
-  </section>
-  <section class="reveal" id="nav-bets">
-    <div class="head"><h2>采配</h2><em>Tactics</em></div>
-    <p class="hint"><span class="sn">ポイントベット制はCS・日本シリーズのみ。</span><span class="sn">3人の持ち点の振り分けと、決着したときに動くptを試合前に公開します。</span></p>
-    <div id="betboard"></div>
-  </section>
-  <section class="reveal" id="nav-schedule">
-    <div class="head"><h2>日程・結果</h2><em id="scheduleRange"></em></div>
-    <div id="timeline"></div>
-  </section>
-  <section class="reveal" id="nav-teams">
-    <div class="head"><h2>球団 戦力一覧</h2><em id="teamCount"></em></div>
-    <div class="tablewrap" id="teams"></div>
-    <p class="fine" style="margin:8px 2px 0;font-size:13px;color:var(--ink-dim)">見出しをタップで並び替え／球団名をタップでその球団の詳細／表は横にスクロールできます</p>
-  </section>
-  <section class="reveal" id="nav-stats">
-    <div class="head"><h2>選手成績</h2><em>Leaders</em></div>
-    <p class="hint"><span class="sn">阪神タイガースの個人成績。</span><span class="sn">毎日12時と17時に自動更新されます。</span></p>
-    <div id="statsboard"></div>
-  </section>
-  <section class="reveal" id="nav-odds">
-    <div class="head"><h2>オッズ算出</h2><em>Odds Model</em></div>
-    <p class="hint"><span class="sn">オッズは固定値ではなく、下の要素をロジスティック回帰の形で足し合わせて阪神の勝率を出し、その逆数から控除率10%を引いて算出しています。</span></p>
-    <div id="oddsmodel"></div>
-    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">係数は仮の重み付け。実測データが溜まったら再校正する前提の v1 モデル</p>
-  </section>
-  <section class="reveal" id="nav-records">
-    <div class="head"><h2>記録室</h2><em>Record Book</em></div>
-    <p class="hint"><span class="sn">全試合の的中データから自動計算しています。</span><span class="sn">来季の比較対象になります。</span></p>
-    <div id="records"></div>
-  </section>
-  <section class="reveal" id="nav-upsets">
-    <div class="head"><h2>大穴的中</h2><em>Big Hits</em></div>
-    <div class="upsets" id="upsets"></div>
-    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">オッズが高い側（対抗）を当てた試合を、倍率の高い順に表示</p>
   </section>
   <section class="reveal" id="nav-chart">
     <div class="head"><h2>得点推移</h2><em>Cumulative</em></div>
@@ -1347,10 +1400,36 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <div class="head"><h2>逆転ライン</h2><em>Comeback</em></div>
     <div id="comeback"></div>
   </section>
-  <section class="reveal" id="trendsWrap" style="display:none">
-    <div class="head"><h2>勝敗の傾向</h2><em>Match-up Trends</em></div>
-    <div class="trendbox" id="trends"></div>
-    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">対戦カードごとに、その試合のオッズで本命だった方／チーム防御率が良い方が、実際どれだけ勝っているかを集計</p>
+  <section class="reveal" id="nav-records">
+    <div class="head"><h2>記録室</h2><em>Record Book</em></div>
+    <p class="hint"><span class="sn">全試合の的中データから自動計算しています。</span><span class="sn">来季の比較対象になります。</span></p>
+    <div id="records"></div>
+  </section>
+  <section class="reveal" id="nav-upsets">
+    <div class="head"><h2>大穴的中</h2><em>Big Hits</em></div>
+    <div class="upsets" id="upsets"></div>
+    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">オッズが高い側（対抗）を当てた試合を、倍率の高い順に表示</p>
+  </section>
+  <section class="reveal" id="nav-bets">
+    <div class="head"><h2>采配</h2><em>Tactics</em></div>
+    <p class="hint"><span class="sn">ポイントベット制はCS・日本シリーズのみ。</span><span class="sn">3人の持ち点の振り分けと、決着したときに動くptを試合前に公開します。</span></p>
+    <div id="betboard"></div>
+  </section>
+  <div class="grouplabel"><span>阪神のデータ</span></div>
+  <section class="reveal" id="nav-npb">
+    <div class="head"><h2>セ・リーグ順位表</h2><em>NPB Standings</em></div>
+    <div id="npbstandings"></div>
+    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">NPB公式の勝敗表から自動取得。直近10試合と連勝・連敗は日程の結果から算出しています</p>
+  </section>
+  <section class="reveal" id="nav-teams">
+    <div class="head"><h2>球団 戦力一覧</h2><em id="teamCount"></em></div>
+    <div class="tablewrap" id="teams"></div>
+    <p class="fine" style="margin:8px 2px 0;font-size:13px;color:var(--ink-dim)">見出しをタップで並び替え／球団名をタップでその球団の詳細／表は横にスクロールできます</p>
+  </section>
+  <section class="reveal" id="nav-stats">
+    <div class="head"><h2>選手成績</h2><em>Leaders</em></div>
+    <p class="hint"><span class="sn">阪神タイガースの個人成績。</span><span class="sn">毎日12時と17時に自動更新されます。</span></p>
+    <div id="statsboard"></div>
   </section>
   <section class="reveal" id="nav-h2h">
     <div class="head"><h2>対戦成績</h2><em>Head to Head</em></div>
@@ -1358,6 +1437,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
     <div id="matchup"></div>
     <div id="h2h"></div>
   </section>
+  <section class="reveal" id="trendsWrap" style="display:none">
+    <div class="head"><h2>勝敗の傾向</h2><em>Match-up Trends</em></div>
+    <div class="trendbox" id="trends"></div>
+    <p class="fine" style="margin:9px 2px 0;font-size:13px;color:var(--ink-dim)">対戦カードごとに、その試合のオッズで本命だった方／チーム防御率が良い方が、実際どれだけ勝っているかを集計</p>
+  </section>
+  <div class="grouplabel"><span>ルール</span></div>
   <section class="reveal" id="nav-rules">
     <div class="head"><h2>大会規定</h2><em>Rules</em></div>
     <div class="rules">
@@ -1414,7 +1499,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offse
       </div>
     </div>
   </section>
-
   <footer><span>熱　覇</span><span id="updated"></span></footer>
 </div>
 
@@ -1582,7 +1666,27 @@ function calculateOdds(hanshinData, opponentData, conditions){
 /* 試合に通し番号を振る。オッズを「その試合の時点」で固定するために使う */
 function indexGames(){
   let i = 0;
-  DAYS.forEach(d=>(d.games||[]).forEach(g=>{ g._i = i++; }));
+  const flat = [];
+  DAYS.forEach(d=>(d.games||[]).forEach(g=>{ g._i = i++; flat.push(g); }));
+  /* 同じ相手が続くあいだを1カード（3連戦など）として番号を振る */
+  let run = [];
+  const flush = () => {
+    run.forEach((g, k)=>{ g.seriesIdx = k + 1; g.seriesLen = run.length; });
+    run = [];
+  };
+  flat.forEach(g=>{
+    if(run.length && run[run.length-1].b === g.b && !g.void) run.push(g);
+    else { flush(); run = [g]; }
+  });
+  flush();
+}
+/* いま予想の対象になっている「次の1試合」 */
+function nextGameIndex(){
+  let idx = null;
+  DAYS.forEach(d=>(d.games||[]).forEach(g=>{
+    if(idx === null && !settled(g) && !g.void && g.a && g.b) idx = g._i;
+  }));
+  return idx;
 }
 
 /* 直近10試合の勝率。日程表に結果があればそこから、なければ TEAM の値を使う。
@@ -1644,87 +1748,87 @@ function attachOdds(){
    home:true が阪神主催。wind は浜風の風速(m/s)で甲子園のみ有効
    ========================================================= */
 const DAYS = [
- {d:"8/1", nth:"第102戦", scored:false, games:[
+ {d:"8/1", scored:false, games:[
    {t:"18:00", r:"対ヤクルト", a:"阪神", b:"ヤクルト", home:false, venue:"神宮", sp:["伊藤将司",null], s:[7,3]}
  ]},
- {d:"8/2", nth:"第103戦", scored:false, games:[
+ {d:"8/2", scored:false, games:[
    {t:"18:00", r:"対ヤクルト", a:"阪神", b:"ヤクルト", home:false, venue:"神宮", sp:["下村海翔",null], s:[4,3], tag:"下村がプロ初勝利目前の好投。9回に坂本のこの日2本目のソロで勝ち越し"}
  ]},
  {d:"8/3", rest:true},
- {d:"8/4", nth:"第104戦", scored:false, games:[
+ {d:"8/4", scored:false, games:[
    {t:"17:45", r:"対ＤｅＮＡ", a:"阪神", b:"ＤｅＮＡ", home:false, venue:"横浜", sp:["村上頌樹",null], s:[0,1]}
  ]},
- {d:"8/5", nth:"第105戦", scored:false, games:[
+ {d:"8/5", scored:false, games:[
    {t:"17:45", r:"対ＤｅＮＡ", a:"阪神", b:"ＤｅＮＡ", home:false, venue:"横浜", sp:["髙橋遥人",null], s:[7,11]}
  ]},
- {d:"8/6", nth:"第106戦", scored:false, games:[
+ {d:"8/6", scored:false, games:[
    {t:"17:45", r:"対ＤｅＮＡ", a:"阪神", b:"ＤｅＮＡ", home:false, venue:"横浜", sp:["大竹耕太郎",null], s:[10,5]}
  ]},
- {d:"8/7", nth:"第107戦", scored:false, games:[
+ {d:"8/7", scored:false, games:[
    {t:"18:00", r:"対中日", a:"阪神", b:"中日", home:true, venue:"京セラD大阪", sp:["才木浩人",null], s:[2,3]}
  ]},
- {d:"8/8", nth:"第108戦", scored:false, games:[
+ {d:"8/8", scored:false, games:[
    {t:"18:00", r:"対中日", a:"阪神", b:"中日", home:true, venue:"京セラD大阪", sp:["伊原陵人",null], s:[1,7]}
  ]},
- {d:"8/9", nth:"第109戦", scored:false, games:[
+ {d:"8/9", scored:false, games:[
    {t:"18:00", r:"対中日", a:"阪神", b:"中日", home:true, venue:"京セラD大阪", sp:["伊藤将司",null], s:[1,0], tag:"木下が競り勝つ。1-0の完封リレー"}
  ]},
  {d:"8/10", rest:true},
- {d:"8/11", nth:"第110戦", scored:false, games:[
+ {d:"8/11", scored:false, games:[
    {t:"14:00", r:"対巨人", a:"阪神", b:"巨人", home:false, venue:"東京ドーム", sp:["村上頌樹",null], s:[9,1]}
  ]},
- {d:"8/12", nth:"第111戦", scored:false, games:[
+ {d:"8/12", scored:false, games:[
    {t:"18:00", r:"対巨人", a:"阪神", b:"巨人", home:false, venue:"東京ドーム", sp:["髙橋遥人",null], s:[5,1]}
  ]},
- {d:"8/13", nth:"第112戦", scored:false, games:[
+ {d:"8/13", scored:false, games:[
    {t:"18:00", r:"対巨人", a:"阪神", b:"巨人", home:false, venue:"東京ドーム", sp:["下村海翔",null], s:[3,2], tag:"下村が5回2失点で3年目にしてプロ初勝利。東京ドームで3タテ"}
  ]},
- {d:"8/14", nth:"第113戦", scored:false, games:[
+ {d:"8/14", scored:false, games:[
    {t:"18:00", r:"対広島", a:"阪神", b:"広島", home:false, venue:"マツダ", sp:["才木浩人",null], s:[1,6]}
  ]},
- {d:"8/15", nth:"第114戦", scored:false, games:[
+ {d:"8/15", scored:false, games:[
    {t:"18:00", r:"対広島", a:"阪神", b:"広島", home:false, venue:"マツダ", sp:["大竹耕太郎",null], s:[2,5]}
  ]},
- {d:"8/16", nth:"第115戦", scored:false, games:[
+ {d:"8/16", scored:false, games:[
    {t:"18:00", r:"対広島", a:"阪神", b:"広島", home:false, venue:"マツダ", sp:["伊原陵人",null], s:[8,1]}
  ]},
  {d:"8/17", rest:true},
- {d:"8/18", nth:"第116戦", scored:false, games:[
+ {d:"8/18", scored:false, games:[
    {t:"18:00", r:"対ヤクルト", a:"阪神", b:"ヤクルト", home:true, venue:"京セラD大阪", sp:["村上頌樹",null], s:[3,2], tag:"桐敷が勝ち投手。1点差を守り切る"}
  ]},
- {d:"8/19", nth:"第117戦", scored:false, games:[
+ {d:"8/19", scored:false, games:[
    {t:"18:00", r:"対ヤクルト", a:"阪神", b:"ヤクルト", home:true, venue:"京セラD大阪", sp:["伊藤将司",null], s:[2,1], tag:"3時間50分の接戦を工藤が締める。ドラ2谷端が一軍初昇格で7番二塁スタメン"}
  ]},
- {d:"8/20", nth:"第118戦", now:true, games:[
+ {d:"8/20", now:true, games:[
    {t:"18:00", r:"対ヤクルト", a:"阪神", b:"ヤクルト", home:true, venue:"京セラD大阪", sp:["下村海翔","高橋奎二"],
     tag:"ここから予想バトル開幕。7月10日と同じ顔合わせで、前回は高橋が7回1失点10奪三振。下村はヤクルト戦11イニング自責点2と好相性"}
  ]},
- {d:"8/21", nth:"第119戦", games:[
+ {d:"8/21", games:[
    {t:"18:00", r:"対ＤｅＮＡ", a:"阪神", b:"ＤｅＮＡ", home:false, venue:"横浜", tag:"予告先発は前日発表。DeNAとは今季8勝8敗の五分"}
  ]},
- {d:"8/22", nth:"第120戦", games:[
+ {d:"8/22", games:[
    {t:"18:00", r:"対ＤｅＮＡ", a:"阪神", b:"ＤｅＮＡ", home:false, venue:"横浜", tag:"予報はくもり一時雨。中止の可能性あり"}
  ]},
- {d:"8/23", nth:"第121戦", games:[
+ {d:"8/23", games:[
    {t:"18:00", r:"対ＤｅＮＡ", a:"阪神", b:"ＤｅＮＡ", home:false, venue:"横浜"}
  ]},
  {d:"8/24", rest:true},
- {d:"8/25", nth:"第122戦", games:[
+ {d:"8/25", games:[
    {t:"18:00", r:"対中日", a:"阪神", b:"中日", home:false, venue:"バンテリン"}
  ]},
- {d:"8/26", nth:"第123戦", games:[
+ {d:"8/26", games:[
    {t:"18:00", r:"対中日", a:"阪神", b:"中日", home:false, venue:"バンテリン"}
  ]},
- {d:"8/27", nth:"第124戦", games:[
+ {d:"8/27", games:[
    {t:"18:00", r:"対中日", a:"阪神", b:"中日", home:false, venue:"バンテリン"}
  ]},
- {d:"8/28", nth:"第125戦", games:[
+ {d:"8/28", games:[
    {t:"18:00", r:"対巨人", a:"阪神", b:"巨人", home:true, venue:"甲子園", wind:0, tag:"高校野球が終わり、いよいよ本拠地・甲子園に帰還。相手は2位の巨人"}
  ]},
- {d:"8/29", nth:"第126戦", games:[
+ {d:"8/29", games:[
    {t:"18:00", r:"対巨人", a:"阪神", b:"巨人", home:true, venue:"甲子園", wind:0}
  ]},
- {d:"8/30", nth:"第127戦", games:[
+ {d:"8/30", games:[
    {t:"18:00", r:"対巨人", a:"阪神", b:"巨人", home:true, venue:"甲子園", wind:0, tag:"8月最終戦。残り35試合、優勝マジックが見えてくるか"}
  ]},
  {d:"8/31", rest:true}
@@ -2669,7 +2773,7 @@ function gameCard(g,i,done,date){
   const w = winnerOf(g);
   const draw = isDraw(g);
   const st = k => (w===null) ? (draw?"lose":"") : (w===k ? "win" : "lose");
-  const showNote = !settled(g);
+  const showNote = !settled(g) && g._i === nextGameIndex();
   const rows = teamRow(g.a,g.oa,g.s?g.s[0]:null,st(0),showNote,g,0)
              + teamRow(g.b,g.ob,g.s?g.s[1]:null,st(1),showNote,g,1);
   const hits = (g.hits && !draw) ? `<div class="hits">${PLAYERS.map(p=>{
@@ -2684,7 +2788,7 @@ function gameCard(g,i,done,date){
     </div>` : "";
   const hm = g.home ? `<span class="hm">${g.venue}</span>` : `<span class="hm away">${g.venue}</span>`;
   return `<div class="g ${g.a?"":"tbd"} ${g.void?"void":""} ${g.home?"homeg":"awayg"}">
-    <div class="gh"><span class="no">${g.r||""}${draw?'<span class="drawmark">引分</span>':""}</span><span class="tm">${g.t}</span></div>
+    <div class="gh"><span class="no">${g.r||""}${g.seriesLen>1?`<i class="ser">${g.seriesLen}連戦 第${g.seriesIdx}戦</i>`:""}${draw?'<span class="drawmark">引分</span>':""}</span><span class="tm">${g.t}</span></div>
     ${g.tag?`<div class="gtag">★${sent(g.tag)}</div>`:""}
     ${hm}${rows}${oddsline}${hits}
   </div>`;
@@ -2728,7 +2832,7 @@ function renderTimeline(){
     const off = d.scored===false ? `<span class="nth">予想対象外</span>` : "";
     return `<article class="day ${d.final?"final":""} ${rdCls==="qf"?"qf-day":""} ${d.now?"now":(done?"done":"")}" ${d.d===anchor?'id="today-anchor"':""}>
       <div class="dayhead">
-        <span class="d">${d.d}<i class="dow ${dowInfo(d.d).cls}">(${dowInfo(d.d).label}${dowInfo(d.d).holiday?"・祝":""})</i></span><span class="nth">${d.nth||""}</span>
+        <span class="d">${d.d}<i class="dow ${dowInfo(d.d).cls}">(${dowInfo(d.d).label}${dowInfo(d.d).holiday?"・祝":""})</i></span>
         <span class="rd ${rdCls}">${rounds}</span>${off}
         ${d.now?'<span class="badge-now">本日</span>':""}${tally}
       </div>
@@ -2914,7 +3018,7 @@ function updateTitle(){
   const today = DAYS.find(d=>d.now);
   if(!today) return;
   const rounds = [...new Set((today.games||[]).map(g=>g.r).filter(Boolean))].join("・");
-  document.title = `${today.d} ${rounds || today.nth || ""} — 猛虎必勝`.replace(/\s+/g," ").trim();
+  document.title = `${today.d} ${rounds || ""} — 猛虎必勝`.replace(/\s+/g," ").trim();
 }
 function updateJumpLink(){
   updateTitle();
@@ -3064,7 +3168,7 @@ function renderLiveBar(state, msg){
   box.innerHTML = `<i></i>` + (
     state === "ok"
       ? `最新データ取り込み済み　<b>${when || "—"}</b> 更新${
-          LIVE && LIVE.errors && LIVE.errors.length ? `　<span style="color:#E58A80">一部は前回値（${LIVE.errors.length}件）</span>` : ""}
+          LIVE && LIVE.errors && LIVE.errors.length ? `　<span style="color:#8FA3B8">一部は前回値（${LIVE.errors.length}件）</span>` : ""}
          <span class="src">出典 ${src}</span>`
       : state === "ng"
       ? `最新データを読み込めませんでした（${msg||"データ未生成"}）。埋め込みデータで表示しています
@@ -3113,8 +3217,7 @@ function renderNpbStandings(){
   const box = document.getElementById("npbstandings");
   if(!box) return;
   const rows = standingsRows(LG_TAB);
-  box.innerHTML = `<div class="head" style="margin-top:34px"><h2 style="font-size:19px">セ・リーグ順位表</h2><em>NPB Standings</em></div>
-    <div class="tablewrap"><table class="npbt"><thead><tr>
+  box.innerHTML = `<div class="tablewrap"><table class="npbt"><thead><tr>
       <th>順</th><th class="l">球団</th><th>勝</th><th>敗</th><th>分</th><th>勝率</th><th>差</th>
       <th>貯金</th><th class="hidesp">得失点</th><th>直近10</th><th>連続</th>
     </tr></thead><tbody>${rows.map(r=>{
@@ -3213,7 +3316,7 @@ function renderStats(){
   const note = (LIVE && LIVE.players && LIVE.players[HOME])
     ? `<p class="fine" style="margin:10px 2px 0;font-size:13px;color:var(--ink-dim)">${
         sent("NPB公式の球団別個人成績から自動取得。FIPは (13×被本塁打 + 3×(与四球+与死球) − 2×奪三振) ÷ 投球回 + 3.20 で算出しています。")}</p>`
-    : `<p class="fine" style="margin:10px 2px 0;font-size:11.5px;color:#E58A80">NPB公式（8/19時点）の埋め込みデータ。data/latest.json が生成されると自動更新に切り替わります</p>`;
+    : `<p class="fine" style="margin:10px 2px 0;font-size:11.5px;color:#8FA3B8">NPB公式（8/19時点）の埋め込みデータ。data/latest.json が生成されると自動更新に切り替わります</p>`;
   box.innerHTML = tabs + body + note;
   box.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{
     STAT_TAB = b.dataset.tab; renderStats();
@@ -3444,7 +3547,7 @@ if("IntersectionObserver" in window){
   const [m,dd] = cur.d.split("/").map(Number);
   const g0 = (cur.games||[])[0];
   const live = (cur.games||[]).some(g=>!g.void && !settled(g));
-  el.innerHTML = `<i></i>${cur.nth||""}　${m}月${dd}日　${g0?`${g0.r}　${g0.venue}`:""}　${live?"予想受付中":"試合終了"}<span class="lampgo">▶</span>`;
+  el.innerHTML = `<i></i>${m}月${dd}日　${g0?`${g0.r}　${g0.venue}`:""}　${live?"予想受付中":"試合終了"}<span class="lampgo">▶</span>`;
 })();
 </script>
 </body>
