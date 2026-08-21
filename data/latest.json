@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-21T19:06:18+09:00",
+  "updated_at": "2026-08-21T23:07:19+09:00",
   "season": 2026,
   "target_date": "2026-08-21",
   "sources": {
@@ -279,13 +279,13 @@
         "park": "横浜",
         "dome": false,
         "temp": 27.3,
-        "pop": 47,
-        "wind_speed": 2.1,
-        "wind_deg": 199,
-        "hamakaze": 2.0,
+        "pop": 67,
+        "wind_speed": 2.5,
+        "wind_deg": 192,
+        "hamakaze": 2.4,
         "at": "2026-08-21T18:00"
       },
-      "wind": 2.0
+      "wind": 2.4
     },
     {
       "date": "2026-08-22",
@@ -303,13 +303,13 @@
         "park": "横浜",
         "dome": false,
         "temp": 27.3,
-        "pop": 47,
-        "wind_speed": 2.1,
-        "wind_deg": 199,
-        "hamakaze": 2.0,
+        "pop": 67,
+        "wind_speed": 2.5,
+        "wind_deg": 192,
+        "hamakaze": 2.4,
         "at": "2026-08-21T18:00"
       },
-      "wind": 2.0
+      "wind": 2.4
     }
   ],
   "players": {
