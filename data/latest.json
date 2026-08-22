@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-08-22T22:44:23+09:00",
+  "updated_at": "2026-08-23T00:01:04+09:00",
   "season": 2026,
-  "target_date": "2026-08-22",
+  "target_date": "2026-08-23",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -264,30 +264,6 @@
   },
   "probables": [
     {
-      "date": "2026-08-22",
-      "opponent": "ＤｅＮＡ",
-      "card": "対ＤｅＮＡ",
-      "venue": "横浜",
-      "home": false,
-      "start_time": "18:00",
-      "hanshin_pitcher": "今朝丸",
-      "opponent_pitcher": "竹田祐",
-      "score": null,
-      "hanshin_fip": null,
-      "opponent_fip": 4.17,
-      "weather": {
-        "park": "横浜",
-        "dome": false,
-        "temp": 27.3,
-        "pop": 100,
-        "wind_speed": 2.5,
-        "wind_deg": 61,
-        "hamakaze": 0.0,
-        "at": "2026-08-22T18:00"
-      },
-      "wind": 0.0
-    },
-    {
       "date": "2026-08-23",
       "opponent": "ＤｅＮＡ",
       "card": "対ＤｅＮＡ",
@@ -302,14 +278,14 @@
       "weather": {
         "park": "横浜",
         "dome": false,
-        "temp": 27.3,
-        "pop": 100,
-        "wind_speed": 2.5,
-        "wind_deg": 61,
-        "hamakaze": 0.0,
-        "at": "2026-08-22T18:00"
+        "temp": 27.8,
+        "pop": 71,
+        "wind_speed": 0.1,
+        "wind_deg": 180,
+        "hamakaze": 0.1,
+        "at": "2026-08-23T18:00"
       },
-      "wind": 0.0
+      "wind": 0.1
     }
   ],
   "players": {
