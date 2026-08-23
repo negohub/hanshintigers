@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-23T00:01:04+09:00",
+  "updated_at": "2026-08-23T12:31:13+09:00",
   "season": 2026,
   "target_date": "2026-08-23",
   "sources": {
@@ -9,7 +9,9 @@
     "probables": "baseball.yahoo.co.jp",
     "weather": "open-meteo.com"
   },
-  "errors": [],
+  "errors": [
+    "probables: 取得できず前回値を使用"
+  ],
   "standings": {
     "セ": [
       {
@@ -32,6 +34,36 @@
         "rank": 1,
         "balance": 15,
         "last10": {
+          "w": 6,
+          "l": 4,
+          "d": 0
+        },
+        "streak": {
+          "type": "win",
+          "n": 2,
+          "label": "2連勝"
+        }
+      },
+      {
+        "team": "巨人",
+        "league": "セ",
+        "g": 112,
+        "w": 60,
+        "l": 50,
+        "d": 2,
+        "pct": 0.545,
+        "gb": "2.5",
+        "rf": null,
+        "ra": null,
+        "run_diff": null,
+        "home_rec": "30-27(2)",
+        "road_rec": "30-23",
+        "hr": null,
+        "avg": null,
+        "era": null,
+        "rank": 2,
+        "balance": 10,
+        "last10": {
           "w": 7,
           "l": 3,
           "d": 0
@@ -40,36 +72,6 @@
           "type": "win",
           "n": 1,
           "label": "1連勝"
-        }
-      },
-      {
-        "team": "巨人",
-        "league": "セ",
-        "g": 111,
-        "w": 59,
-        "l": 50,
-        "d": 2,
-        "pct": 0.541,
-        "gb": "3.0",
-        "rf": null,
-        "ra": null,
-        "run_diff": null,
-        "home_rec": "29-27(2)",
-        "road_rec": "30-23",
-        "hr": null,
-        "avg": null,
-        "era": null,
-        "rank": 2,
-        "balance": 9,
-        "last10": {
-          "w": 4,
-          "l": 6,
-          "d": 0
-        },
-        "streak": {
-          "type": "win",
-          "n": 2,
-          "label": "2連勝"
         }
       },
       {
@@ -92,8 +94,8 @@
         "rank": 3,
         "balance": -8,
         "last10": {
-          "w": 4,
-          "l": 6,
+          "w": 5,
+          "l": 5,
           "d": 0
         },
         "streak": {
@@ -105,22 +107,52 @@
       {
         "team": "ヤクルト",
         "league": "セ",
-        "g": 109,
+        "g": 110,
         "w": 50,
-        "l": 58,
+        "l": 59,
         "d": 1,
-        "pct": 0.463,
-        "gb": "11.5",
+        "pct": 0.459,
+        "gb": "12.0",
         "rf": null,
         "ra": null,
         "run_diff": null,
         "home_rec": "24-27(1)",
-        "road_rec": "26-31",
+        "road_rec": "26-32",
         "hr": null,
         "avg": null,
         "era": null,
         "rank": 4,
-        "balance": -8,
+        "balance": -9,
+        "last10": {
+          "w": 3,
+          "l": 7,
+          "d": 0
+        },
+        "streak": {
+          "type": "lose",
+          "n": 2,
+          "label": "2連敗"
+        }
+      },
+      {
+        "team": "中日",
+        "league": "セ",
+        "g": 114,
+        "w": 48,
+        "l": 65,
+        "d": 1,
+        "pct": 0.425,
+        "gb": "16.0",
+        "rf": null,
+        "ra": null,
+        "run_diff": null,
+        "home_rec": "32-29",
+        "road_rec": "16-36(1)",
+        "hr": null,
+        "avg": null,
+        "era": null,
+        "rank": 5,
+        "balance": -17,
         "last10": {
           "w": 5,
           "l": 5,
@@ -135,61 +167,31 @@
       {
         "team": "広島",
         "league": "セ",
-        "g": 106,
+        "g": 107,
         "w": 43,
-        "l": 59,
+        "l": 60,
         "d": 4,
-        "pct": 0.422,
-        "gb": "15.5",
+        "pct": 0.417,
+        "gb": "16.0",
         "rf": null,
         "ra": null,
         "run_diff": null,
         "home_rec": "26-27(1)",
-        "road_rec": "17-32(3)",
-        "hr": null,
-        "avg": null,
-        "era": null,
-        "rank": 5,
-        "balance": -16,
-        "last10": {
-          "w": 5,
-          "l": 5,
-          "d": 0
-        },
-        "streak": {
-          "type": "lose",
-          "n": 1,
-          "label": "1連敗"
-        }
-      },
-      {
-        "team": "中日",
-        "league": "セ",
-        "g": 113,
-        "w": 47,
-        "l": 65,
-        "d": 1,
-        "pct": 0.42,
-        "gb": "16.5",
-        "rf": null,
-        "ra": null,
-        "run_diff": null,
-        "home_rec": "31-29",
-        "road_rec": "16-36(1)",
+        "road_rec": "17-33(3)",
         "hr": null,
         "avg": null,
         "era": null,
         "rank": 6,
-        "balance": -18,
+        "balance": -17,
         "last10": {
-          "w": 3,
-          "l": 7,
+          "w": 4,
+          "l": 6,
           "d": 0
         },
         "streak": {
           "type": "win",
-          "n": 1,
-          "label": "1連勝"
+          "n": 2,
+          "label": "2連勝"
         }
       }
     ]
@@ -222,44 +224,44 @@
       "obp": 0.293,
       "slg": 0.349,
       "ops": 0.642,
-      "hr": 80,
-      "runs": 372,
-      "era": 2.94,
-      "so": 911,
+      "hr": 81,
+      "runs": 377,
+      "era": 2.91,
+      "so": 917,
       "whip": 1.18
     },
     "ヤクルト": {
-      "avg": 0.233,
+      "avg": 0.234,
       "obp": 0.293,
       "slg": 0.333,
       "ops": 0.626,
       "hr": 64,
-      "runs": 340,
+      "runs": 344,
       "era": 3.49,
-      "so": 842,
+      "so": 851,
       "whip": 1.21
     },
     "中日": {
-      "avg": 0.229,
+      "avg": 0.228,
       "obp": 0.301,
-      "slg": 0.346,
-      "ops": 0.647,
-      "hr": 89,
-      "runs": 378,
+      "slg": 0.347,
+      "ops": 0.648,
+      "hr": 92,
+      "runs": 383,
       "era": 3.27,
-      "so": 891,
+      "so": 897,
       "whip": 1.21
     },
     "広島": {
       "avg": 0.227,
       "obp": 0.289,
-      "slg": 0.33,
-      "ops": 0.619,
+      "slg": 0.329,
+      "ops": 0.618,
       "hr": 72,
       "runs": 318,
-      "era": 3.33,
-      "so": 808,
-      "whip": 1.23
+      "era": 3.35,
+      "so": 814,
+      "whip": 1.24
     }
   },
   "probables": [
@@ -278,14 +280,14 @@
       "weather": {
         "park": "横浜",
         "dome": false,
-        "temp": 27.8,
-        "pop": 71,
-        "wind_speed": 0.1,
-        "wind_deg": 180,
-        "hamakaze": 0.1,
+        "temp": 28.5,
+        "pop": 88,
+        "wind_speed": 0.6,
+        "wind_deg": 121,
+        "hamakaze": 0.3,
         "at": "2026-08-23T18:00"
       },
-      "wind": 0.1
+      "wind": 0.3
     }
   ],
   "players": {
@@ -1680,125 +1682,101 @@
       "l": 6,
       "d": 0
     },
-    "広島": {
-      "w": 9,
-      "l": 8,
-      "d": 1
-    },
     "中日": {
       "w": 13,
       "l": 6,
       "d": 0
+    },
+    "広島": {
+      "w": 9,
+      "l": 8,
+      "d": 1
     }
   },
   "park_stats": {
     "東京ドーム": {
-      "g": 12,
-      "w": 10,
+      "g": 6,
+      "w": 4,
       "l": 2,
       "d": 0,
-      "rf": 65,
-      "ra": 27,
+      "rf": 32,
+      "ra": 16,
       "home": false,
-      "pct": 0.833,
-      "rf_avg": 5.42,
-      "ra_avg": 2.25
+      "pct": 0.667,
+      "rf_avg": 5.33,
+      "ra_avg": 2.67
     },
     "京セラD大阪": {
-      "g": 12,
-      "w": 6,
-      "l": 6,
-      "d": 0,
-      "rf": 28,
-      "ra": 33,
-      "home": true,
-      "pct": 0.5,
-      "rf_avg": 2.33,
-      "ra_avg": 2.75
-    },
-    "マツダ": {
-      "g": 11,
-      "w": 6,
-      "l": 5,
-      "d": 0,
-      "rf": 46,
-      "ra": 33,
-      "home": false,
-      "pct": 0.545,
-      "rf_avg": 4.18,
-      "ra_avg": 3.0
-    },
-    "甲子園": {
-      "g": 43,
-      "w": 21,
-      "l": 21,
-      "d": 1,
-      "rf": 123,
-      "ra": 126,
-      "home": true,
-      "pct": 0.5,
-      "rf_avg": 2.86,
-      "ra_avg": 2.93
-    },
-    "バンテリン": {
-      "g": 9,
-      "w": 6,
+      "g": 6,
+      "w": 3,
       "l": 3,
       "d": 0,
-      "rf": 38,
-      "ra": 29,
-      "home": false,
-      "pct": 0.667,
-      "rf_avg": 4.22,
-      "ra_avg": 3.22
-    },
-    "横浜": {
-      "g": 8,
-      "w": 4,
-      "l": 4,
-      "d": 0,
-      "rf": 49,
-      "ra": 45,
-      "home": false,
-      "pct": 0.5,
-      "rf_avg": 6.12,
-      "ra_avg": 5.62
-    },
-    "神宮": {
-      "g": 8,
-      "w": 6,
-      "l": 2,
-      "d": 0,
-      "rf": 44,
-      "ra": 25,
-      "home": false,
-      "pct": 0.75,
-      "rf_avg": 5.5,
-      "ra_avg": 3.12
-    },
-    "倉敷": {
-      "g": 1,
-      "w": 1,
-      "l": 0,
-      "d": 0,
-      "rf": 4,
-      "ra": 2,
+      "rf": 18,
+      "ra": 16,
       "home": true,
-      "pct": 1.0,
-      "rf_avg": 4.0,
-      "ra_avg": 2.0
+      "pct": 0.5,
+      "rf_avg": 3.0,
+      "ra_avg": 2.67
     },
-    "ZOZOマリン": {
-      "g": 3,
-      "w": 2,
+    "マツダ": {
+      "g": 8,
+      "w": 5,
+      "l": 3,
+      "d": 0,
+      "rf": 35,
+      "ra": 21,
+      "home": false,
+      "pct": 0.625,
+      "rf_avg": 4.38,
+      "ra_avg": 2.62
+    },
+    "甲子園": {
+      "g": 30,
+      "w": 16,
+      "l": 13,
+      "d": 1,
+      "rf": 90,
+      "ra": 79,
+      "home": true,
+      "pct": 0.552,
+      "rf_avg": 3.0,
+      "ra_avg": 2.63
+    },
+    "バンテリン": {
+      "g": 6,
+      "w": 5,
       "l": 1,
       "d": 0,
-      "rf": 7,
-      "ra": 7,
+      "rf": 30,
+      "ra": 15,
       "home": false,
-      "pct": 0.667,
-      "rf_avg": 2.33,
-      "ra_avg": 2.33
+      "pct": 0.833,
+      "rf_avg": 5.0,
+      "ra_avg": 2.5
+    },
+    "横浜": {
+      "g": 4,
+      "w": 2,
+      "l": 2,
+      "d": 0,
+      "rf": 28,
+      "ra": 27,
+      "home": false,
+      "pct": 0.5,
+      "rf_avg": 7.0,
+      "ra_avg": 6.75
+    },
+    "神宮": {
+      "g": 4,
+      "w": 3,
+      "l": 1,
+      "d": 0,
+      "rf": 21,
+      "ra": 15,
+      "home": false,
+      "pct": 0.75,
+      "rf_avg": 5.25,
+      "ra_avg": 3.75
     },
     "PayPayドーム": {
       "g": 3,
@@ -2181,341 +2159,6 @@
       "score": [
         10,
         2
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-01",
-      "opponent": "巨人",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        3,
-        5
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-02",
-      "opponent": "巨人",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "14:00",
-      "score": [
-        7,
-        5
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-03",
-      "opponent": "巨人",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "14:00",
-      "score": [
-        3,
-        0
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-04",
-      "opponent": "中日",
-      "venue": "バンテリン",
-      "home": false,
-      "start_time": "14:30",
-      "score": [
-        3,
-        7
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-05",
-      "opponent": "中日",
-      "venue": "バンテリン",
-      "home": false,
-      "start_time": "14:00",
-      "score": [
-        3,
-        7
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-06",
-      "opponent": "中日",
-      "venue": "バンテリン",
-      "home": false,
-      "start_time": "14:00",
-      "score": [
-        2,
-        0
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-08",
-      "opponent": "ＤｅＮＡ",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        1,
-        10
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-09",
-      "opponent": "ＤｅＮＡ",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "14:00",
-      "score": [
-        1,
-        3
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-10",
-      "opponent": "ＤｅＮＡ",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "14:00",
-      "score": [
-        3,
-        0
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-12",
-      "opponent": "ヤクルト",
-      "venue": "神宮",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        10,
-        0
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-13",
-      "opponent": "ヤクルト",
-      "venue": "神宮",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        2,
-        4
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-15",
-      "opponent": "広島",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        0,
-        2
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-16",
-      "opponent": "広島",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "14:00",
-      "score": [
-        3,
-        1
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-17",
-      "opponent": "広島",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "14:00",
-      "score": [
-        0,
-        1
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-19",
-      "opponent": "中日",
-      "venue": "倉敷",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        4,
-        2
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-20",
-      "opponent": "中日",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        8,
-        7
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-21",
-      "opponent": "中日",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-22",
-      "opponent": "巨人",
-      "venue": "東京ドーム",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        7,
-        4
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-23",
-      "opponent": "巨人",
-      "venue": "東京ドーム",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        3,
-        0
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-24",
-      "opponent": "巨人",
-      "venue": "東京ドーム",
-      "home": false,
-      "start_time": "14:00",
-      "score": [
-        6,
-        3
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-26",
-      "opponent": "日本ハム",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        0,
-        4
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-27",
-      "opponent": "日本ハム",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        2,
-        5
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-28",
-      "opponent": "日本ハム",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        2,
-        4
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-29",
-      "opponent": "ロッテ",
-      "venue": "ZOZOマリン",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        1,
-        0
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-30",
-      "opponent": "ロッテ",
-      "venue": "ZOZOマリン",
-      "home": false,
-      "start_time": "14:00",
-      "score": [
-        4,
-        3
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-05-31",
-      "opponent": "ロッテ",
-      "venue": "ZOZOマリン",
-      "home": false,
-      "start_time": "13:00",
-      "score": [
-        2,
-        4
       ],
       "hanshin_starter": null,
       "opponent_starter": null
@@ -3127,320 +2770,6 @@
         4,
         3
       ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-01",
-      "opponent": "ヤクルト",
-      "venue": "神宮",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        7,
-        3
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-02",
-      "opponent": "ヤクルト",
-      "venue": "神宮",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        4,
-        3
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-04",
-      "opponent": "ＤｅＮＡ",
-      "venue": "横浜",
-      "home": false,
-      "start_time": "17:45",
-      "score": [
-        0,
-        1
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-05",
-      "opponent": "ＤｅＮＡ",
-      "venue": "横浜",
-      "home": false,
-      "start_time": "17:45",
-      "score": [
-        7,
-        11
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-06",
-      "opponent": "ＤｅＮＡ",
-      "venue": "横浜",
-      "home": false,
-      "start_time": "17:45",
-      "score": [
-        10,
-        5
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-07",
-      "opponent": "中日",
-      "venue": "京セラD大阪",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        2,
-        3
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-08",
-      "opponent": "中日",
-      "venue": "京セラD大阪",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        1,
-        7
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-09",
-      "opponent": "中日",
-      "venue": "京セラD大阪",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        1,
-        0
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-11",
-      "opponent": "巨人",
-      "venue": "東京ドーム",
-      "home": false,
-      "start_time": "14:00",
-      "score": [
-        9,
-        1
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-12",
-      "opponent": "巨人",
-      "venue": "東京ドーム",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        5,
-        1
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-13",
-      "opponent": "巨人",
-      "venue": "東京ドーム",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        3,
-        2
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-14",
-      "opponent": "広島",
-      "venue": "マツダ",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        1,
-        6
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-15",
-      "opponent": "広島",
-      "venue": "マツダ",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        2,
-        5
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-16",
-      "opponent": "広島",
-      "venue": "マツダ",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        8,
-        1
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-18",
-      "opponent": "ヤクルト",
-      "venue": "京セラD大阪",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        3,
-        2
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-19",
-      "opponent": "ヤクルト",
-      "venue": "京セラD大阪",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        2,
-        1
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-20",
-      "opponent": "ヤクルト",
-      "venue": "京セラD大阪",
-      "home": true,
-      "start_time": "18:00",
-      "score": [
-        1,
-        4
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-21",
-      "opponent": "ＤｅＮＡ",
-      "venue": "横浜",
-      "home": false,
-      "start_time": "18:00",
-      "score": [
-        4,
-        1
-      ],
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-22",
-      "opponent": "ＤｅＮＡ",
-      "venue": "横浜",
-      "home": false,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": "今朝丸",
-      "opponent_starter": "竹田"
-    },
-    {
-      "date": "2026-08-23",
-      "opponent": "ＤｅＮＡ",
-      "venue": "横浜",
-      "home": false,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-25",
-      "opponent": "中日",
-      "venue": "バンテリン",
-      "home": false,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-26",
-      "opponent": "中日",
-      "venue": "バンテリン",
-      "home": false,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-27",
-      "opponent": "中日",
-      "venue": "バンテリン",
-      "home": false,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-28",
-      "opponent": "巨人",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-29",
-      "opponent": "巨人",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-08-30",
-      "opponent": "巨人",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": null,
       "hanshin_starter": null,
       "opponent_starter": null
     }
