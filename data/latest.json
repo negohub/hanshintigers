@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-24T12:33:26+09:00",
+  "updated_at": "2026-08-24T19:57:59+09:00",
   "season": 2026,
   "target_date": "2026-08-24",
   "sources": {
@@ -270,11 +270,11 @@
       "venue": "バンテリン",
       "home": false,
       "start_time": "18:00",
-      "hanshin_pitcher": null,
-      "opponent_pitcher": null,
+      "hanshin_pitcher": "西勇輝",
+      "opponent_pitcher": "大野雄大",
       "score": null,
-      "hanshin_fip": null,
-      "opponent_fip": null,
+      "hanshin_fip": 3.99,
+      "opponent_fip": 3.82,
       "weather": {
         "park": "バンテリン",
         "dome": true,
