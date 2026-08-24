@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-08-24T19:57:59+09:00",
+  "updated_at": "2026-08-25T00:24:47+09:00",
   "season": 2026,
-  "target_date": "2026-08-24",
+  "target_date": "2026-08-25",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -275,6 +275,27 @@
       "score": null,
       "hanshin_fip": 3.99,
       "opponent_fip": 3.82,
+      "weather": {
+        "park": "バンテリン",
+        "dome": true,
+        "text": "ドーム",
+        "wind_speed": 0,
+        "hamakaze": 0
+      },
+      "wind": 0
+    },
+    {
+      "date": "2026-08-26",
+      "opponent": "中日",
+      "card": "対中日",
+      "venue": "バンテリン",
+      "home": false,
+      "start_time": "18:00",
+      "hanshin_pitcher": null,
+      "opponent_pitcher": null,
+      "score": null,
+      "hanshin_fip": null,
+      "opponent_fip": null,
       "weather": {
         "park": "バンテリン",
         "dome": true,
