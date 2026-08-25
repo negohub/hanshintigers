@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-08-25T23:29:26+09:00",
+  "updated_at": "2026-08-26T00:30:16+09:00",
   "season": 2026,
-  "target_date": "2026-08-25",
+  "target_date": "2026-08-26",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -264,27 +264,6 @@
   },
   "probables": [
     {
-      "date": "2026-08-25",
-      "opponent": "中日",
-      "card": "対中日",
-      "venue": "バンテリン",
-      "home": false,
-      "start_time": "18:00",
-      "hanshin_pitcher": "西勇輝",
-      "opponent_pitcher": "大野雄大",
-      "score": null,
-      "hanshin_fip": 3.99,
-      "opponent_fip": 3.82,
-      "weather": {
-        "park": "バンテリン",
-        "dome": true,
-        "text": "ドーム",
-        "wind_speed": 0,
-        "hamakaze": 0
-      },
-      "wind": 0
-    },
-    {
       "date": "2026-08-26",
       "opponent": "中日",
       "card": "対中日",
@@ -296,6 +275,27 @@
       "score": null,
       "hanshin_fip": 3.27,
       "opponent_fip": 3.79,
+      "weather": {
+        "park": "バンテリン",
+        "dome": true,
+        "text": "ドーム",
+        "wind_speed": 0,
+        "hamakaze": 0
+      },
+      "wind": 0
+    },
+    {
+      "date": "2026-08-27",
+      "opponent": "中日",
+      "card": "対中日",
+      "venue": "バンテリン",
+      "home": false,
+      "start_time": "18:00",
+      "hanshin_pitcher": null,
+      "opponent_pitcher": null,
+      "score": null,
+      "hanshin_fip": null,
+      "opponent_fip": null,
       "weather": {
         "park": "バンテリン",
         "dome": true,
