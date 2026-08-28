@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-08-28T15:17:56+09:00",
+  "updated_at": "2026-08-29T06:13:29+09:00",
   "season": 2026,
-  "target_date": "2026-08-28",
+  "target_date": "2026-08-29",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -32,14 +32,14 @@
         "rank": 1,
         "balance": 15,
         "last10": {
-          "w": 6,
-          "l": 4,
+          "w": 7,
+          "l": 3,
           "d": 0
         },
         "streak": {
           "type": "win",
-          "n": 1,
-          "label": "1連勝"
+          "n": 2,
+          "label": "2連勝"
         }
       },
       {
@@ -62,14 +62,14 @@
         "rank": 2,
         "balance": 12,
         "last10": {
-          "w": 7,
-          "l": 3,
+          "w": 6,
+          "l": 4,
           "d": 0
         },
         "streak": {
-          "type": "win",
-          "n": 3,
-          "label": "3連勝"
+          "type": "lose",
+          "n": 1,
+          "label": "1連敗"
         }
       },
       {
@@ -92,14 +92,14 @@
         "rank": 3,
         "balance": -10,
         "last10": {
-          "w": 3,
-          "l": 7,
+          "w": 4,
+          "l": 6,
           "d": 0
         },
         "streak": {
           "type": "win",
-          "n": 1,
-          "label": "1連勝"
+          "n": 2,
+          "label": "2連勝"
         }
       },
       {
@@ -127,9 +127,9 @@
           "d": 0
         },
         "streak": {
-          "type": "lose",
-          "n": 6,
-          "label": "6連敗"
+          "type": "win",
+          "n": 1,
+          "label": "1連勝"
         }
       },
       {
@@ -158,8 +158,8 @@
         },
         "streak": {
           "type": "lose",
-          "n": 1,
-          "label": "1連敗"
+          "n": 2,
+          "label": "2連敗"
         }
       },
       {
@@ -188,8 +188,8 @@
         },
         "streak": {
           "type": "lose",
-          "n": 1,
-          "label": "1連敗"
+          "n": 2,
+          "label": "2連敗"
         }
       }
     ]
@@ -264,31 +264,31 @@
   },
   "probables": [
     {
-      "date": "2026-08-28",
+      "date": "2026-08-29",
       "opponent": "巨人",
       "card": "対巨人",
       "venue": "甲子園",
       "home": true,
       "start_time": "18:00",
-      "hanshin_pitcher": "村上頌樹",
-      "opponent_pitcher": "ハワード",
+      "hanshin_pitcher": "大竹耕太郎",
+      "opponent_pitcher": "田中将大",
       "score": null,
-      "hanshin_fip": 3.24,
-      "opponent_fip": 2.62,
+      "hanshin_fip": 3.63,
+      "opponent_fip": 3.16,
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 29.0,
-        "pop": 84,
-        "wind_speed": 0.9,
-        "wind_deg": 234,
-        "hamakaze": 0.8,
-        "at": "2026-08-28T18:00"
+        "temp": 29.2,
+        "pop": 92,
+        "wind_speed": 4.9,
+        "wind_deg": 232,
+        "hamakaze": 4.9,
+        "at": "2026-08-29T18:00"
       },
-      "wind": 0.8
+      "wind": 4.9
     },
     {
-      "date": "2026-08-29",
+      "date": "2026-08-30",
       "opponent": "巨人",
       "card": "対巨人",
       "venue": "甲子園",
@@ -302,14 +302,14 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 29.0,
-        "pop": 84,
-        "wind_speed": 0.9,
-        "wind_deg": 234,
-        "hamakaze": 0.8,
-        "at": "2026-08-28T18:00"
+        "temp": 29.2,
+        "pop": 92,
+        "wind_speed": 4.9,
+        "wind_deg": 232,
+        "hamakaze": 4.9,
+        "at": "2026-08-29T18:00"
       },
-      "wind": 0.8
+      "wind": 4.9
     }
   ],
   "players": {
@@ -1753,16 +1753,16 @@
       "ra_avg": 3.0
     },
     "甲子園": {
-      "g": 30,
-      "w": 16,
+      "g": 31,
+      "w": 17,
       "l": 13,
       "d": 1,
-      "rf": 90,
-      "ra": 79,
+      "rf": 94,
+      "ra": 80,
       "home": true,
-      "pct": 0.552,
-      "rf_avg": 3.0,
-      "ra_avg": 2.63
+      "pct": 0.567,
+      "rf_avg": 3.03,
+      "ra_avg": 2.58
     },
     "バンテリン": {
       "g": 9,
@@ -3097,9 +3097,12 @@
       "venue": "甲子園",
       "home": true,
       "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": "村上",
-      "opponent_starter": "ハワード"
+      "score": [
+        4,
+        1
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
     },
     {
       "date": "2026-08-29",
@@ -3108,8 +3111,8 @@
       "home": true,
       "start_time": "18:00",
       "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
+      "hanshin_starter": "大竹",
+      "opponent_starter": "田中将"
     },
     {
       "date": "2026-08-30",
