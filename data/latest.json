@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-29T12:07:51+09:00",
+  "updated_at": "2026-08-29T18:01:52+09:00",
   "season": 2026,
   "target_date": "2026-08-29",
   "sources": {
@@ -280,12 +280,12 @@
         "dome": false,
         "temp": 29.2,
         "pop": 84,
-        "wind_speed": 5.8,
-        "wind_deg": 229,
-        "hamakaze": 5.8,
+        "wind_speed": 5.3,
+        "wind_deg": 232,
+        "hamakaze": 5.3,
         "at": "2026-08-29T18:00"
       },
-      "wind": 5.8
+      "wind": 5.3
     },
     {
       "date": "2026-08-30",
@@ -294,22 +294,22 @@
       "venue": "甲子園",
       "home": true,
       "start_time": "18:00",
-      "hanshin_pitcher": null,
-      "opponent_pitcher": null,
+      "hanshin_pitcher": "才木浩人",
+      "opponent_pitcher": "小笠原慎之介",
       "score": null,
-      "hanshin_fip": null,
-      "opponent_fip": null,
+      "hanshin_fip": 2.77,
+      "opponent_fip": 2.99,
       "weather": {
         "park": "甲子園",
         "dome": false,
         "temp": 29.2,
         "pop": 84,
-        "wind_speed": 5.8,
-        "wind_deg": 229,
-        "hamakaze": 5.8,
+        "wind_speed": 5.3,
+        "wind_deg": 232,
+        "hamakaze": 5.3,
         "at": "2026-08-29T18:00"
       },
-      "wind": 5.8
+      "wind": 5.3
     }
   ],
   "players": {
