@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-31T18:01:54+09:00",
+  "updated_at": "2026-08-31T21:08:39+09:00",
   "season": 2026,
   "target_date": "2026-08-31",
   "sources": {
@@ -282,12 +282,12 @@
         "dome": false,
         "temp": 29.3,
         "pop": 18,
-        "wind_speed": 3.9,
-        "wind_deg": 247,
-        "hamakaze": 3.6,
+        "wind_speed": 4.4,
+        "wind_deg": 243,
+        "hamakaze": 4.2,
         "at": "2026-08-31T18:00"
       },
-      "wind": 3.6
+      "wind": 4.2
     }
   ],
   "players": {
