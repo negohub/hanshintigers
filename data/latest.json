@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-01T12:15:07+09:00",
+  "updated_at": "2026-09-01T18:02:42+09:00",
   "season": 2026,
   "target_date": "2026-09-01",
   "sources": {
@@ -278,14 +278,14 @@
       "weather": {
         "park": "神宮",
         "dome": false,
-        "temp": 27.0,
+        "temp": 26.8,
         "pop": 22,
-        "wind_speed": 1.0,
-        "wind_deg": 101,
-        "hamakaze": 0.2,
+        "wind_speed": 1.4,
+        "wind_deg": 107,
+        "hamakaze": 0.4,
         "at": "2026-09-01T18:00"
       },
-      "wind": 0.2
+      "wind": 0.4
     },
     {
       "date": "2026-09-02",
@@ -294,22 +294,22 @@
       "venue": "神宮",
       "home": false,
       "start_time": "18:00",
-      "hanshin_pitcher": null,
-      "opponent_pitcher": null,
+      "hanshin_pitcher": "西勇輝",
+      "opponent_pitcher": "山野太一",
       "score": null,
-      "hanshin_fip": null,
-      "opponent_fip": null,
+      "hanshin_fip": 4.12,
+      "opponent_fip": 3.12,
       "weather": {
         "park": "神宮",
         "dome": false,
-        "temp": 27.0,
+        "temp": 26.8,
         "pop": 22,
-        "wind_speed": 1.0,
-        "wind_deg": 101,
-        "hamakaze": 0.2,
+        "wind_speed": 1.4,
+        "wind_deg": 107,
+        "hamakaze": 0.4,
         "at": "2026-09-01T18:00"
       },
-      "wind": 0.2
+      "wind": 0.4
     }
   ],
   "players": {
