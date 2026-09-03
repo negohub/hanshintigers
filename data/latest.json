@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-02T21:19:42+09:00",
+  "updated_at": "2026-09-03T09:09:54+09:00",
   "season": 2026,
-  "target_date": "2026-09-02",
+  "target_date": "2026-09-03",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -15,85 +15,25 @@
       {
         "team": "阪神",
         "league": "セ",
-        "g": 118,
+        "g": 119,
         "w": 68,
-        "l": 49,
+        "l": 50,
         "d": 1,
-        "pct": 0.581,
+        "pct": 0.576,
         "gb": "--",
         "rf": null,
         "ra": null,
         "run_diff": null,
         "home_rec": "30-25(1)",
-        "road_rec": "38-24",
+        "road_rec": "38-25",
         "hr": null,
         "avg": null,
         "era": null,
         "rank": 1,
-        "balance": 19,
+        "balance": 18,
         "last10": {
           "w": 7,
           "l": 3,
-          "d": 0
-        },
-        "streak": {
-          "type": "win",
-          "n": 5,
-          "label": "5連勝"
-        }
-      },
-      {
-        "team": "巨人",
-        "league": "セ",
-        "g": 120,
-        "w": 64,
-        "l": 54,
-        "d": 2,
-        "pct": 0.542,
-        "gb": "4.5",
-        "rf": null,
-        "ra": null,
-        "run_diff": null,
-        "home_rec": "31-28(2)",
-        "road_rec": "33-26",
-        "hr": null,
-        "avg": null,
-        "era": null,
-        "rank": 2,
-        "balance": 10,
-        "last10": {
-          "w": 6,
-          "l": 4,
-          "d": 0
-        },
-        "streak": {
-          "type": "win",
-          "n": 1,
-          "label": "1連勝"
-        }
-      },
-      {
-        "team": "ＤｅＮＡ",
-        "league": "セ",
-        "g": 119,
-        "w": 54,
-        "l": 62,
-        "d": 3,
-        "pct": 0.466,
-        "gb": "13.5",
-        "rf": null,
-        "ra": null,
-        "run_diff": null,
-        "home_rec": "29-25(3)",
-        "road_rec": "25-37",
-        "hr": null,
-        "avg": null,
-        "era": null,
-        "rank": 3,
-        "balance": -8,
-        "last10": {
-          "w": 4,
-          "l": 6,
           "d": 0
         },
         "streak": {
@@ -103,54 +43,54 @@
         }
       },
       {
-        "team": "ヤクルト",
+        "team": "巨人",
         "league": "セ",
-        "g": 118,
-        "w": 52,
-        "l": 65,
-        "d": 1,
-        "pct": 0.444,
-        "gb": "16.0",
+        "g": 121,
+        "w": 64,
+        "l": 55,
+        "d": 2,
+        "pct": 0.538,
+        "gb": "4.5",
         "rf": null,
         "ra": null,
         "run_diff": null,
-        "home_rec": "24-31(1)",
-        "road_rec": "28-34",
+        "home_rec": "31-29(2)",
+        "road_rec": "33-26",
         "hr": null,
         "avg": null,
         "era": null,
-        "rank": 4,
-        "balance": -13,
+        "rank": 2,
+        "balance": 9,
         "last10": {
-          "w": 2,
-          "l": 8,
+          "w": 5,
+          "l": 5,
           "d": 0
         },
         "streak": {
           "type": "lose",
-          "n": 2,
-          "label": "2連敗"
+          "n": 1,
+          "label": "1連敗"
         }
       },
       {
-        "team": "広島",
+        "team": "ＤｅＮＡ",
         "league": "セ",
-        "g": 115,
-        "w": 48,
-        "l": 63,
-        "d": 4,
-        "pct": 0.432,
-        "gb": "17.0",
+        "g": 120,
+        "w": 55,
+        "l": 62,
+        "d": 3,
+        "pct": 0.47,
+        "gb": "12.5",
         "rf": null,
         "ra": null,
         "run_diff": null,
-        "home_rec": "29-30(1)",
-        "road_rec": "19-33(3)",
+        "home_rec": "29-25(3)",
+        "road_rec": "26-37",
         "hr": null,
         "avg": null,
         "era": null,
-        "rank": 5,
-        "balance": -15,
+        "rank": 3,
+        "balance": -7,
         "last10": {
           "w": 5,
           "l": 5,
@@ -158,29 +98,59 @@
         },
         "streak": {
           "type": "win",
-          "n": 2,
-          "label": "2連勝"
+          "n": 1,
+          "label": "1連勝"
         }
       },
       {
-        "team": "中日",
+        "team": "ヤクルト",
         "league": "セ",
-        "g": 122,
-        "w": 51,
-        "l": 70,
+        "g": 119,
+        "w": 53,
+        "l": 65,
         "d": 1,
-        "pct": 0.421,
-        "gb": "19.0",
+        "pct": 0.449,
+        "gb": "15.0",
         "rf": null,
         "ra": null,
         "run_diff": null,
-        "home_rec": "35-31",
-        "road_rec": "16-39(1)",
+        "home_rec": "25-31(1)",
+        "road_rec": "28-34",
         "hr": null,
         "avg": null,
         "era": null,
-        "rank": 6,
-        "balance": -19,
+        "rank": 4,
+        "balance": -12,
+        "last10": {
+          "w": 3,
+          "l": 7,
+          "d": 0
+        },
+        "streak": {
+          "type": "win",
+          "n": 1,
+          "label": "1連勝"
+        }
+      },
+      {
+        "team": "広島",
+        "league": "セ",
+        "g": 116,
+        "w": 48,
+        "l": 64,
+        "d": 4,
+        "pct": 0.429,
+        "gb": "17.0",
+        "rf": null,
+        "ra": null,
+        "run_diff": null,
+        "home_rec": "29-30(1)",
+        "road_rec": "19-34(3)",
+        "hr": null,
+        "avg": null,
+        "era": null,
+        "rank": 5,
+        "balance": -16,
         "last10": {
           "w": 5,
           "l": 5,
@@ -188,66 +158,96 @@
         },
         "streak": {
           "type": "lose",
-          "n": 5,
-          "label": "5連敗"
+          "n": 1,
+          "label": "1連敗"
+        }
+      },
+      {
+        "team": "中日",
+        "league": "セ",
+        "g": 123,
+        "w": 52,
+        "l": 70,
+        "d": 1,
+        "pct": 0.426,
+        "gb": "18.0",
+        "rf": null,
+        "ra": null,
+        "run_diff": null,
+        "home_rec": "36-31",
+        "road_rec": "16-39(1)",
+        "hr": null,
+        "avg": null,
+        "era": null,
+        "rank": 6,
+        "balance": -18,
+        "last10": {
+          "w": 5,
+          "l": 5,
+          "d": 0
+        },
+        "streak": {
+          "type": "win",
+          "n": 1,
+          "label": "1連勝"
         }
       }
     ]
   },
   "team_stats": {
     "阪神": {
-      "avg": 0.248,
-      "obp": 0.319,
-      "slg": 0.372,
-      "ops": 0.691,
-      "hr": 105,
-      "runs": 440,
-      "era": 2.84,
-      "so": 943,
-      "whip": 1.13
+      "avg": 0.247,
+      "obp": 0.318,
+      "slg": 0.371,
+      "ops": 0.689,
+      "hr": 106,
+      "runs": 443,
+      "era": 2.86,
+      "so": 950,
+      "whip": 1.14
     },
     "ＤｅＮＡ": {
       "avg": 0.244,
-      "obp": 0.306,
-      "slg": 0.367,
+      "obp": 0.307,
+      "slg": 0.366,
       "ops": 0.673,
       "hr": 99,
-      "runs": 455,
-      "era": 3.46,
-      "so": 979,
+      "runs": 457,
+      "era": 3.44,
+      "so": 987,
       "whip": 1.25
     },
-    "巨人": {
-      "avg": 0.236,
-      "obp": 0.295,
-      "slg": 0.35,
-      "ops": 0.645,
-      "hr": 87,
-      "runs": 408,
-      "era": 2.95,
-      "so": 963,
-      "whip": 1.2
-    },
     "ヤクルト": {
-      "avg": 0.235,
-      "obp": 0.295,
-      "slg": 0.333,
-      "ops": 0.628,
+      "avg": 0.236,
+      "obp": 0.296,
+      "slg": 0.334,
+      "ops": 0.63,
       "hr": 69,
-      "runs": 372,
-      "era": 3.55,
-      "so": 913,
+      "runs": 377,
+      "era": 3.54,
+      "so": 924,
       "whip": 1.22
     },
+    "巨人": {
+      "avg": 0.235,
+      "obp": 0.294,
+      "slg": 0.349,
+      "ops": 0.643,
+      "hr": 87,
+      "runs": 409,
+      "era": 2.94,
+      "so": 974,
+      "whip": 1.2
+    },
     "中日": {
-      "avg": 0.228,
-      "obp": 0.3,
-      "slg": 0.348,
-      "ops": 0.648,
-      "hr": 100,
-      "runs": 403,
-      "era": 3.24,
-      "so": 957,
+      "avg": 0.229,
+      "obp": 0.301,
+      "slg": 0.35,
+      "ops": 0.651,
+      "hr": 102,
+      "runs": 408,
+      "era": 3.25,
+      "so": 966,
       "whip": 1.22
     },
     "広島": {
@@ -255,38 +255,14 @@
       "obp": 0.29,
       "slg": 0.325,
       "ops": 0.615,
-      "hr": 74,
-      "runs": 345,
-      "era": 3.38,
-      "so": 870,
+      "hr": 75,
+      "runs": 349,
+      "era": 3.4,
+      "so": 876,
       "whip": 1.24
     }
   },
   "probables": [
-    {
-      "date": "2026-09-02",
-      "opponent": "ヤクルト",
-      "card": "対ヤクルト",
-      "venue": "神宮",
-      "home": false,
-      "start_time": "18:00",
-      "hanshin_pitcher": "西勇輝",
-      "opponent_pitcher": "山野太一",
-      "score": null,
-      "hanshin_fip": 4.12,
-      "opponent_fip": 3.12,
-      "weather": {
-        "park": "神宮",
-        "dome": false,
-        "temp": 27.6,
-        "pop": 0,
-        "wind_speed": 1.5,
-        "wind_deg": 203,
-        "hamakaze": 1.4,
-        "at": "2026-09-02T18:00"
-      },
-      "wind": 1.4
-    },
     {
       "date": "2026-09-03",
       "opponent": "ヤクルト",
@@ -302,14 +278,14 @@
       "weather": {
         "park": "神宮",
         "dome": false,
-        "temp": 27.6,
-        "pop": 0,
-        "wind_speed": 1.5,
-        "wind_deg": 203,
-        "hamakaze": 1.4,
-        "at": "2026-09-02T18:00"
+        "temp": 25.9,
+        "pop": 76,
+        "wind_speed": 2.0,
+        "wind_deg": 336,
+        "hamakaze": 0.0,
+        "at": "2026-09-03T18:00"
       },
-      "wind": 1.4
+      "wind": 0.0
     }
   ],
   "players": {
@@ -317,122 +293,122 @@
       "batters": [
         {
           "name": "森下翔太",
-          "g": 118,
-          "pa": 509,
-          "ab": 437,
-          "h": 133,
+          "g": 119,
+          "pa": 513,
+          "ab": 441,
+          "h": 134,
           "hr": 31,
-          "rbi": 70,
+          "rbi": 72,
           "sb": 3,
           "bb": 52,
-          "so": 73,
+          "so": 75,
           "avg": 0.304,
-          "obp": 0.395,
-          "slg": 0.586,
-          "ops": 0.981,
-          "woba": 0.42
+          "obp": 0.394,
+          "slg": 0.583,
+          "ops": 0.977,
+          "woba": 0.419
         },
         {
           "name": "佐藤輝明",
-          "g": 118,
-          "pa": 503,
-          "ab": 440,
-          "h": 141,
-          "hr": 31,
-          "rbi": 86,
+          "g": 119,
+          "pa": 507,
+          "ab": 444,
+          "h": 142,
+          "hr": 32,
+          "rbi": 87,
           "sb": 6,
           "bb": 58,
-          "so": 129,
+          "so": 131,
           "avg": 0.32,
-          "obp": 0.4,
-          "slg": 0.62,
-          "ops": 1.02,
-          "woba": 0.435
+          "obp": 0.398,
+          "slg": 0.624,
+          "ops": 1.022,
+          "woba": 0.436
         },
         {
           "name": "大山悠輔",
-          "g": 116,
-          "pa": 484,
-          "ab": 413,
+          "g": 117,
+          "pa": 488,
+          "ab": 416,
           "h": 115,
           "hr": 15,
           "rbi": 68,
           "sb": 0,
-          "bb": 54,
+          "bb": 55,
           "so": 73,
-          "avg": 0.278,
-          "obp": 0.366,
-          "slg": 0.433,
-          "ops": 0.799,
-          "woba": 0.35
+          "avg": 0.276,
+          "obp": 0.365,
+          "slg": 0.43,
+          "ops": 0.795,
+          "woba": 0.349
         },
         {
           "name": "中野拓夢",
-          "g": 118,
-          "pa": 476,
-          "ab": 417,
-          "h": 117,
+          "g": 119,
+          "pa": 480,
+          "ab": 421,
+          "h": 119,
           "hr": 0,
           "rbi": 20,
           "sb": 7,
           "bb": 32,
-          "so": 70,
-          "avg": 0.281,
-          "obp": 0.333,
-          "slg": 0.317,
-          "ops": 0.65,
-          "woba": 0.29
+          "so": 71,
+          "avg": 0.283,
+          "obp": 0.334,
+          "slg": 0.318,
+          "ops": 0.652,
+          "woba": 0.291
         },
         {
           "name": "髙寺望夢",
-          "g": 106,
-          "pa": 322,
-          "ab": 277,
+          "g": 107,
+          "pa": 323,
+          "ab": 278,
           "h": 61,
           "hr": 2,
           "rbi": 21,
           "sb": 12,
           "bb": 35,
-          "so": 64,
-          "avg": 0.22,
-          "obp": 0.315,
-          "slg": 0.282,
-          "ops": 0.597,
-          "woba": 0.276
+          "so": 65,
+          "avg": 0.219,
+          "obp": 0.314,
+          "slg": 0.281,
+          "ops": 0.595,
+          "woba": 0.275
         },
         {
           "name": "近本光司",
-          "g": 65,
-          "pa": 298,
-          "ab": 269,
+          "g": 66,
+          "pa": 302,
+          "ab": 272,
           "h": 77,
           "hr": 4,
           "rbi": 14,
           "sb": 10,
-          "bb": 27,
-          "so": 39,
-          "avg": 0.286,
-          "obp": 0.352,
-          "slg": 0.364,
-          "ops": 0.716,
-          "woba": 0.319
+          "bb": 28,
+          "so": 40,
+          "avg": 0.283,
+          "obp": 0.351,
+          "slg": 0.36,
+          "ops": 0.711,
+          "woba": 0.317
         },
         {
           "name": "坂本誠志郎",
-          "g": 80,
-          "pa": 254,
-          "ab": 226,
+          "g": 81,
+          "pa": 258,
+          "ab": 230,
           "h": 50,
           "hr": 9,
           "rbi": 33,
           "sb": 2,
           "bb": 18,
-          "so": 73,
-          "avg": 0.221,
-          "obp": 0.282,
-          "slg": 0.376,
-          "ops": 0.658,
-          "woba": 0.289
+          "so": 76,
+          "avg": 0.217,
+          "obp": 0.278,
+          "slg": 0.37,
+          "ops": 0.648,
+          "woba": 0.284
         },
         {
           "name": "前川右京",
@@ -470,20 +446,20 @@
         },
         {
           "name": "福島圭音",
-          "g": 66,
-          "pa": 148,
-          "ab": 131,
+          "g": 67,
+          "pa": 149,
+          "ab": 132,
           "h": 31,
           "hr": 0,
           "rbi": 4,
           "sb": 6,
           "bb": 9,
           "so": 27,
-          "avg": 0.237,
-          "obp": 0.315,
-          "slg": 0.298,
-          "ops": 0.613,
-          "woba": 0.282
+          "avg": 0.235,
+          "obp": 0.313,
+          "slg": 0.295,
+          "ops": 0.608,
+          "woba": 0.28
         },
         {
           "name": "木浪聖也",
@@ -520,6 +496,23 @@
           "woba": 0.231
         },
         {
+          "name": "元山飛優",
+          "g": 38,
+          "pa": 116,
+          "ab": 97,
+          "h": 26,
+          "hr": 0,
+          "rbi": 4,
+          "sb": 1,
+          "bb": 13,
+          "so": 25,
+          "avg": 0.268,
+          "obp": 0.357,
+          "slg": 0.289,
+          "ops": 0.646,
+          "woba": 0.295
+        },
+        {
           "name": "立石正広",
           "g": 32,
           "pa": 113,
@@ -535,23 +528,6 @@
           "slg": 0.27,
           "ops": 0.482,
           "woba": 0.21
-        },
-        {
-          "name": "元山飛優",
-          "g": 37,
-          "pa": 113,
-          "ab": 95,
-          "h": 26,
-          "hr": 0,
-          "rbi": 4,
-          "sb": 1,
-          "bb": 13,
-          "so": 24,
-          "avg": 0.274,
-          "obp": 0.358,
-          "slg": 0.295,
-          "ops": 0.653,
-          "woba": 0.297
         },
         {
           "name": "小幡竜平",
@@ -786,6 +762,22 @@
           "fip": 3.26
         },
         {
+          "name": "西勇輝",
+          "g": 8,
+          "gs": null,
+          "w": 3,
+          "l": 4,
+          "sv": 0,
+          "hld": 0,
+          "ip": 38.1,
+          "era": 3.29,
+          "whip": 1.31,
+          "so": 22,
+          "bb": 12,
+          "hr": 4,
+          "fip": 4.13
+        },
+        {
           "name": "岩崎優",
           "g": 39,
           "gs": null,
@@ -816,22 +808,6 @@
           "bb": 15,
           "hr": 4,
           "fip": 3.86
-        },
-        {
-          "name": "西勇輝",
-          "g": 7,
-          "gs": null,
-          "w": 3,
-          "l": 3,
-          "sv": 0,
-          "hld": 0,
-          "ip": 35.0,
-          "era": 2.57,
-          "whip": 1.14,
-          "so": 19,
-          "bb": 9,
-          "hr": 4,
-          "fip": 4.12
         },
         {
           "name": "下村海翔",
@@ -882,6 +858,22 @@
           "fip": 3.58
         },
         {
+          "name": "桐敷拓馬",
+          "g": 23,
+          "gs": null,
+          "w": 1,
+          "l": 2,
+          "sv": 1,
+          "hld": 7,
+          "ip": 20.0,
+          "era": 5.4,
+          "whip": 1.4,
+          "so": 12,
+          "bb": 6,
+          "hr": 2,
+          "fip": 4.03
+        },
+        {
           "name": "ルーカス",
           "g": 4,
           "gs": null,
@@ -896,22 +888,6 @@
           "bb": 6,
           "hr": 3,
           "fip": 3.78
-        },
-        {
-          "name": "桐敷拓馬",
-          "g": 22,
-          "gs": null,
-          "w": 1,
-          "l": 2,
-          "sv": 1,
-          "hld": 7,
-          "ip": 19.1,
-          "era": 5.59,
-          "whip": 1.47,
-          "so": 12,
-          "bb": 6,
-          "hr": 2,
-          "fip": 3.98
         },
         {
           "name": "門別啓人",
@@ -983,26 +959,26 @@
       "batters": [
         {
           "name": "長岡秀樹",
-          "g": 103,
-          "pa": 438,
-          "ab": 394,
+          "g": 104,
+          "pa": 443,
+          "ab": 397,
           "h": 102,
           "hr": 8,
           "rbi": 35,
           "sb": 4,
-          "bb": 36,
+          "bb": 38,
           "so": 60,
-          "avg": 0.259,
-          "obp": 0.326,
-          "slg": 0.368,
-          "ops": 0.694,
+          "avg": 0.257,
+          "obp": 0.327,
+          "slg": 0.365,
+          "ops": 0.692,
           "woba": 0.308
         },
         {
           "name": "サンタナ",
-          "g": 108,
-          "pa": 391,
-          "ab": 330,
+          "g": 109,
+          "pa": 392,
+          "ab": 331,
           "h": 80,
           "hr": 16,
           "rbi": 37,
@@ -1010,27 +986,27 @@
           "bb": 57,
           "so": 105,
           "avg": 0.242,
-          "obp": 0.358,
-          "slg": 0.445,
-          "ops": 0.803,
-          "woba": 0.355
+          "obp": 0.357,
+          "slg": 0.444,
+          "ops": 0.801,
+          "woba": 0.354
         },
         {
           "name": "岩田幸宏",
-          "g": 106,
-          "pa": 382,
-          "ab": 357,
-          "h": 91,
+          "g": 107,
+          "pa": 386,
+          "ab": 360,
+          "h": 93,
           "hr": 1,
           "rbi": 21,
-          "sb": 31,
-          "bb": 17,
+          "sb": 34,
+          "bb": 18,
           "so": 69,
-          "avg": 0.255,
-          "obp": 0.296,
-          "slg": 0.294,
-          "ops": 0.59,
-          "woba": 0.263
+          "avg": 0.258,
+          "obp": 0.3,
+          "slg": 0.297,
+          "ops": 0.597,
+          "woba": 0.267
         },
         {
           "name": "増田珠",
@@ -1051,20 +1027,20 @@
         },
         {
           "name": "内山壮真",
-          "g": 76,
-          "pa": 301,
-          "ab": 262,
-          "h": 65,
+          "g": 77,
+          "pa": 305,
+          "ab": 266,
+          "h": 67,
           "hr": 5,
           "rbi": 25,
           "sb": 3,
           "bb": 36,
           "so": 56,
-          "avg": 0.248,
-          "obp": 0.342,
-          "slg": 0.359,
-          "ops": 0.701,
-          "woba": 0.316
+          "avg": 0.252,
+          "obp": 0.344,
+          "slg": 0.365,
+          "ops": 0.709,
+          "woba": 0.319
         },
         {
           "name": "古賀優大",
@@ -1085,37 +1061,37 @@
         },
         {
           "name": "武岡龍世",
-          "g": 95,
-          "pa": 282,
-          "ab": 256,
+          "g": 96,
+          "pa": 284,
+          "ab": 258,
           "h": 58,
           "hr": 4,
           "rbi": 27,
           "sb": 1,
           "bb": 23,
-          "so": 69,
-          "avg": 0.227,
-          "obp": 0.292,
-          "slg": 0.336,
-          "ops": 0.628,
-          "woba": 0.281
+          "so": 70,
+          "avg": 0.225,
+          "obp": 0.29,
+          "slg": 0.333,
+          "ops": 0.623,
+          "woba": 0.279
         },
         {
           "name": "赤羽由紘",
-          "g": 87,
-          "pa": 262,
-          "ab": 234,
+          "g": 88,
+          "pa": 266,
+          "ab": 238,
           "h": 54,
           "hr": 5,
           "rbi": 23,
           "sb": 7,
           "bb": 23,
-          "so": 73,
-          "avg": 0.231,
-          "obp": 0.298,
-          "slg": 0.342,
-          "ops": 0.64,
-          "woba": 0.286
+          "so": 76,
+          "avg": 0.227,
+          "obp": 0.294,
+          "slg": 0.336,
+          "ops": 0.63,
+          "woba": 0.282
         },
         {
           "name": "オスナ",
@@ -1221,20 +1197,20 @@
         },
         {
           "name": "宮本丈",
-          "g": 43,
-          "pa": 72,
-          "ab": 65,
-          "h": 19,
+          "g": 44,
+          "pa": 75,
+          "ab": 67,
+          "h": 20,
           "hr": 1,
           "rbi": 8,
           "sb": 1,
           "bb": 4,
           "so": 15,
-          "avg": 0.292,
-          "obp": 0.338,
-          "slg": 0.415,
-          "ops": 0.753,
-          "woba": 0.331
+          "avg": 0.299,
+          "obp": 0.351,
+          "slg": 0.418,
+          "ops": 0.769,
+          "woba": 0.339
         },
         {
           "name": "松下歩叶",
@@ -1272,20 +1248,37 @@
         },
         {
           "name": "並木秀尊",
-          "g": 26,
-          "pa": 60,
-          "ab": 57,
-          "h": 14,
+          "g": 27,
+          "pa": 65,
+          "ab": 62,
+          "h": 15,
           "hr": 1,
           "rbi": 3,
-          "sb": 8,
+          "sb": 9,
           "bb": 1,
-          "so": 7,
-          "avg": 0.246,
-          "obp": 0.259,
-          "slg": 0.298,
-          "ops": 0.557,
-          "woba": 0.241
+          "so": 8,
+          "avg": 0.242,
+          "obp": 0.254,
+          "slg": 0.306,
+          "ops": 0.56,
+          "woba": 0.243
+        },
+        {
+          "name": "西村瑠伊斗",
+          "g": 21,
+          "pa": 61,
+          "ab": 58,
+          "h": 18,
+          "hr": 0,
+          "rbi": 9,
+          "sb": 0,
+          "bb": 2,
+          "so": 12,
+          "avg": 0.31,
+          "obp": 0.328,
+          "slg": 0.397,
+          "ops": 0.725,
+          "woba": 0.316
         },
         {
           "name": "石井巧",
@@ -1303,26 +1296,25 @@
           "slg": 0.235,
           "ops": 0.476,
           "woba": 0.225
-        },
-        {
-          "name": "西村瑠伊斗",
-          "g": 20,
-          "pa": 56,
-          "ab": 53,
-          "h": 15,
-          "hr": 0,
-          "rbi": 5,
-          "sb": 0,
-          "bb": 2,
-          "so": 12,
-          "avg": 0.283,
-          "obp": 0.304,
-          "slg": 0.34,
-          "ops": 0.644,
-          "woba": 0.282
         }
       ],
       "pitchers": [
+        {
+          "name": "山野太一",
+          "g": 21,
+          "gs": null,
+          "w": 10,
+          "l": 3,
+          "sv": 0,
+          "hld": 0,
+          "ip": 135.1,
+          "era": 2.13,
+          "whip": 0.95,
+          "so": 131,
+          "bb": 26,
+          "hr": 10,
+          "fip": 3.05
+        },
         {
           "name": "奥川恭伸",
           "g": 19,
@@ -1338,22 +1330,6 @@
           "bb": 24,
           "hr": 13,
           "fip": 3.46
-        },
-        {
-          "name": "山野太一",
-          "g": 20,
-          "gs": null,
-          "w": 9,
-          "l": 3,
-          "sv": 0,
-          "hld": 0,
-          "ip": 128.1,
-          "era": 2.1,
-          "whip": 0.98,
-          "so": 122,
-          "bb": 25,
-          "hr": 10,
-          "fip": 3.12
         },
         {
           "name": "吉村貢司郎",
@@ -1501,35 +1477,35 @@
         },
         {
           "name": "清水昇",
-          "g": 38,
+          "g": 39,
           "gs": null,
           "w": 2,
           "l": 2,
           "sv": 4,
-          "hld": 15,
-          "ip": 33.1,
-          "era": 2.16,
-          "whip": 1.21,
-          "so": 33,
+          "hld": 16,
+          "ip": 34.1,
+          "era": 2.1,
+          "whip": 1.17,
+          "so": 34,
           "bb": 7,
           "hr": 2,
-          "fip": 2.92
+          "fip": 2.89
         },
         {
           "name": "ウォルターズ",
-          "g": 13,
+          "g": 14,
           "gs": null,
           "w": 1,
           "l": 4,
-          "sv": 0,
+          "sv": 1,
           "hld": 2,
-          "ip": 32.1,
-          "era": 5.29,
-          "whip": 1.43,
-          "so": 31,
-          "bb": 14,
-          "hr": 4,
-          "fip": 4.01
+          "ip": 33.1,
+          "era": 5.4,
+          "whip": 1.48,
+          "so": 32,
+          "bb": 15,
+          "hr": 5,
+          "fip": 4.24
         },
         {
           "name": "増居翔太",
@@ -1655,20 +1631,20 @@
     "伊藤将司": 3.59,
     "ドリス": 2.65,
     "木下里都": 3.26,
+    "西勇輝": 4.13,
     "岩崎優": 3.29,
     "伊原陵人": 3.86,
-    "西勇輝": 4.12,
     "下村海翔": 3.48,
     "及川雅貴": 4.19,
     "湯浅京己": 3.58,
+    "桐敷拓馬": 4.03,
     "ルーカス": 3.78,
-    "桐敷拓馬": 3.98,
     "門別啓人": 3.83,
     "石黒佑弥": 3.52,
     "モレッタ": 3.8,
     "早川太貴": 4.13,
+    "山野太一": 3.05,
     "奥川恭伸": 3.46,
-    "山野太一": 3.12,
     "吉村貢司郎": 4.43,
     "松本健吾": 3.42,
     "高橋奎二": 3.83,
@@ -1678,8 +1654,8 @@
     "キハダ": 3.85,
     "廣澤優": 3.26,
     "丸山翔大": 3.23,
-    "清水昇": 2.92,
-    "ウォルターズ": 4.01,
+    "清水昇": 2.89,
+    "ウォルターズ": 4.24,
     "増居翔太": 3.92,
     "リランソ": 3.43,
     "荘司宏太": 3.31,
@@ -1701,7 +1677,7 @@
     },
     "ヤクルト": {
       "w": 13,
-      "l": 6,
+      "l": 7,
       "d": 0
     },
     "広島": {
@@ -1717,16 +1693,16 @@
   },
   "park_stats": {
     "東京ドーム": {
-      "g": 9,
-      "w": 7,
+      "g": 12,
+      "w": 10,
       "l": 2,
       "d": 0,
-      "rf": 49,
-      "ra": 20,
+      "rf": 65,
+      "ra": 27,
       "home": false,
-      "pct": 0.778,
-      "rf_avg": 5.44,
-      "ra_avg": 2.22
+      "pct": 0.833,
+      "rf_avg": 5.42,
+      "ra_avg": 2.25
     },
     "京セラD大阪": {
       "g": 12,
@@ -1753,28 +1729,28 @@
       "ra_avg": 3.0
     },
     "甲子園": {
-      "g": 33,
-      "w": 19,
-      "l": 13,
+      "g": 46,
+      "w": 24,
+      "l": 21,
       "d": 1,
-      "rf": 101,
-      "ra": 82,
+      "rf": 134,
+      "ra": 129,
       "home": true,
-      "pct": 0.594,
-      "rf_avg": 3.06,
-      "ra_avg": 2.48
+      "pct": 0.533,
+      "rf_avg": 2.91,
+      "ra_avg": 2.8
     },
     "バンテリン": {
-      "g": 9,
-      "w": 6,
-      "l": 3,
+      "g": 12,
+      "w": 7,
+      "l": 5,
       "d": 0,
-      "rf": 36,
-      "ra": 26,
+      "rf": 44,
+      "ra": 40,
       "home": false,
-      "pct": 0.667,
-      "rf_avg": 4.0,
-      "ra_avg": 2.89
+      "pct": 0.583,
+      "rf_avg": 3.67,
+      "ra_avg": 3.33
     },
     "横浜": {
       "g": 9,
@@ -1789,16 +1765,40 @@
       "ra_avg": 5.33
     },
     "神宮": {
-      "g": 7,
-      "w": 6,
+      "g": 10,
+      "w": 7,
+      "l": 3,
+      "d": 0,
+      "rf": 53,
+      "ra": 32,
+      "home": false,
+      "pct": 0.7,
+      "rf_avg": 5.3,
+      "ra_avg": 3.2
+    },
+    "倉敷": {
+      "g": 1,
+      "w": 1,
+      "l": 0,
+      "d": 0,
+      "rf": 4,
+      "ra": 2,
+      "home": true,
+      "pct": 1.0,
+      "rf_avg": 4.0,
+      "ra_avg": 2.0
+    },
+    "ZOZOマリン": {
+      "g": 3,
+      "w": 2,
       "l": 1,
       "d": 0,
-      "rf": 38,
-      "ra": 23,
+      "rf": 7,
+      "ra": 7,
       "home": false,
-      "pct": 0.857,
-      "rf_avg": 5.43,
-      "ra_avg": 3.29
+      "pct": 0.667,
+      "rf_avg": 2.33,
+      "ra_avg": 2.33
     },
     "PayPayドーム": {
       "g": 3,
@@ -2181,6 +2181,341 @@
       "score": [
         10,
         2
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-01",
+      "opponent": "巨人",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        3,
+        5
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-02",
+      "opponent": "巨人",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "14:00",
+      "score": [
+        7,
+        5
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-03",
+      "opponent": "巨人",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "14:00",
+      "score": [
+        3,
+        0
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-04",
+      "opponent": "中日",
+      "venue": "バンテリン",
+      "home": false,
+      "start_time": "14:30",
+      "score": [
+        3,
+        7
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-05",
+      "opponent": "中日",
+      "venue": "バンテリン",
+      "home": false,
+      "start_time": "14:00",
+      "score": [
+        3,
+        7
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-06",
+      "opponent": "中日",
+      "venue": "バンテリン",
+      "home": false,
+      "start_time": "14:00",
+      "score": [
+        2,
+        0
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-08",
+      "opponent": "ＤｅＮＡ",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        1,
+        10
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-09",
+      "opponent": "ＤｅＮＡ",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "14:00",
+      "score": [
+        1,
+        3
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-10",
+      "opponent": "ＤｅＮＡ",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "14:00",
+      "score": [
+        3,
+        0
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-12",
+      "opponent": "ヤクルト",
+      "venue": "神宮",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        10,
+        0
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-13",
+      "opponent": "ヤクルト",
+      "venue": "神宮",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        2,
+        4
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-15",
+      "opponent": "広島",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        0,
+        2
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-16",
+      "opponent": "広島",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "14:00",
+      "score": [
+        3,
+        1
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-17",
+      "opponent": "広島",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "14:00",
+      "score": [
+        0,
+        1
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-19",
+      "opponent": "中日",
+      "venue": "倉敷",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        4,
+        2
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-20",
+      "opponent": "中日",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        8,
+        7
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-21",
+      "opponent": "中日",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": null,
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-22",
+      "opponent": "巨人",
+      "venue": "東京ドーム",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        7,
+        4
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-23",
+      "opponent": "巨人",
+      "venue": "東京ドーム",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        3,
+        0
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-24",
+      "opponent": "巨人",
+      "venue": "東京ドーム",
+      "home": false,
+      "start_time": "14:00",
+      "score": [
+        6,
+        3
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-26",
+      "opponent": "日本ハム",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        0,
+        4
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-27",
+      "opponent": "日本ハム",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        2,
+        5
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-28",
+      "opponent": "日本ハム",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        2,
+        4
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-29",
+      "opponent": "ロッテ",
+      "venue": "ZOZOマリン",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        1,
+        0
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-30",
+      "opponent": "ロッテ",
+      "venue": "ZOZOマリン",
+      "home": false,
+      "start_time": "14:00",
+      "score": [
+        4,
+        3
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-05-31",
+      "opponent": "ロッテ",
+      "venue": "ZOZOマリン",
+      "home": false,
+      "start_time": "13:00",
+      "score": [
+        2,
+        4
       ],
       "hanshin_starter": null,
       "opponent_starter": null
@@ -3149,9 +3484,12 @@
       "venue": "神宮",
       "home": false,
       "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": "西勇",
-      "opponent_starter": "山野"
+      "score": [
+        3,
+        5
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
     },
     {
       "date": "2026-09-03",
@@ -3160,8 +3498,8 @@
       "home": false,
       "start_time": "18:00",
       "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
+      "hanshin_starter": "伊藤将",
+      "opponent_starter": "増居"
     },
     {
       "date": "2026-09-05",
