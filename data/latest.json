@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-08T22:38:08+09:00",
+  "updated_at": "2026-09-09T09:09:58+09:00",
   "season": 2026,
-  "target_date": "2026-09-08",
+  "target_date": "2026-09-09",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -45,112 +45,82 @@
       {
         "team": "巨人",
         "league": "セ",
-        "g": 124,
+        "g": 125,
         "w": 67,
-        "l": 55,
+        "l": 56,
         "d": 2,
-        "pct": 0.549,
-        "gb": "2.5",
+        "pct": 0.545,
+        "gb": "3.0",
         "rf": null,
         "ra": null,
         "run_diff": null,
-        "home_rec": "31-29(2)",
+        "home_rec": "31-30(2)",
         "road_rec": "36-26",
         "hr": null,
         "avg": null,
         "era": null,
         "rank": 2,
-        "balance": 12,
+        "balance": 11,
         "last10": {
-          "w": 6,
-          "l": 4,
+          "w": 5,
+          "l": 5,
           "d": 0
         },
         "streak": {
-          "type": "win",
-          "n": 3,
-          "label": "3連勝"
+          "type": "lose",
+          "n": 1,
+          "label": "1連敗"
         }
       },
       {
         "team": "ＤｅＮＡ",
         "league": "セ",
-        "g": 122,
+        "g": 123,
         "w": 57,
-        "l": 62,
+        "l": 63,
         "d": 3,
-        "pct": 0.479,
-        "gb": "11.0",
+        "pct": 0.475,
+        "gb": "11.5",
         "rf": null,
         "ra": null,
         "run_diff": null,
-        "home_rec": "29-25(3)",
+        "home_rec": "29-26(3)",
         "road_rec": "28-37",
         "hr": null,
         "avg": null,
         "era": null,
         "rank": 3,
-        "balance": -5,
+        "balance": -6,
         "last10": {
           "w": 7,
           "l": 3,
           "d": 0
         },
         "streak": {
-          "type": "win",
-          "n": 3,
-          "label": "3連勝"
+          "type": "lose",
+          "n": 1,
+          "label": "1連敗"
         }
       },
       {
         "team": "ヤクルト",
         "league": "セ",
-        "g": 122,
-        "w": 53,
+        "g": 123,
+        "w": 54,
         "l": 67,
         "d": 2,
-        "pct": 0.442,
-        "gb": "15.5",
+        "pct": 0.446,
+        "gb": "15.0",
         "rf": null,
         "ra": null,
         "run_diff": null,
         "home_rec": "25-33(2)",
-        "road_rec": "28-34",
+        "road_rec": "29-34",
         "hr": null,
         "avg": null,
         "era": null,
         "rank": 4,
-        "balance": -14,
-        "last10": {
-          "w": 3,
-          "l": 7,
-          "d": 0
-        },
-        "streak": {
-          "type": "lose",
-          "n": 2,
-          "label": "2連敗"
-        }
-      },
-      {
-        "team": "中日",
-        "league": "セ",
-        "g": 126,
-        "w": 53,
-        "l": 71,
-        "d": 2,
-        "pct": 0.427,
-        "gb": "17.5",
-        "rf": null,
-        "ra": null,
-        "run_diff": null,
-        "home_rec": "36-32",
-        "road_rec": "17-39(2)",
-        "hr": null,
-        "avg": null,
-        "era": null,
-        "rank": 5,
-        "balance": -18,
+        "balance": -13,
         "last10": {
           "w": 4,
           "l": 6,
@@ -160,6 +130,36 @@
           "type": "win",
           "n": 1,
           "label": "1連勝"
+        }
+      },
+      {
+        "team": "中日",
+        "league": "セ",
+        "g": 127,
+        "w": 54,
+        "l": 71,
+        "d": 2,
+        "pct": 0.432,
+        "gb": "17.0",
+        "rf": null,
+        "ra": null,
+        "run_diff": null,
+        "home_rec": "36-32",
+        "road_rec": "18-39(2)",
+        "hr": null,
+        "avg": null,
+        "era": null,
+        "rank": 5,
+        "balance": -17,
+        "last10": {
+          "w": 4,
+          "l": 6,
+          "d": 0
+        },
+        "streak": {
+          "type": "win",
+          "n": 2,
+          "label": "2連勝"
         }
       },
       {
@@ -208,35 +208,35 @@
     },
     "ＤｅＮＡ": {
       "avg": 0.244,
-      "obp": 0.308,
-      "slg": 0.367,
-      "ops": 0.675,
+      "obp": 0.307,
+      "slg": 0.366,
+      "ops": 0.673,
       "hr": 100,
-      "runs": 464,
+      "runs": 465,
       "era": 3.4,
-      "so": 999,
+      "so": 1008,
       "whip": 1.24
     },
     "ヤクルト": {
-      "avg": 0.236,
+      "avg": 0.235,
       "obp": 0.297,
-      "slg": 0.334,
-      "ops": 0.631,
+      "slg": 0.333,
+      "ops": 0.63,
       "hr": 72,
-      "runs": 386,
-      "era": 3.59,
-      "so": 945,
+      "runs": 389,
+      "era": 3.56,
+      "so": 953,
       "whip": 1.22
     },
     "巨人": {
       "avg": 0.235,
       "obp": 0.295,
-      "slg": 0.35,
-      "ops": 0.645,
+      "slg": 0.349,
+      "ops": 0.644,
       "hr": 91,
       "runs": 426,
-      "era": 2.9,
-      "so": 1001,
+      "era": 2.87,
+      "so": 1007,
       "whip": 1.19
     },
     "中日": {
@@ -244,10 +244,10 @@
       "obp": 0.301,
       "slg": 0.352,
       "ops": 0.653,
-      "hr": 107,
-      "runs": 419,
-      "era": 3.25,
-      "so": 993,
+      "hr": 108,
+      "runs": 422,
+      "era": 3.22,
+      "so": 998,
       "whip": 1.23
     },
     "広島": {
@@ -264,30 +264,6 @@
   },
   "probables": [
     {
-      "date": "2026-09-08",
-      "opponent": "広島",
-      "card": "対広島",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "hanshin_pitcher": "才木浩人",
-      "opponent_pitcher": "床田寛樹",
-      "score": null,
-      "hanshin_fip": 2.76,
-      "opponent_fip": 3.9,
-      "weather": {
-        "park": "甲子園",
-        "dome": false,
-        "temp": 26.0,
-        "pop": 98,
-        "wind_speed": 3.3,
-        "wind_deg": 40,
-        "hamakaze": 0.0,
-        "at": "2026-09-08T18:00"
-      },
-      "wind": 0.0
-    },
-    {
       "date": "2026-09-09",
       "opponent": "広島",
       "card": "対広島",
@@ -302,12 +278,36 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 26.0,
-        "pop": 98,
-        "wind_speed": 3.3,
-        "wind_deg": 40,
+        "temp": 23.5,
+        "pop": 69,
+        "wind_speed": 2.9,
+        "wind_deg": 8,
         "hamakaze": 0.0,
-        "at": "2026-09-08T18:00"
+        "at": "2026-09-09T18:00"
+      },
+      "wind": 0.0
+    },
+    {
+      "date": "2026-09-10",
+      "opponent": "広島",
+      "card": "対広島",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "hanshin_pitcher": null,
+      "opponent_pitcher": null,
+      "score": null,
+      "hanshin_fip": null,
+      "opponent_fip": null,
+      "weather": {
+        "park": "甲子園",
+        "dome": false,
+        "temp": 23.5,
+        "pop": 69,
+        "wind_speed": 2.9,
+        "wind_deg": 8,
+        "hamakaze": 0.0,
+        "at": "2026-09-09T18:00"
       },
       "wind": 0.0
     }
@@ -3202,8 +3202,8 @@
       "home": true,
       "start_time": "18:00",
       "score": null,
-      "hanshin_starter": "才木",
-      "opponent_starter": "床田"
+      "hanshin_starter": null,
+      "opponent_starter": null
     },
     {
       "date": "2026-09-09",
@@ -3212,8 +3212,8 @@
       "home": true,
       "start_time": "18:00",
       "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
+      "hanshin_starter": "髙橋",
+      "opponent_starter": "床田"
     },
     {
       "date": "2026-09-10",
