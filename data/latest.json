@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-13T17:09:03+09:00",
+  "updated_at": "2026-09-13T22:31:33+09:00",
   "season": 2026,
   "target_date": "2026-09-13",
   "sources": {
@@ -278,14 +278,14 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 27.5,
-        "pop": 29,
-        "wind_speed": 5.0,
-        "wind_deg": 239,
-        "hamakaze": 4.9,
+        "temp": 27.4,
+        "pop": 10,
+        "wind_speed": 3.8,
+        "wind_deg": 238,
+        "hamakaze": 3.7,
         "at": "2026-09-13T18:00"
       },
-      "wind": 4.9
+      "wind": 3.7
     },
     {
       "date": "2026-09-14",
@@ -294,22 +294,22 @@
       "venue": "甲子園",
       "home": true,
       "start_time": "18:00",
-      "hanshin_pitcher": null,
-      "opponent_pitcher": null,
+      "hanshin_pitcher": "伊藤将司",
+      "opponent_pitcher": "マラー",
       "score": null,
-      "hanshin_fip": null,
-      "opponent_fip": null,
+      "hanshin_fip": 3.71,
+      "opponent_fip": 3.47,
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 27.5,
-        "pop": 29,
-        "wind_speed": 5.0,
-        "wind_deg": 239,
-        "hamakaze": 4.9,
+        "temp": 27.4,
+        "pop": 10,
+        "wind_speed": 3.8,
+        "wind_deg": 238,
+        "hamakaze": 3.7,
         "at": "2026-09-13T18:00"
       },
-      "wind": 4.9
+      "wind": 3.7
     }
   ],
   "players": {
