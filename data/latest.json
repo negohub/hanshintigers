@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-14T11:47:43+09:00",
+  "updated_at": "2026-09-14T17:43:29+09:00",
   "season": 2026,
   "target_date": "2026-09-14",
   "sources": {
@@ -278,14 +278,14 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 28.0,
+        "temp": 26.4,
         "pop": 69,
-        "wind_speed": 4.1,
-        "wind_deg": 229,
-        "hamakaze": 4.1,
+        "wind_speed": 2.1,
+        "wind_deg": 76,
+        "hamakaze": 0.0,
         "at": "2026-09-14T18:00"
       },
-      "wind": 4.1
+      "wind": 0.0
     },
     {
       "date": "2026-09-15",
@@ -294,22 +294,22 @@
       "venue": "甲子園",
       "home": true,
       "start_time": "18:00",
-      "hanshin_pitcher": null,
-      "opponent_pitcher": null,
+      "hanshin_pitcher": "ルーカス",
+      "opponent_pitcher": "柳裕也",
       "score": null,
-      "hanshin_fip": null,
-      "opponent_fip": null,
+      "hanshin_fip": 3.78,
+      "opponent_fip": 3.35,
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 28.0,
+        "temp": 26.4,
         "pop": 69,
-        "wind_speed": 4.1,
-        "wind_deg": 229,
-        "hamakaze": 4.1,
+        "wind_speed": 2.1,
+        "wind_deg": 76,
+        "hamakaze": 0.0,
         "at": "2026-09-14T18:00"
       },
-      "wind": 4.1
+      "wind": 0.0
     }
   ],
   "players": {
