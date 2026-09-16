@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-16T11:45:38+09:00",
+  "updated_at": "2026-09-16T17:25:30+09:00",
   "season": 2026,
   "target_date": "2026-09-16",
   "sources": {
@@ -270,18 +270,18 @@
       "venue": "甲子園",
       "home": true,
       "start_time": "18:00",
-      "hanshin_pitcher": null,
-      "opponent_pitcher": null,
+      "hanshin_pitcher": "髙橋遥人",
+      "opponent_pitcher": "床田寛樹",
       "score": null,
-      "hanshin_fip": null,
-      "opponent_fip": null,
+      "hanshin_fip": 2.62,
+      "opponent_fip": 3.84,
       "weather": {
         "park": "甲子園",
         "dome": false,
         "temp": 23.2,
-        "pop": 90,
-        "wind_speed": 2.8,
-        "wind_deg": 17,
+        "pop": 88,
+        "wind_speed": 1.9,
+        "wind_deg": 58,
         "hamakaze": 0.0,
         "at": "2026-09-16T18:00"
       },
@@ -3701,16 +3701,6 @@
       "venue": "横浜",
       "home": false,
       "start_time": "14:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-09-27",
-      "opponent": "中日",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
       "score": null,
       "hanshin_starter": null,
       "opponent_starter": null
