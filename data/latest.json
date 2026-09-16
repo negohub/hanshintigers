@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-16T17:25:30+09:00",
+  "updated_at": "2026-09-16T22:49:07+09:00",
   "season": 2026,
   "target_date": "2026-09-16",
   "sources": {
@@ -278,10 +278,10 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 23.2,
-        "pop": 88,
-        "wind_speed": 1.9,
-        "wind_deg": 58,
+        "temp": 23.1,
+        "pop": 100,
+        "wind_speed": 2.6,
+        "wind_deg": 32,
         "hamakaze": 0.0,
         "at": "2026-09-16T18:00"
       },
