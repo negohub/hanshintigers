@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-17T22:52:58+09:00",
+  "updated_at": "2026-09-18T01:36:47+09:00",
   "season": 2026,
-  "target_date": "2026-09-17",
+  "target_date": "2026-09-18",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -264,30 +264,6 @@
   },
   "probables": [
     {
-      "date": "2026-09-17",
-      "opponent": "広島",
-      "card": "対広島",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "hanshin_pitcher": "髙橋遥人",
-      "opponent_pitcher": "床田寛樹",
-      "score": null,
-      "hanshin_fip": 2.62,
-      "opponent_fip": 3.84,
-      "weather": {
-        "park": "甲子園",
-        "dome": false,
-        "temp": 25.9,
-        "pop": 0,
-        "wind_speed": 3.6,
-        "wind_deg": 9,
-        "hamakaze": 0.0,
-        "at": "2026-09-17T18:00"
-      },
-      "wind": 0.0
-    },
-    {
       "date": "2026-09-18",
       "opponent": "広島",
       "card": "対広島",
@@ -302,12 +278,36 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 25.9,
-        "pop": 0,
-        "wind_speed": 3.6,
-        "wind_deg": 9,
+        "temp": 25.6,
+        "pop": 16,
+        "wind_speed": 2.2,
+        "wind_deg": 58,
         "hamakaze": 0.0,
-        "at": "2026-09-17T18:00"
+        "at": "2026-09-18T18:00"
+      },
+      "wind": 0.0
+    },
+    {
+      "date": "2026-09-19",
+      "opponent": "広島",
+      "card": "対広島",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "hanshin_pitcher": null,
+      "opponent_pitcher": null,
+      "score": null,
+      "hanshin_fip": null,
+      "opponent_fip": null,
+      "weather": {
+        "park": "甲子園",
+        "dome": false,
+        "temp": 25.6,
+        "pop": 16,
+        "wind_speed": 2.2,
+        "wind_deg": 58,
+        "hamakaze": 0.0,
+        "at": "2026-09-18T18:00"
       },
       "wind": 0.0
     }
