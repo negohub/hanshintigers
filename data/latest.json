@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-20T00:40:58+09:00",
+  "updated_at": "2026-09-20T02:20:44+09:00",
   "season": 2026,
   "target_date": "2026-09-20",
   "sources": {
@@ -278,10 +278,10 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 25.4,
+        "temp": 25.3,
         "pop": 0,
-        "wind_speed": 6.5,
-        "wind_deg": 15,
+        "wind_speed": 6.4,
+        "wind_deg": 16,
         "hamakaze": 0.0,
         "at": "2026-09-20T18:00"
       },
@@ -302,9 +302,9 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 27.9,
+        "temp": 27.1,
         "pop": 1,
-        "wind_speed": 6.0,
+        "wind_speed": 6.1,
         "wind_deg": 18,
         "hamakaze": 0.0,
         "at": "2026-09-20T14:00"
