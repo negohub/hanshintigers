@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-22T22:44:49+09:00",
+  "updated_at": "2026-09-23T01:38:20+09:00",
   "season": 2026,
-  "target_date": "2026-09-22",
+  "target_date": "2026-09-23",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -264,30 +264,6 @@
   },
   "probables": [
     {
-      "date": "2026-09-22",
-      "opponent": "ヤクルト",
-      "card": "対ヤクルト",
-      "venue": "神宮",
-      "home": false,
-      "start_time": "18:00",
-      "hanshin_pitcher": "伊藤将司",
-      "opponent_pitcher": "松本健吾",
-      "score": null,
-      "hanshin_fip": 3.89,
-      "opponent_fip": 3.43,
-      "weather": {
-        "park": "神宮",
-        "dome": false,
-        "temp": 26.0,
-        "pop": 25,
-        "wind_speed": 1.5,
-        "wind_deg": 118,
-        "hamakaze": 0.7,
-        "at": "2026-09-22T18:00"
-      },
-      "wind": 0.7
-    },
-    {
       "date": "2026-09-23",
       "opponent": "ヤクルト",
       "card": "対ヤクルト",
@@ -302,12 +278,12 @@
       "weather": {
         "park": "神宮",
         "dome": false,
-        "temp": 30.6,
-        "pop": 6,
-        "wind_speed": 0.9,
-        "wind_deg": 72,
+        "temp": 20.7,
+        "pop": 60,
+        "wind_speed": 1.2,
+        "wind_deg": 351,
         "hamakaze": 0.0,
-        "at": "2026-09-22T14:00"
+        "at": "2026-09-23T14:00"
       },
       "wind": 0.0
     }
