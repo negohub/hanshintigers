@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-25T17:40:05+09:00",
+  "updated_at": "2026-09-25T23:15:37+09:00",
   "season": 2026,
   "target_date": "2026-09-25",
   "sources": {
@@ -278,14 +278,14 @@
       "weather": {
         "park": "横浜",
         "dome": false,
-        "temp": 23.8,
+        "temp": 23.9,
         "pop": 16,
-        "wind_speed": 1.9,
-        "wind_deg": 196,
-        "hamakaze": 1.8,
+        "wind_speed": 2.2,
+        "wind_deg": 180,
+        "hamakaze": 2.2,
         "at": "2026-09-25T18:00"
       },
-      "wind": 1.8
+      "wind": 2.2
     },
     {
       "date": "2026-09-26",
@@ -1717,88 +1717,88 @@
   },
   "park_stats": {
     "東京ドーム": {
-      "g": 7,
-      "w": 4,
+      "g": 10,
+      "w": 7,
       "l": 3,
       "d": 0,
-      "rf": 32,
-      "ra": 17,
-      "home": false,
-      "pct": 0.571,
-      "rf_avg": 4.57,
-      "ra_avg": 2.43
-    },
-    "京セラD大阪": {
-      "g": 6,
-      "w": 3,
-      "l": 3,
-      "d": 0,
-      "rf": 18,
-      "ra": 16,
-      "home": true,
-      "pct": 0.5,
-      "rf_avg": 3.0,
-      "ra_avg": 2.67
-    },
-    "マツダ": {
-      "g": 8,
-      "w": 5,
-      "l": 3,
-      "d": 0,
-      "rf": 35,
+      "rf": 49,
       "ra": 21,
       "home": false,
-      "pct": 0.625,
-      "rf_avg": 4.38,
-      "ra_avg": 2.62
+      "pct": 0.7,
+      "rf_avg": 4.9,
+      "ra_avg": 2.1
     },
-    "甲子園": {
-      "g": 41,
-      "w": 20,
-      "l": 20,
-      "d": 1,
-      "rf": 116,
-      "ra": 111,
-      "home": true,
-      "pct": 0.5,
-      "rf_avg": 2.83,
-      "ra_avg": 2.71
-    },
-    "バンテリン": {
-      "g": 6,
-      "w": 5,
-      "l": 1,
-      "d": 0,
-      "rf": 30,
-      "ra": 15,
-      "home": false,
-      "pct": 0.833,
-      "rf_avg": 5.0,
-      "ra_avg": 2.5
-    },
-    "横浜": {
-      "g": 4,
-      "w": 2,
-      "l": 2,
+    "京セラD大阪": {
+      "g": 12,
+      "w": 6,
+      "l": 6,
       "d": 0,
       "rf": 28,
-      "ra": 27,
-      "home": false,
+      "ra": 33,
+      "home": true,
       "pct": 0.5,
-      "rf_avg": 7.0,
-      "ra_avg": 6.75
+      "rf_avg": 2.33,
+      "ra_avg": 2.75
     },
-    "神宮": {
+    "マツダ": {
+      "g": 11,
+      "w": 6,
+      "l": 5,
+      "d": 0,
+      "rf": 46,
+      "ra": 33,
+      "home": false,
+      "pct": 0.545,
+      "rf_avg": 4.18,
+      "ra_avg": 3.0
+    },
+    "甲子園": {
+      "g": 44,
+      "w": 23,
+      "l": 20,
+      "d": 1,
+      "rf": 127,
+      "ra": 114,
+      "home": true,
+      "pct": 0.535,
+      "rf_avg": 2.89,
+      "ra_avg": 2.59
+    },
+    "バンテリン": {
       "g": 9,
-      "w": 7,
-      "l": 2,
+      "w": 6,
+      "l": 3,
+      "d": 0,
+      "rf": 36,
+      "ra": 26,
+      "home": false,
+      "pct": 0.667,
+      "rf_avg": 4.0,
+      "ra_avg": 2.89
+    },
+    "横浜": {
+      "g": 9,
+      "w": 5,
+      "l": 4,
       "d": 0,
       "rf": 54,
-      "ra": 37,
+      "ra": 48,
       "home": false,
-      "pct": 0.778,
+      "pct": 0.556,
       "rf_avg": 6.0,
-      "ra_avg": 4.11
+      "ra_avg": 5.33
+    },
+    "神宮": {
+      "g": 11,
+      "w": 9,
+      "l": 2,
+      "d": 0,
+      "rf": 65,
+      "ra": 43,
+      "home": false,
+      "pct": 0.818,
+      "rf_avg": 5.91,
+      "ra_avg": 3.91
     },
     "PayPayドーム": {
       "g": 3,
@@ -1811,18 +1811,6 @@
       "pct": 0.0,
       "rf_avg": 2.67,
       "ra_avg": 6.33
-    },
-    "ж®TMгААжμЬ": {
-      "g": 5,
-      "w": 3,
-      "l": 2,
-      "d": 0,
-      "rf": 26,
-      "ra": 21,
-      "home": false,
-      "pct": 0.6,
-      "rf_avg": 5.2,
-      "ra_avg": 4.2
     }
   },
   "season_games": [
@@ -2808,9 +2796,35 @@
       "opponent_starter": null
     },
     {
+      "date": "2026-08-01",
+      "opponent": "ヤクルト",
+      "venue": "神宮",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        7,
+        3
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-02",
+      "opponent": "ヤクルト",
+      "venue": "神宮",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        4,
+        3
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
       "date": "2026-08-04",
       "opponent": "ＤｅＮＡ",
-      "venue": "ж®TMгААжμЬ",
+      "venue": "横浜",
       "home": false,
       "start_time": "17:45",
       "score": [
@@ -2823,7 +2837,7 @@
     {
       "date": "2026-08-05",
       "opponent": "ＤｅＮＡ",
-      "venue": "ж®TMгААжμЬ",
+      "venue": "横浜",
       "home": false,
       "start_time": "17:45",
       "score": [
@@ -2836,7 +2850,7 @@
     {
       "date": "2026-08-06",
       "opponent": "ＤｅＮＡ",
-      "venue": "ж®TMгААжμЬ",
+      "venue": "横浜",
       "home": false,
       "start_time": "17:45",
       "score": [
@@ -2847,9 +2861,165 @@
       "opponent_starter": null
     },
     {
+      "date": "2026-08-07",
+      "opponent": "中日",
+      "venue": "京セラD大阪",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        2,
+        3
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-08",
+      "opponent": "中日",
+      "venue": "京セラD大阪",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        1,
+        7
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-09",
+      "opponent": "中日",
+      "venue": "京セラD大阪",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        1,
+        0
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-11",
+      "opponent": "巨人",
+      "venue": "東京ドーム",
+      "home": false,
+      "start_time": "14:00",
+      "score": [
+        9,
+        1
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-12",
+      "opponent": "巨人",
+      "venue": "東京ドーム",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        5,
+        1
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-13",
+      "opponent": "巨人",
+      "venue": "東京ドーム",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        3,
+        2
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-14",
+      "opponent": "広島",
+      "venue": "マツダ",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        1,
+        6
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-15",
+      "opponent": "広島",
+      "venue": "マツダ",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        2,
+        5
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-16",
+      "opponent": "広島",
+      "venue": "マツダ",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        8,
+        1
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-18",
+      "opponent": "ヤクルト",
+      "venue": "京セラD大阪",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        3,
+        2
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-19",
+      "opponent": "ヤクルト",
+      "venue": "京セラD大阪",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        2,
+        1
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-20",
+      "opponent": "ヤクルト",
+      "venue": "京セラD大阪",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        1,
+        4
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
       "date": "2026-08-21",
       "opponent": "ＤｅＮＡ",
-      "venue": "ж®TMгААжμЬ",
+      "venue": "横浜",
       "home": false,
       "start_time": "18:00",
       "score": [
@@ -2862,7 +3032,7 @@
     {
       "date": "2026-08-22",
       "opponent": "ＤｅＮＡ",
-      "venue": "ж®TMгААжμЬ",
+      "venue": "横浜",
       "home": false,
       "start_time": "18:00",
       "score": null,
@@ -2872,12 +3042,90 @@
     {
       "date": "2026-08-23",
       "opponent": "ＤｅＮＡ",
-      "venue": "ж®TMгААжμЬ",
+      "venue": "横浜",
       "home": false,
       "start_time": "18:00",
       "score": [
         5,
         3
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-25",
+      "opponent": "中日",
+      "venue": "バンテリン",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        2,
+        4
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-26",
+      "opponent": "中日",
+      "venue": "バンテリン",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        0,
+        4
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-27",
+      "opponent": "中日",
+      "venue": "バンテリン",
+      "home": false,
+      "start_time": "18:00",
+      "score": [
+        4,
+        3
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-28",
+      "opponent": "巨人",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        4,
+        1
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-29",
+      "opponent": "巨人",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        4,
+        1
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-08-30",
+      "opponent": "巨人",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": [
+        3,
+        1
       ],
       "hanshin_starter": null,
       "opponent_starter": null
