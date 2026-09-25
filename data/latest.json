@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-26T01:55:12+09:00",
+  "updated_at": "2026-09-26T03:00:14+09:00",
   "season": 2026,
   "target_date": "2026-09-26",
   "sources": {
@@ -37,9 +37,9 @@
           "d": 0
         },
         "streak": {
-          "type": "win",
-          "n": 4,
-          "label": "4連勝"
+          "type": "lose",
+          "n": 1,
+          "label": "1連敗"
         }
       },
       {
@@ -62,14 +62,14 @@
         "rank": 2,
         "balance": 13,
         "last10": {
-          "w": 5,
-          "l": 5,
+          "w": 4,
+          "l": 6,
           "d": 0
         },
         "streak": {
           "type": "lose",
-          "n": 1,
-          "label": "1連敗"
+          "n": 2,
+          "label": "2連敗"
         }
       },
       {
@@ -98,8 +98,8 @@
         },
         "streak": {
           "type": "win",
-          "n": 2,
-          "label": "2連勝"
+          "n": 3,
+          "label": "3連勝"
         }
       },
       {
@@ -128,8 +128,8 @@
         },
         "streak": {
           "type": "lose",
-          "n": 2,
-          "label": "2連敗"
+          "n": 3,
+          "label": "3連敗"
         }
       },
       {
@@ -157,9 +157,9 @@
           "d": 0
         },
         "streak": {
-          "type": "lose",
-          "n": 4,
-          "label": "4連敗"
+          "type": "win",
+          "n": 1,
+          "label": "1連勝"
         }
       },
       {
@@ -188,8 +188,8 @@
         },
         "streak": {
           "type": "win",
-          "n": 1,
-          "label": "1連勝"
+          "n": 2,
+          "label": "2連勝"
         }
       }
     ]
@@ -278,10 +278,10 @@
       "weather": {
         "park": "横浜",
         "dome": false,
-        "temp": 19.6,
+        "temp": 19.5,
         "pop": 98,
-        "wind_speed": 2.9,
-        "wind_deg": 350,
+        "wind_speed": 2.5,
+        "wind_deg": 9,
         "hamakaze": 0.0,
         "at": "2026-09-26T14:00"
       },
@@ -1753,16 +1753,16 @@
       "ra_avg": 2.89
     },
     "横浜": {
-      "g": 9,
+      "g": 10,
       "w": 5,
-      "l": 4,
+      "l": 5,
       "d": 0,
-      "rf": 54,
-      "ra": 48,
+      "rf": 55,
+      "ra": 50,
       "home": false,
-      "pct": 0.556,
-      "rf_avg": 6.0,
-      "ra_avg": 5.33
+      "pct": 0.5,
+      "rf_avg": 5.5,
+      "ra_avg": 5.0
     },
     "神宮": {
       "g": 11,
@@ -3353,9 +3353,12 @@
       "venue": "横浜",
       "home": false,
       "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": "村上",
-      "opponent_starter": "石田裕"
+      "score": [
+        1,
+        2
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
     },
     {
       "date": "2026-09-26",
@@ -3364,8 +3367,8 @@
       "home": false,
       "start_time": "14:00",
       "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
+      "hanshin_starter": "才木",
+      "opponent_starter": "尾形"
     },
     {
       "date": "2026-09-29",
