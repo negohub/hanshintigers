@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-27T11:58:55+09:00",
+  "updated_at": "2026-09-27T18:05:20+09:00",
   "season": 2026,
   "target_date": "2026-09-27",
   "sources": {
@@ -280,10 +280,10 @@
       "weather": {
         "park": "横浜",
         "dome": false,
-        "temp": 22.6,
-        "pop": 3,
-        "wind_speed": 1.0,
-        "wind_deg": 343,
+        "temp": 23.2,
+        "pop": 6,
+        "wind_speed": 1.1,
+        "wind_deg": 34,
         "hamakaze": 0.0,
         "at": "2026-09-27T14:00"
       },
