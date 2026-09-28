@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-29T02:09:34+09:00",
+  "updated_at": "2026-09-29T04:28:04+09:00",
   "season": 2026,
   "target_date": "2026-09-29",
   "sources": {
@@ -75,31 +75,61 @@
       {
         "team": "ＤｅＮＡ",
         "league": "セ",
-        "g": 140,
+        "g": 141,
         "w": 69,
-        "l": 68,
+        "l": 69,
         "d": 3,
-        "pct": 0.504,
-        "gb": "8.0",
+        "pct": 0.5,
+        "gb": "8.5",
         "rf": null,
         "ra": null,
         "run_diff": null,
-        "home_rec": "38-29(3)",
+        "home_rec": "38-30(3)",
         "road_rec": "31-39",
         "hr": null,
         "avg": null,
         "era": null,
         "rank": 3,
-        "balance": 1,
+        "balance": 0,
         "last10": {
-          "w": 5,
-          "l": 5,
+          "w": 4,
+          "l": 6,
           "d": 0
         },
         "streak": {
           "type": "lose",
-          "n": 2,
-          "label": "2連敗"
+          "n": 3,
+          "label": "3連敗"
+        }
+      },
+      {
+        "team": "広島",
+        "league": "セ",
+        "g": 137,
+        "w": 58,
+        "l": 75,
+        "d": 4,
+        "pct": 0.436,
+        "gb": "17.0",
+        "rf": null,
+        "ra": null,
+        "run_diff": null,
+        "home_rec": "32-36(1)",
+        "road_rec": "26-39(3)",
+        "hr": null,
+        "avg": null,
+        "era": null,
+        "rank": 4,
+        "balance": -17,
+        "last10": {
+          "w": 6,
+          "l": 4,
+          "d": 0
+        },
+        "streak": {
+          "type": "win",
+          "n": 4,
+          "label": "4連勝"
         }
       },
       {
@@ -119,7 +149,7 @@
         "hr": null,
         "avg": null,
         "era": null,
-        "rank": 4,
+        "rank": 5,
         "balance": -18,
         "last10": {
           "w": 3,
@@ -130,36 +160,6 @@
           "type": "lose",
           "n": 1,
           "label": "1連敗"
-        }
-      },
-      {
-        "team": "広島",
-        "league": "セ",
-        "g": 136,
-        "w": 57,
-        "l": 75,
-        "d": 4,
-        "pct": 0.432,
-        "gb": "17.5",
-        "rf": null,
-        "ra": null,
-        "run_diff": null,
-        "home_rec": "32-36(1)",
-        "road_rec": "25-39(3)",
-        "hr": null,
-        "avg": null,
-        "era": null,
-        "rank": 5,
-        "balance": -18,
-        "last10": {
-          "w": 5,
-          "l": 5,
-          "d": 0
-        },
-        "streak": {
-          "type": "win",
-          "n": 3,
-          "label": "3連勝"
         }
       },
       {
@@ -212,9 +212,9 @@
       "slg": 0.375,
       "ops": 0.684,
       "hr": 125,
-      "runs": 547,
-      "era": 3.29,
-      "so": 1147,
+      "runs": 550,
+      "era": 3.3,
+      "so": 1151,
       "whip": 1.25
     },
     "ヤクルト": {
@@ -253,12 +253,12 @@
     "広島": {
       "avg": 0.224,
       "obp": 0.288,
-      "slg": 0.322,
-      "ops": 0.61,
+      "slg": 0.323,
+      "ops": 0.611,
       "hr": 87,
-      "runs": 406,
+      "runs": 410,
       "era": 3.42,
-      "so": 1043,
+      "so": 1050,
       "whip": 1.23
     }
   },
@@ -271,7 +271,7 @@
       "home": true,
       "start_time": "18:00",
       "hanshin_pitcher": "大竹耕太郎",
-      "opponent_pitcher": "中村優斗",
+      "opponent_pitcher": "中村優",
       "score": null,
       "hanshin_fip": 3.46,
       "opponent_fip": null,
@@ -280,8 +280,8 @@
         "dome": false,
         "temp": 20.7,
         "pop": 57,
-        "wind_speed": 3.5,
-        "wind_deg": 32,
+        "wind_speed": 3.0,
+        "wind_deg": 37,
         "hamakaze": 0.0,
         "at": "2026-09-29T18:00"
       },
@@ -304,8 +304,8 @@
         "dome": false,
         "temp": 20.7,
         "pop": 57,
-        "wind_speed": 3.5,
-        "wind_deg": 32,
+        "wind_speed": 3.0,
+        "wind_deg": 37,
         "hamakaze": 0.0,
         "at": "2026-09-29T18:00"
       },
@@ -1699,15 +1699,15 @@
       "l": 11,
       "d": 0
     },
-    "ヤクルト": {
-      "w": 16,
-      "l": 7,
-      "d": 0
-    },
     "広島": {
       "w": 11,
       "l": 10,
       "d": 1
+    },
+    "ヤクルト": {
+      "w": 16,
+      "l": 7,
+      "d": 0
     },
     "中日": {
       "w": 14,
@@ -3763,8 +3763,8 @@
       "home": true,
       "start_time": "18:00",
       "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
+      "hanshin_starter": "大竹",
+      "opponent_starter": "中村優"
     },
     {
       "date": "2026-09-30",
