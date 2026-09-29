@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-29T18:37:42+09:00",
+  "updated_at": "2026-09-30T00:11:22+09:00",
   "season": 2026,
-  "target_date": "2026-09-29",
+  "target_date": "2026-09-30",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -264,30 +264,6 @@
   },
   "probables": [
     {
-      "date": "2026-09-29",
-      "opponent": "ヤクルト",
-      "card": "対ヤクルト",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "hanshin_pitcher": "大竹耕太郎",
-      "opponent_pitcher": "中村優",
-      "score": null,
-      "hanshin_fip": 3.46,
-      "opponent_fip": null,
-      "weather": {
-        "park": "甲子園",
-        "dome": false,
-        "temp": 20.0,
-        "pop": 78,
-        "wind_speed": 2.9,
-        "wind_deg": 56,
-        "hamakaze": 0.0,
-        "at": "2026-09-29T18:00"
-      },
-      "wind": 0.0
-    },
-    {
       "date": "2026-09-30",
       "opponent": "ヤクルト",
       "card": "対ヤクルト",
@@ -302,12 +278,12 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 20.0,
-        "pop": 78,
-        "wind_speed": 2.9,
-        "wind_deg": 56,
+        "temp": 24.9,
+        "pop": 0,
+        "wind_speed": 2.2,
+        "wind_deg": 60,
         "hamakaze": 0.0,
-        "at": "2026-09-29T18:00"
+        "at": "2026-09-30T18:00"
       },
       "wind": 0.0
     }
