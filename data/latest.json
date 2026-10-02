@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-02T12:30:27+09:00",
+  "updated_at": "2026-10-02T18:32:29+09:00",
   "season": 2026,
   "target_date": "2026-10-02",
   "sources": {
@@ -270,17 +270,17 @@
       "venue": "マツダ",
       "home": false,
       "start_time": "14:00",
-      "hanshin_pitcher": null,
-      "opponent_pitcher": null,
+      "hanshin_pitcher": "才木浩人",
+      "opponent_pitcher": "森下暢仁",
       "score": null,
-      "hanshin_fip": null,
-      "opponent_fip": null,
+      "hanshin_fip": 2.67,
+      "opponent_fip": 3.88,
       "weather": {
         "park": "マツダ",
         "dome": false,
-        "temp": 26.0,
+        "temp": 25.8,
         "pop": 0,
-        "wind_speed": 2.3,
+        "wind_speed": 2.5,
         "wind_deg": 2,
         "hamakaze": 0.0,
         "at": "2026-10-02T14:00"
@@ -3789,6 +3789,16 @@
       "opponent_starter": null
     },
     {
+      "date": "2026-10-05",
+      "opponent": "ＤｅＮＡ",
+      "venue": "横浜",
+      "home": false,
+      "start_time": "18:00",
+      "score": null,
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
       "date": "2026-10-06",
       "opponent": "広島",
       "venue": "甲子園",
@@ -3801,6 +3811,16 @@
     {
       "date": "2026-10-07",
       "opponent": "広島",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "score": null,
+      "hanshin_starter": null,
+      "opponent_starter": null
+    },
+    {
+      "date": "2026-10-08",
+      "opponent": "ヤクルト",
       "venue": "甲子園",
       "home": true,
       "start_time": "18:00",
