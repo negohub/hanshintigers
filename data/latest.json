@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-02T03:56:57+09:00",
+  "updated_at": "2026-10-02T12:30:27+09:00",
   "season": 2026,
   "target_date": "2026-10-02",
   "sources": {
@@ -278,10 +278,10 @@
       "weather": {
         "park": "マツダ",
         "dome": false,
-        "temp": 25.9,
+        "temp": 26.0,
         "pop": 0,
-        "wind_speed": 2.4,
-        "wind_deg": 358,
+        "wind_speed": 2.3,
+        "wind_deg": 2,
         "hamakaze": 0.0,
         "at": "2026-10-02T14:00"
       },
