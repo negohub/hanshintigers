@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-05T19:12:17+09:00",
+  "updated_at": "2026-10-06T02:32:08+09:00",
   "season": 2026,
-  "target_date": "2026-10-05",
+  "target_date": "2026-10-06",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -278,12 +278,36 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 20.1,
-        "pop": 94,
-        "wind_speed": 1.8,
-        "wind_deg": 49,
+        "temp": 22.0,
+        "pop": 0,
+        "wind_speed": 4.7,
+        "wind_deg": 359,
         "hamakaze": 0.0,
-        "at": "2026-10-05T18:00"
+        "at": "2026-10-06T18:00"
+      },
+      "wind": 0.0
+    },
+    {
+      "date": "2026-10-07",
+      "opponent": "広島",
+      "card": "対広島",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "18:00",
+      "hanshin_pitcher": null,
+      "opponent_pitcher": null,
+      "score": null,
+      "hanshin_fip": null,
+      "opponent_fip": null,
+      "weather": {
+        "park": "甲子園",
+        "dome": false,
+        "temp": 22.0,
+        "pop": 0,
+        "wind_speed": 4.7,
+        "wind_deg": 359,
+        "hamakaze": 0.0,
+        "at": "2026-10-06T18:00"
       },
       "wind": 0.0
     }
