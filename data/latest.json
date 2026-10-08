@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-08T19:15:40+09:00",
+  "updated_at": "2026-10-09T00:56:05+09:00",
   "season": 2026,
-  "target_date": "2026-10-08",
+  "target_date": "2026-10-09",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -9,7 +9,9 @@
     "probables": "baseball.yahoo.co.jp",
     "weather": "open-meteo.com"
   },
-  "errors": [],
+  "errors": [
+    "probables: 取得できず前回値を使用"
+  ],
   "standings": {
     "セ": [
       {
@@ -278,14 +280,14 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 23.8,
+        "temp": 25.0,
         "pop": 0,
-        "wind_speed": 3.2,
-        "wind_deg": 18,
-        "hamakaze": 0.0,
-        "at": "2026-10-08T18:00"
+        "wind_speed": 2.9,
+        "wind_deg": 224,
+        "hamakaze": 2.9,
+        "at": "2026-10-09T18:00"
       },
-      "wind": 0.0
+      "wind": 2.9
     }
   ],
   "players": {
