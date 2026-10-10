@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T02:10:15+09:00",
+  "updated_at": "2026-10-11T03:44:19+09:00",
   "season": 2026,
   "target_date": "2026-10-11",
   "sources": {
@@ -64,14 +64,14 @@
         "rank": 2,
         "balance": 12,
         "last10": {
-          "w": 5,
-          "l": 5,
+          "w": 4,
+          "l": 6,
           "d": 0
         },
         "streak": {
           "type": "lose",
-          "n": 2,
-          "label": "2連敗"
+          "n": 3,
+          "label": "3連敗"
         }
       },
       {
@@ -94,14 +94,14 @@
         "rank": 3,
         "balance": 2,
         "last10": {
-          "w": 5,
-          "l": 5,
+          "w": 6,
+          "l": 4,
           "d": 0
         },
         "streak": {
           "type": "win",
-          "n": 2,
-          "label": "2連勝"
+          "n": 3,
+          "label": "3連勝"
         }
       },
       {
@@ -280,10 +280,10 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 24.3,
+        "temp": 24.2,
         "pop": 0,
-        "wind_speed": 3.6,
-        "wind_deg": 11,
+        "wind_speed": 4.0,
+        "wind_deg": 10,
         "hamakaze": 0.0,
         "at": "2026-10-11T18:00"
       },
