@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-10T12:45:22+09:00",
+  "updated_at": "2026-10-10T18:37:06+09:00",
   "season": 2026,
   "target_date": "2026-10-10",
   "sources": {
@@ -282,12 +282,12 @@
         "dome": false,
         "temp": 24.2,
         "pop": 0,
-        "wind_speed": 2.7,
-        "wind_deg": 255,
-        "hamakaze": 2.3,
+        "wind_speed": 2.4,
+        "wind_deg": 253,
+        "hamakaze": 2.1,
         "at": "2026-10-10T18:00"
       },
-      "wind": 2.3
+      "wind": 2.1
     }
   ],
   "players": {
