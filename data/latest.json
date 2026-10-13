@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-14T01:33:18+09:00",
+  "updated_at": "2026-10-14T04:05:25+09:00",
   "season": 2026,
   "target_date": "2026-10-14",
   "sources": {
@@ -278,10 +278,10 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 21.2,
-        "pop": 6,
-        "wind_speed": 4.8,
-        "wind_deg": 349,
+        "temp": 21.1,
+        "pop": 0,
+        "wind_speed": 5.1,
+        "wind_deg": 347,
         "hamakaze": 0.0,
         "at": "2026-10-14T18:00"
       },
@@ -302,10 +302,10 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 21.2,
-        "pop": 6,
-        "wind_speed": 4.8,
-        "wind_deg": 349,
+        "temp": 21.1,
+        "pop": 0,
+        "wind_speed": 5.1,
+        "wind_deg": 347,
         "hamakaze": 0.0,
         "at": "2026-10-14T18:00"
       },
@@ -3864,8 +3864,8 @@
       "home": true,
       "start_time": "18:00",
       "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
+      "hanshin_starter": "村上",
+      "opponent_starter": "平良"
     },
     {
       "date": "2026-10-15",
