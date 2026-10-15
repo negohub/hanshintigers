@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T02:49:16+09:00",
+  "updated_at": "2026-10-16T03:26:36+09:00",
   "season": 2026,
   "target_date": "2026-10-16",
   "sources": {
@@ -32,14 +32,14 @@
         "rank": 1,
         "balance": 17,
         "last10": {
-          "w": 5,
-          "l": 5,
+          "w": 4,
+          "l": 6,
           "d": 0
         },
         "streak": {
           "type": "lose",
-          "n": 2,
-          "label": "2連敗"
+          "n": 3,
+          "label": "3連敗"
         }
       },
       {
@@ -98,8 +98,8 @@
         },
         "streak": {
           "type": "win",
-          "n": 5,
-          "label": "5連勝"
+          "n": 6,
+          "label": "6連勝"
         }
       },
       {
@@ -1753,16 +1753,16 @@
       "ra_avg": 3.25
     },
     "甲子園": {
-      "g": 63,
+      "g": 64,
       "w": 31,
-      "l": 30,
+      "l": 31,
       "d": 2,
       "rf": 171,
-      "ra": 171,
+      "ra": 172,
       "home": true,
-      "pct": 0.508,
-      "rf_avg": 2.71,
-      "ra_avg": 2.71
+      "pct": 0.5,
+      "rf_avg": 2.67,
+      "ra_avg": 2.69
     },
     "バンテリン": {
       "g": 12,
@@ -3876,9 +3876,12 @@
       "venue": "甲子園",
       "home": true,
       "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": "髙橋",
-      "opponent_starter": "尾形"
+      "score": [
+        0,
+        1
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
     },
     {
       "date": "2026-10-16",
@@ -3887,8 +3890,8 @@
       "home": true,
       "start_time": "18:00",
       "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
+      "hanshin_starter": "才木",
+      "opponent_starter": "片山"
     },
     {
       "date": "2026-10-17",
