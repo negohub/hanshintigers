@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-15T22:45:52+09:00",
+  "updated_at": "2026-10-16T01:39:30+09:00",
   "season": 2026,
-  "target_date": "2026-10-15",
+  "target_date": "2026-10-16",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -264,30 +264,6 @@
   },
   "probables": [
     {
-      "date": "2026-10-15",
-      "opponent": "ＤｅＮＡ",
-      "card": "対ＤｅＮＡ",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "hanshin_pitcher": "髙橋遥人",
-      "opponent_pitcher": "尾形崇斗",
-      "score": null,
-      "hanshin_fip": 2.53,
-      "opponent_fip": 3.82,
-      "weather": {
-        "park": "甲子園",
-        "dome": false,
-        "temp": 21.5,
-        "pop": 0,
-        "wind_speed": 2.0,
-        "wind_deg": 279,
-        "hamakaze": 1.2,
-        "at": "2026-10-15T18:00"
-      },
-      "wind": 1.2
-    },
-    {
       "date": "2026-10-16",
       "opponent": "ＤｅＮＡ",
       "card": "対ＤｅＮＡ",
@@ -302,14 +278,38 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 21.5,
+        "temp": 22.2,
         "pop": 0,
-        "wind_speed": 2.0,
-        "wind_deg": 279,
-        "hamakaze": 1.2,
-        "at": "2026-10-15T18:00"
+        "wind_speed": 2.6,
+        "wind_deg": 25,
+        "hamakaze": 0.0,
+        "at": "2026-10-16T18:00"
       },
-      "wind": 1.2
+      "wind": 0.0
+    },
+    {
+      "date": "2026-10-17",
+      "opponent": "ＤｅＮＡ",
+      "card": "対ＤｅＮＡ",
+      "venue": "甲子園",
+      "home": true,
+      "start_time": "14:00",
+      "hanshin_pitcher": null,
+      "opponent_pitcher": null,
+      "score": null,
+      "hanshin_fip": null,
+      "opponent_fip": null,
+      "weather": {
+        "park": "甲子園",
+        "dome": false,
+        "temp": 22.2,
+        "pop": 0,
+        "wind_speed": 3.5,
+        "wind_deg": 225,
+        "hamakaze": 3.5,
+        "at": "2026-10-16T14:00"
+      },
+      "wind": 3.5
     }
   ],
   "players": {
