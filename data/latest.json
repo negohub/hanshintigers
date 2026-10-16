@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T11:36:55+09:00",
+  "updated_at": "2026-10-16T17:00:27+09:00",
   "season": 2026,
   "target_date": "2026-10-16",
   "sources": {
@@ -278,10 +278,10 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 21.7,
+        "temp": 22.0,
         "pop": 0,
-        "wind_speed": 3.5,
-        "wind_deg": 22,
+        "wind_speed": 4.1,
+        "wind_deg": 17,
         "hamakaze": 0.0,
         "at": "2026-10-16T18:00"
       },
@@ -298,18 +298,7 @@
       "opponent_pitcher": null,
       "score": null,
       "hanshin_fip": null,
-      "opponent_fip": null,
-      "weather": {
-        "park": "甲子園",
-        "dome": false,
-        "temp": 22.0,
-        "pop": 0,
-        "wind_speed": 3.8,
-        "wind_deg": 224,
-        "hamakaze": 3.7,
-        "at": "2026-10-16T14:00"
-      },
-      "wind": 3.7
+      "opponent_fip": null
     }
   ],
   "players": {
