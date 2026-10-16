@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T02:33:33+09:00",
+  "updated_at": "2026-10-17T03:13:57+09:00",
   "season": 2026,
   "target_date": "2026-10-17",
   "sources": {
@@ -38,8 +38,8 @@
         },
         "streak": {
           "type": "lose",
-          "n": 3,
-          "label": "3連敗"
+          "n": 4,
+          "label": "4連敗"
         }
       },
       {
@@ -98,8 +98,8 @@
         },
         "streak": {
           "type": "win",
-          "n": 6,
-          "label": "6連勝"
+          "n": 7,
+          "label": "7連勝"
         }
       },
       {
@@ -271,10 +271,10 @@
       "home": true,
       "start_time": "14:00",
       "hanshin_pitcher": "大竹耕太郎",
-      "opponent_pitcher": "東克樹",
+      "opponent_pitcher": "東",
       "score": null,
       "hanshin_fip": 3.39,
-      "opponent_fip": 3.28,
+      "opponent_fip": null,
       "weather": {
         "park": "甲子園",
         "dome": false,
@@ -1753,16 +1753,16 @@
       "ra_avg": 3.25
     },
     "甲子園": {
-      "g": 64,
+      "g": 65,
       "w": 31,
-      "l": 31,
+      "l": 32,
       "d": 2,
       "rf": 171,
-      "ra": 172,
+      "ra": 176,
       "home": true,
-      "pct": 0.5,
-      "rf_avg": 2.67,
-      "ra_avg": 2.69
+      "pct": 0.492,
+      "rf_avg": 2.63,
+      "ra_avg": 2.71
     },
     "バンテリン": {
       "g": 12,
@@ -3889,9 +3889,12 @@
       "venue": "甲子園",
       "home": true,
       "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": "才木",
-      "opponent_starter": "片山"
+      "score": [
+        0,
+        4
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
     },
     {
       "date": "2026-10-17",
@@ -3900,8 +3903,8 @@
       "home": true,
       "start_time": "14:00",
       "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
+      "hanshin_starter": "大竹",
+      "opponent_starter": "東"
     },
     {
       "date": "2026-10-18",
