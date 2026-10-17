@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T16:38:22+09:00",
+  "updated_at": "2026-10-17T21:32:29+09:00",
   "season": 2026,
   "target_date": "2026-10-17",
   "sources": {
@@ -275,30 +275,6 @@
       "score": null,
       "hanshin_fip": 3.39,
       "opponent_fip": null,
-      "weather": {
-        "park": "甲子園",
-        "dome": false,
-        "temp": 23.8,
-        "pop": 0,
-        "wind_speed": 3.5,
-        "wind_deg": 22,
-        "hamakaze": 0.0,
-        "at": "2026-10-17T14:00"
-      },
-      "wind": 0.0
-    },
-    {
-      "date": "2026-10-18",
-      "opponent": "ＤｅＮＡ",
-      "card": "対ＤｅＮＡ",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "14:00",
-      "hanshin_pitcher": "伊藤将司",
-      "opponent_pitcher": "石田裕太郎",
-      "score": null,
-      "hanshin_fip": 4.04,
-      "opponent_fip": 2.98,
       "weather": {
         "park": "甲子園",
         "dome": false,
@@ -3905,46 +3881,6 @@
       "score": null,
       "hanshin_starter": "大竹",
       "opponent_starter": "東"
-    },
-    {
-      "date": "2026-10-18",
-      "opponent": "ＤｅＮＡ",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "14:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-10-19",
-      "opponent": "ＤｅＮＡ",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-10-20",
-      "opponent": "ＤｅＮＡ",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
-    },
-    {
-      "date": "2026-10-21",
-      "opponent": "ＤｅＮＡ",
-      "venue": "甲子園",
-      "home": true,
-      "start_time": "18:00",
-      "score": null,
-      "hanshin_starter": null,
-      "opponent_starter": null
     }
   ]
 }
