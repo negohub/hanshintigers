@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-18T02:22:51+09:00",
+  "updated_at": "2026-10-18T11:29:41+09:00",
   "season": 2026,
   "target_date": "2026-10-18",
   "sources": {
@@ -34,14 +34,14 @@
         "rank": 1,
         "balance": 17,
         "last10": {
-          "w": 4,
-          "l": 6,
+          "w": 3,
+          "l": 7,
           "d": 0
         },
         "streak": {
           "type": "lose",
-          "n": 4,
-          "label": "4連敗"
+          "n": 5,
+          "label": "5連敗"
         }
       },
       {
@@ -94,14 +94,14 @@
         "rank": 3,
         "balance": 2,
         "last10": {
-          "w": 7,
-          "l": 3,
+          "w": 8,
+          "l": 2,
           "d": 0
         },
         "streak": {
           "type": "win",
-          "n": 7,
-          "label": "7連勝"
+          "n": 8,
+          "label": "8連勝"
         }
       },
       {
@@ -280,14 +280,14 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 25.1,
+        "temp": 24.7,
         "pop": 0,
-        "wind_speed": 4.3,
-        "wind_deg": 251,
-        "hamakaze": 3.9,
+        "wind_speed": 3.8,
+        "wind_deg": 252,
+        "hamakaze": 3.4,
         "at": "2026-10-18T14:00"
       },
-      "wind": 3.9
+      "wind": 3.4
     }
   ],
   "players": {
@@ -1731,16 +1731,16 @@
       "ra_avg": 3.25
     },
     "甲子園": {
-      "g": 65,
+      "g": 66,
       "w": 31,
-      "l": 32,
+      "l": 33,
       "d": 2,
-      "rf": 171,
-      "ra": 176,
+      "rf": 176,
+      "ra": 184,
       "home": true,
-      "pct": 0.492,
-      "rf_avg": 2.63,
-      "ra_avg": 2.71
+      "pct": 0.484,
+      "rf_avg": 2.67,
+      "ra_avg": 2.79
     },
     "バンテリン": {
       "g": 12,
@@ -3880,9 +3880,12 @@
       "venue": "甲子園",
       "home": true,
       "start_time": "14:00",
-      "score": null,
-      "hanshin_starter": "大竹",
-      "opponent_starter": "東"
+      "score": [
+        5,
+        8
+      ],
+      "hanshin_starter": null,
+      "opponent_starter": null
     }
   ]
 }
