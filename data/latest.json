@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T00:23:45+09:00",
+  "updated_at": "2026-11-15T02:49:05+09:00",
   "season": 2026,
   "target_date": "2026-11-15",
   "sources": {
@@ -282,8 +282,8 @@
         "dome": false,
         "temp": 17.9,
         "pop": 100,
-        "wind_speed": 2.9,
-        "wind_deg": 16,
+        "wind_speed": 3.5,
+        "wind_deg": 24,
         "hamakaze": 0.0,
         "at": "2026-11-15T14:00"
       },
