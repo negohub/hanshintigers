@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-23T01:45:30+09:00",
+  "updated_at": "2026-11-23T04:15:35+09:00",
   "season": 2026,
   "target_date": "2026-11-23",
   "sources": {
@@ -280,14 +280,14 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 11.0,
-        "pop": 9,
-        "wind_speed": 3.1,
-        "wind_deg": 307,
-        "hamakaze": 0.4,
-        "at": "2026-11-22T14:00"
+        "temp": 12.1,
+        "pop": 0,
+        "wind_speed": 2.8,
+        "wind_deg": 232,
+        "hamakaze": 2.8,
+        "at": "2026-11-23T14:00"
       },
-      "wind": 0.4
+      "wind": 2.8
     }
   ],
   "players": {
