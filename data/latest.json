@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-11-24T22:26:56+09:00",
+  "updated_at": "2026-11-25T04:46:43+09:00",
   "season": 2026,
-  "target_date": "2026-11-24",
+  "target_date": "2026-11-25",
   "sources": {
     "standings": "npb.jp",
     "team_stats": "npb.jp",
@@ -280,12 +280,12 @@
       "weather": {
         "park": "甲子園",
         "dome": false,
-        "temp": 13.3,
-        "pop": 100,
-        "wind_speed": 3.3,
-        "wind_deg": 275,
+        "temp": 10.8,
+        "pop": 0,
+        "wind_speed": 2.6,
+        "wind_deg": 263,
         "hamakaze": 2.1,
-        "at": "2026-11-24T14:00"
+        "at": "2026-11-25T14:00"
       },
       "wind": 2.1
     }
